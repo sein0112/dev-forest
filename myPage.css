@@ -1,0 +1,180 @@
+body {
+    background-color: #e5e5e5;
+    min-width: 1250px;
+}
+*{
+    padding: 0;
+    margin: 0;
+}
+a {
+    text-decoration: none;
+    color: black;
+}
+
+#wrap{
+    margin: 30px 40px;
+}
+#contents{
+    overflow: auto;
+    background-color: white;
+    width: 100%;
+    height: min-content;
+    border-radius: 20px;
+    text-align: center;
+}
+
+
+
+#usrProfImgBig{
+    float: left;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+}
+#useInfoTable{
+    width: 350px;
+    height: 105px;
+    margin: auto 0;
+    margin-left: 30px;
+    float:left;
+    text-align: left;
+    margin-top: 60px;
+}
+
+.userInfo_label {
+    text-align: left;
+    color: #A1A1A1;
+}
+.userRealInfo {
+    font-size: 30px;
+    font-weight: bold;
+}
+#userInfoEdit_btn {
+    float: left;
+    background-color: #e5e5e5;
+    border-radius: 10px;
+    height: 40px;
+    border-style: none;
+    width: 3em;
+    font-size: 20px;
+    margin-top: 90px;
+    margin-left: 10px;
+}
+#line{
+    width: 80%;
+    margin: 0 auto;
+    display: black;
+}
+
+#userPost{
+    width: 76%;
+    margin: 0 auto;
+    overflow: auto;
+}
+.userPost_label {
+    color: #A1A1A1;
+    text-align: left;
+    margin-bottom: 10px;
+}
+#myQuest, #myAnsw, #myScrap, #myLike{
+    min-width: 1080px;
+    height: 300px;
+    width: 100%;
+    /*overflow-x: scroll;*/
+}
+.myQuestPost, .myAnswPost, .myScrapPost, .myLikePost{
+    float: left;
+    text-align: left;
+    padding:25px;
+    width: 250px;
+    height: 203px;
+    background-color: #e5e5e5;
+    margin: 10px;
+    margin-left: 0;
+    margin-bottom: 20px;
+    border-radius: 10%;
+    overflow: auto;
+    box-shadow: 5px 5px 5px rgb(68, 57, 57);
+}
+#myQuestPost_info, #myAnswPost_info, #myScrapPost_info, #myLikePost_info{
+    float: left;
+    overflow: auto;
+    height: 60px;
+}
+.myQuestPost_title, .myAnswPost_title, .myScrapPost_title, .myLikePost_title{
+    vertical-align: bottom;
+    float: left;
+    margin-left: 10px;
+    width: 133px;
+    white-space:nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 40px;
+    white-space: normal;
+    line-height: 1.2;   /*줄간격*/
+    height: 2.5em;
+    word-wrap: break-word; 
+    display: -webkit-box; 
+    -webkit-line-clamp: 2;  /*보여줄 줄 개수*/
+    -webkit-box-orient: vertical;
+}
+.myQuestPost_time, .myAnswPost_time, .myScrapPost_time, .myLikePost_time{
+    float: right;
+    font-size: 15px;
+    color: #A1A1A1;
+}
+.myQuestPost_contents, .myAnswPost_contents, .myScrapPost_contents, .myLikePost_contents{
+    margin-top: 65px;
+    width: 233px;
+    height: 140px;
+    overflow: hidden;
+    line-height: 1.2;
+    height:8.59em;
+    word-wrap: break-word;
+    display: -webkit-box;
+    -webkit-line-clamp: 7;
+    -webkit-box-orient: vertical;
+}
+
+.myAnswPost_writer, .myScrapPost_writer, .myLikePost_writer{
+    float: left;
+    margin-left: 10px;
+    width: 90px;
+    font-size: 15px;
+    color: #A1A1A1;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+
+#menuList{
+    background-color: white;
+    width: 300px;
+    position: absolute;
+    margin-top: 100px;
+    overflow: auto;
+    border-radius: 13px;
+    box-shadow: 1px 0px 8px 1px rgba(68, 57, 57, 1);
+    padding: 30px;
+}
+#hamburger_menu {
+    list-style: none;
+}
+#toHome, #recentlyAsked, #postQuest, #posts{
+    overflow: hidden;
+    width: 100%;
+}
+.menu_icon{
+    margin-top: 15px;
+    margin-right: 20px;
+    width: 30px;
+    height: 30px;
+    float: left;
+}
+.bigMenu{
+    line-height: 3;
+    font-size: 20px;
+    font-weight: bold;
+    width: 100%;
+}
