@@ -1,17 +1,13 @@
-// var http = require('http');
-// var fs = require('fs');
-// var app = http.createServer(function(request,response){
-//
-//     var url = request.url;
-//     // if(request.url === '/'){
-//     //     // url = '/view/qna/ask.html';
-//     // }
-//     // if(request.url == '/favicon.ico'){
-//     //     return response.writeHead(404);
-//     // }
-//     response.writeHead(200);
-//     // response.end("hhhh");
-//     // console.log(__dirname)
-//     response.end(fs.readFileSync(__dirname + url));
-// });
-// app.listen(3000);
+var http = require('http');
+var url = require('url');
+var answer = require('./view/qna/answer.js');
+var express = require('express');
+var app = express();
+app.use(express.static(__dirname + '/asset'));
+
+app.get('/answer', function(request, response){
+    answer.container(request, response);
+});
+
+app.listen(5000);
+
