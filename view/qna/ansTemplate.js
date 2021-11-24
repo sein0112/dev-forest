@@ -15,7 +15,7 @@ module.exports = {
                 <div class="answer-container">
                     <div class="answer-info">
                         <div class="info-float info-img">
-                            <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                            <img id = "section_user_img" src="image/user_img.jpg">
                         </div>
                         <div class="info-float info-content">
                             <h4>답변 제목</h4>
