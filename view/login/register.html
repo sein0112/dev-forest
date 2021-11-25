@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+    <link rel="stylesheet" , href="../../asset/css/login/register.css">
+</head>
+
+<body class="register">
+    <div class="container">
+        <div class="logo">
+            <img src="../../asset/image/forest.png" class="logo_title"/>
+        </div>
+        <div class="title_name" style="float: left;">
+            <p>개발자의 숲</p>
+        </div>
+        <h3 class="register_info">회원 가입</h3>
+        <div class="register_check">
+            <h4 class="register_user">이미 개발자의 숲 회원이신가요?</h4>
+            <p class="check_link">
+                <a href="login.html" class="login_checking">로그인</a>
+            </p>
+        </div>
+        <div class="line">
+            <img src="../../asset/image/line.png"
+                style="margin-left: 20px; margin-right:20px; margin-top: 15px; width: 460px; height: 1.5px;">
+        </div>
+        <form action="#" method="post">
+            <input type="text" name="user_email" class="text_email" placeholder="이메일">
+            <input type="submit" name="email_check" value="중복조회" class="doublecheck_btn">
+            <input type="text" id="user_nickname" class="text_input" placeholder="닉네임">
+            <input type="text" id="user_group" class="text_input" placeholder="소속">
+            <input type="password" id="user_pw" class="text_input" placeholder="비밀번호">
+            <div class="pw_info">
+                <p class="pw_info">*영문, 숫자 조합으로 8~20자 사이로 입력하세요.</p>
+            </div>
+            <input type="password" id="user_dbpw" class="text_dbpw" placeholder="비밀번호 확인">
+            <div class="warn_info">
+                <p class="warn_info">*비밀번호가 일치하지 않습니다.</p>
+            </div>
+            <div class="agree_check">
+            <style>
+                input[id="agree"]{
+                    position: relative;
+                    top:1.5px;
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 13px;
+                    margin-top: 10px;
+                    margin-left: 33px;
+                }
+                label{
+                    font-family: 'Roboto', sans-serif;
+                    font-size: 13px;
+                    color:#636363
+                }
+            </style>
+            <p><input type="checkbox" id="agree" class="agree_checkbox"><label for="agree">이용약관 동의 (필수)</label></label></p>
+            <input type="button" name="agree_check" value="내용보기" 
+            onClick="location.href='agreement.html'" class="agreecheck_btn">
+            </div>
+            <input type="submit" value="회원가입" class="register_btn">
+        </form>
+    </div>
+</body>
+
+</html>
