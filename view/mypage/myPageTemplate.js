@@ -82,10 +82,29 @@ module.exports = {
         }
         return result;
     },
-    myScraps:function(scraps){
-
+    myScraps:function(questions){
+        let i = 0;
+        let result = '';
+        while (i < questions.length) {
+            result += `
+                <div class="myScrapPost" style="cursor: pointer;">
+                <div id="myScrapPost_info">
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <div class="myScrapPost_title"><p class="userPost_title">${questions[i].title}</p></div>
+                    <div class="myScrapPost_writer">${questions[i].nickname}</div>
+                    <p class="myScrapPost_time">${this.parseDate(questions[i].datetime)}</p>
+                </div>
+                <div class="myScrapPost_contents">
+                    <P class="myScrapPost_content">${questions[i].content}</P>
+                </div>
+            </div>
+            `;
+            console.log(questions[i]);
+            i++;
+        }
+        return result;
     },
-    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml){
+    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml){
         return `
         <!DOCTYPE html>
         <head>
@@ -181,17 +200,7 @@ module.exports = {
                         </div>
                         <p class="userPost_label" style="cursor: pointer;">즐겨찾기한 글</p>
                         <div id="myScrap">
-                            <div class="myScrapPost" style="cursor: pointer;">
-                                <div id="myScrapPost_info">
-                                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                                    <div class="myScrapPost_title"><p class="userPost_title">내가 즐겨찾기한 글입니다</p></div>
-                                    <div class="myScrapPost_writer">작성자작성자wkd</div>
-                                    <p class="myScrapPost_time">2021/11/11</p>
-                                </div>
-                                <div class="myScrapPost_contents">
-                                    <P class="myScrapPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-                                </div>
-                            </div>
+                            ${myscraphtml}
                         </div>
                         <p class="userPost_label" style="cursor: pointer;">좋아요한 답변</p>
                         <div id="myLike">
