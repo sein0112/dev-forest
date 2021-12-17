@@ -146,7 +146,7 @@ a {
 .myAnswPost_writer, .myScrapPost_writer, .myLikePost_writer{
     float: left;
     margin-left: 10px;
-    width: 90px;
+    width: 80px;
     font-size: 15px;
     color: #A1A1A1;
     overflow: hidden;

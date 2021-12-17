@@ -1,4 +1,11 @@
 module.exports = {
+    parseDate:function(date) {
+        let result='';
+        let datelist = date.toString().split(' ');
+        result += datelist[3] + "/" + datelist[1] + "/" + datelist[2];
+        return result;
+    },
+
     nav:function(userinfo) {
         return `                    
         <div id="nav_userInfo">
@@ -10,45 +17,75 @@ module.exports = {
     },
     userinfotohtml:function(userinfo) {
         return `
-        <tbody>
-        <tr class="userInfo_label userInfo_center">
-            <td colspan="4">이메일</td>
-        </tr>
-        <tr class="userInfo_center userRealInfo">
-            <td colspan="4">${userinfo.id}</td>
-        </tr>
-        <tr class="userInfo_label">
-            <td>닉네임</td>
-            <td>소속</td>
-            <td>등급</td>
-            <td>포인트</td>
-        </tr>
-        <tr class="userRealInfo">
-            <td>${userinfo.nickname}</td>
-            <td>${userinfo.belong}</td>
-            <td>${userinfo.name}</td>
-            <td>포인트</td>
-        </tr>
-        <tr></tr>
-    </tbody>
+            <tbody>
+            <tr class="userInfo_label userInfo_center">
+                <td colspan="4">이메일</td>
+            </tr>
+            <tr class="userInfo_center userRealInfo">
+                <td colspan="4">${userinfo.id}</td>
+            </tr>
+            <tr class="userInfo_label">
+                <td>닉네임</td>
+                <td>소속</td>
+                <td>등급</td>
+                <td>포인트</td>
+            </tr>
+            <tr class="userRealInfo">
+                <td>${userinfo.nickname}</td>
+                <td>${userinfo.belong}</td>
+                <td>${userinfo.name}</td>
+                <td>포인트</td>
+            </tr>
+            <tr></tr>
+        </tbody>
+        `;
+    },
+    myQuests:function(questions) {
+        let i = 0;
+        let result = '';
+        while (i < questions.length) {
+            result += `
+            <div class="myQuestPost" style="cursor: pointer;">
+                <div id="myQuestPost_info">
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <div class="myQuestPost_title">${questions[i].title}</div>
+                    <p class="myQuestPost_time">${this.parseDate(questions[i].datetime)}</p>
+                </div>
+                <div class="myQuestPost_contents">
+                    <P class="myQuestPost_content">${questions[i].content}</P>
+                </div>
+            </div>
+            `;
+            i++;
+        }
+        return result;
+    },
+    myAnswerQuests:function(questions) {
+        let i = 0;
+        let result = '';
+        while (i < questions.length) {
+            result += `
+            <div class="myAnswPost" style="cursor: pointer;">
+                <div id="myAnswPost_info">
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <div class="myAnswPost_title"><p class="userPost_title">${questions[i].title}</p></div>
+                    <div class="myAnswPost_writer">${questions[i].nickname}</div>
+                    <p class="myAnswPost_time">${this.parseDate(questions[i].datetime)}</p>
+                </div>
+                <div class="myAnswPost_contents">
+                    <P class="myAnswPost_content">${questions[i].content}</P>
+                </div>
+            </div>
 
-        `;
+            `;
+            i++;
+        }
+        return result;
     },
-    myQuests:function(userinfo) {
-        return `
-        <div class="myQuestPost" style="cursor: pointer;">
-            <div id="myQuestPost_info">
-                <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                <div class="myQuestPost_title">Lorem ipsum, dolor sit amet consectetur</div>
-                <p class="myQuestPost_time">2021/11/11</p>
-            </div>
-            <div class="myQuestPost_contents">
-                <P class="myQuestPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-            </div>
-        </div>
-        `;
+    myScraps:function(scraps){
+
     },
-    container:function(navhtml, userinfohtml){
+    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml){
         return `
         <!DOCTYPE html>
         <head>
@@ -135,51 +172,12 @@ module.exports = {
                     <div id="userPost">
                         <p class="userPost_label">최근 내가 질문 한 글</p>
                         <div id="myQuest">
-                            <div class="myQuestPost" style="cursor: pointer;">
-                                <div id="myQuestPost_info">
-                                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                                    <div class="myQuestPost_title">Lorem ipsum, dolor sit amet consectetur</div>
-                                    <p class="myQuestPost_time">2021/11/11</p>
-                                </div>
-                                <div class="myQuestPost_contents">
-                                    <P class="myQuestPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-                                </div>
-                            </div>
-                            <div class="myQuestPost" style="cursor: pointer;">
-                                <div id="myQuestPost_info">
-                                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                                    <div class="myQuestPost_title">Lorem ipsum, dolor sit amet consectetur</div>
-                                    <p class="myQuestPost_time">2021/11/11</p>
-                                </div>
-                                <div class="myQuestPost_contents">
-                                    <P class="myQuestPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-                                </div>
-                            </div>
-                            <div class="myQuestPost" style="cursor: pointer;">
-                                <div id="myQuestPost_info">
-                                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                                    <div class="myQuestPost_title">Lorem ipsum, dolor sit amet consectetur</div>
-                                    <p class="myQuestPost_time">2021/11/11</p>
-                                </div>
-                                <div class="myQuestPost_contents">
-                                    <P class="myQuestPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-                                </div>
-                            </div>
+                            ${questionshtml}
                             <!--<img src="점점점.png" style="width:150px; height: 50px; float:left; margin-top: 115px;">-->
                         </div>
                         <p class="userPost_label" style="cursor: pointer;">최근 내가 답변 한 글</p>
                         <div id="myAnsw">
-                            <div class="myAnswPost" style="cursor: pointer;">
-                                <div id="myAnswPost_info">
-                                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                                    <div class="myAnswPost_title"><p class="userPost_title">내가 답변한 글</p></div>
-                                    <div class="myAnswPost_writer">작성자작성자wkd</div>
-                                    <p class="myAnswPost_time">2021/11/11</p>
-                                </div>
-                                <div class="myAnswPost_contents">
-                                    <P class="myAnswPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-                                </div>
-                            </div>
+                            ${myanswerquestshtml}
                         </div>
                         <p class="userPost_label" style="cursor: pointer;">즐겨찾기한 글</p>
                         <div id="myScrap">
