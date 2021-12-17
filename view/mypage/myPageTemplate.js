@@ -1,5 +1,54 @@
 module.exports = {
-    container:function(){
+    nav:function(userinfo) {
+        return `                    
+        <div id="nav_userInfo">
+            <img id="usrProfImg" src="#" alt="userpng">
+            <p id="usrNname"><b>${userinfo.nickname}</b></p>
+            <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
+        </div>
+        `;
+    },
+    userinfotohtml:function(userinfo) {
+        return `
+        <tbody>
+        <tr class="userInfo_label userInfo_center">
+            <td colspan="4">이메일</td>
+        </tr>
+        <tr class="userInfo_center userRealInfo">
+            <td colspan="4">${userinfo.id}</td>
+        </tr>
+        <tr class="userInfo_label">
+            <td>닉네임</td>
+            <td>소속</td>
+            <td>등급</td>
+            <td>포인트</td>
+        </tr>
+        <tr class="userRealInfo">
+            <td>${userinfo.nickname}</td>
+            <td>${userinfo.belong}</td>
+            <td>${userinfo.name}</td>
+            <td>포인트</td>
+        </tr>
+        <tr></tr>
+    </tbody>
+
+        `;
+    },
+    myQuests:function(userinfo) {
+        return `
+        <div class="myQuestPost" style="cursor: pointer;">
+            <div id="myQuestPost_info">
+                <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                <div class="myQuestPost_title">Lorem ipsum, dolor sit amet consectetur</div>
+                <p class="myQuestPost_time">2021/11/11</p>
+            </div>
+            <div class="myQuestPost_contents">
+                <P class="myQuestPost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
+            </div>
+        </div>
+        `;
+    },
+    container:function(navhtml, userinfohtml){
         return `
         <!DOCTYPE html>
         <head>
@@ -12,24 +61,24 @@ module.exports = {
             <div id="wrap">
                 <div id="nav">
                     <div id="menu">
-                        <img id="menuicon" src="../../asset/image/hamburgerbar2.png" alt="menu" onClick="menuClick()" style="cursor: pointer;">
-                        <img id="menuiconX" src="../../asset/image/X.png" onClick="menuClick()" style="visibility: hidden; cursor: pointer;">
+                        <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" onClick="menuClick()" style="cursor: pointer;">
+                        <img id="menuiconX" src="/image/X.png" onClick="menuClick()" style="visibility: hidden; cursor: pointer;">
                         <div id="menuList" style="visibility: hidden;">
                             <ul id="hamburger_menu">
                                 <div id="toHome" style="cursor:pointer;" onClick="location.href='../mainPage.html'">
-                                    <img class="menu_icon" src="../../asset/image/home.png">
+                                    <img class="menu_icon" src="/image/home.png">
                                     <li class="bigMenu"><a href="../..">Home</a></li>
                                 </div>
                                 <div id="recentlyAsked">
-                                    <img class="menu_icon" src="../../asset/image/chat.png">
+                                    <img class="menu_icon" src="/image/chat.png">
                                     <li class="bigMenu"><a href="../..">최근 질문 보기</a></li>
                                 </div>
                                 <div id="postQuest">
-                                    <img class="menu_icon" src="../../asset/image/pencil.png">
+                                    <img class="menu_icon" src="/image/pencil.png">
                                     <li class="bigMenu"><a href="../..">질문 작성하기</a></li>
                                 </div>
                                 <div id="posts">
-                                    <img class="menu_icon" src="../../asset/image/tag.png">
+                                    <img class="menu_icon" src="/image/tag.png">
                                     <li class="bigMenu"><a href="../..">게시판</a></li>
                                     <div id="tags">
                                         <a href="../.." class="left">javasript</a>
@@ -67,42 +116,18 @@ module.exports = {
                     </div>
                     <div id="search">
                         <form action="/">
-                            <img id="search_icon" src="../../asset/image/searchicon.png" alt="search">
+                            <img id="search_icon" src="/image/searchicon.png" alt="search">
                             <input id="search_query" type="text">
                             <button id="search_btn" style="cursor:pointer;">search</button>
                         </form>
                     </div>
-                    <div id="nav_userInfo">
-                        <img id="usrProfImg" src="내사진.jpg" alt="userpng">
-                        <p id="usrNname"><b>정준서</b></p>
-                        <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
-                    </div>
+                    ${navhtml}
                 </div>
                 <div id="contents">
                     <div id="userInfo">
                         <img id="usrProfImgBig" src="내사진.jpg" alt="userpng">
-                        <table id="useInfoTable">
-                            <tbody>
-                                <tr class="userInfo_label userInfo_center">
-                                    <td colspan="4">이메일</td>
-                                </tr>
-                                <tr class="userInfo_center userRealInfo">
-                                    <td colspan="4">kjmj13@naver.com</td>
-                                </tr>
-                                <tr class="userInfo_label">
-                                    <td>닉네임</td>
-                                    <td>소속</td>
-                                    <td>등급</td>
-                                    <td>포인트</td>
-                                </tr>
-                                <tr class="userRealInfo">
-                                    <td>수룡이</td>
-                                    <td>성신</td>
-                                    <td>열매</td>
-                                    <td>32,389</td>
-                                </tr>
-                                <tr></tr>
-                            </tbody>
+                        <table id="userInfoTable">
+                        ${userinfohtml}
                         </table>
                         <button id="userInfoEdit_btn" style="cursor: pointer;">편집</button>
                     </div>
