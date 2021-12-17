@@ -120,7 +120,6 @@ module.exports = {
                 </div>
             </div>
             `;
-            console.log(answers[i]);
             i++;
         }
         return result;

@@ -40,7 +40,6 @@ exports.container = function(request, response) {
                     db.query('call getMyLike(?)', [userid], function(error, answers) {
                         if(error) console.log(error);
                         else {
-                            //console.log(answers[0]);
                             mylikehtml = template.myLikes(answers[0]);
                             html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml);
                         }
