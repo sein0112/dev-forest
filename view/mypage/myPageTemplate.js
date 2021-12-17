@@ -99,12 +99,33 @@ module.exports = {
                 </div>
             </div>
             `;
-            console.log(questions[i]);
             i++;
         }
         return result;
     },
-    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml){
+    myLikes:function(answers){
+        let i = 0;
+        let result = '';
+        while (i < answers.length) {
+            result += `
+            <div class="myLikePost" style="cursor: pointer;">
+                <div id="myLikePost_info">
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <div class="myLikePost_title"><p class="userPost_title">${answers[i].title}</p></div>
+                    <div class="myLikePost_writer">${answers[i].nickname}</div>
+                    <p class="myLikePost_time">${this.parseDate(answers[i].datetime)}</p>
+                </div>
+                <div class="myLikePost_contents">
+                    <P class="myLikePost_content">${answers[i].content}</P>
+                </div>
+            </div>
+            `;
+            console.log(answers[i]);
+            i++;
+        }
+        return result;
+    },
+    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml){
         return `
         <!DOCTYPE html>
         <head>
@@ -204,17 +225,7 @@ module.exports = {
                         </div>
                         <p class="userPost_label" style="cursor: pointer;">좋아요한 답변</p>
                         <div id="myLike">
-                            <div class="myLikePost" style="cursor: pointer;">
-                                <div id="myLikePost_info">
-                                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                                    <div class="myLikePost_title"><p class="userPost_title">내가 좋아요한 답변입니다 내가 좋아요 한 답변 </p></div>
-                                    <div class="myLikePost_writer">작성자작성자wkd</div>
-                                    <p class="myLikePost_time">2021/11/11</p>
-                                </div>
-                                <div class="myLikePost_contents">
-                                    <P class="myLikePost_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
-                                </div>
-                            </div>
+                            ${mylikehtml}
                         </div>
                     </div>
                 </div>

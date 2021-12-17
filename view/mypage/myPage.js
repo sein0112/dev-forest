@@ -5,12 +5,12 @@ exports.container = function(request, response) {
     let userid='abc@naver.com';
     let html;
     let user;
-    let userinfohtml, navhtml, questionshtml, myanswerquestshtml, myscraphtml;
+    let userinfohtml, navhtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml;
     db.query('SELECT id, nickname, belong, image, name FROM usertbl JOIN gradetbl ON usertbl.level = gradetbl.level where usertbl.id=?', [userid], function(error, users) {
         if(error) console.log(error);
         else{
             user = users[0];
-            console.log(user);
+            //console.log(user);
             userinfohtml = template.userinfotohtml(user);
             navhtml = template.nav(user);
         }
@@ -23,9 +23,7 @@ exports.container = function(request, response) {
 
             //최근 내가 답변 한 글
             db.query('call getlatelyAnswered(?)', [userid], function(error, questions) {
-                if(error) {
-                    console.log(error);
-                }
+                if(error) console.log(error);
                 else{
                     //console.log(questions[0]);
                     myanswerquestshtml = template.myAnswerQuests(questions[0]);
@@ -35,17 +33,21 @@ exports.container = function(request, response) {
                 db.query('call getMyScrap(?)', [userid], function(error, questions) {
                     if(error) console.log(error);
                     else {
-                        console.log(questions[0]);
                         myscraphtml = template.myScraps(questions[0]);
-                        html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml);
                     }
-                    response.send(html);
 
                     //좋아요 한 답변
-                    
+                    db.query('call getMyLike(?)', [userid], function(error, answers) {
+                        if(error) console.log(error);
+                        else {
+                            //console.log(answers[0]);
+                            mylikehtml = template.myLikes(answers[0]);
+                            html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml);
+                        }
+                       response.send(html);
+                    });
                 });
             });            
         });
-
     });
 }
