@@ -7,6 +7,7 @@ var rank = require('./view/rank/rank.js');
 var loginRoutes = require('./view/login/loginRouter.js');
 var boardRoutes = require('./view/board/boardRouter.js');
 var modRoutes = require('./view/login/usermodRouter.js');
+var qnaRoutes = require('./view/qna/qnaRouter.js');
 var express = require('express');
 const session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -34,28 +35,10 @@ app.get('/', function(request, response){
     response.sendFile(__dirname + '/view/mainPage.html');
 })
 
-app.get('/qna/:boardId/:questionNo', function(request, response){
-    qna.read(request, response);
-});
-
-app.get('/qna/:boardId/first/create', function(request, response){
-    qna.create(request, response);
-});
-
-app.post('/qna/:boardId/:questionNo/update_process', function(request, response){
-    qna.update_process(request, response);
-});
-
-app.post('/qna/create_process', function(request, response){
-    qna.create_process(request, response);
-});
-
-app.post('/qna/scrap_process', function(request, response){
-    qna.scrap(request, response);
-});
 
 app.use('/login', loginRoutes);
 app.use('/modify', modRoutes);
+app.use('/qna', qnaRoutes);
 
 app.use('/answer', function(request, response){
     answer.container(request, response);
