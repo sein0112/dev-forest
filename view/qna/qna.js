@@ -22,7 +22,14 @@ exports.read = function(request, response){
                 if(error3){
                     throw error3;
                 }
+                let contents
+                try {
+                    contents = JSON.parse(question[0].content)
+                } catch (e) {
+                    contents = { text : question[0].content}
+                }
                 let data = {
+                    contents,
                     ...question[0],
                     ...scrap[0],
                     ...answerCount[0]
@@ -45,6 +52,10 @@ exports.create = function (request, response){
 
 exports.create_process = function(request, response){
     var data = request.body;
+    let content = {
+        text : data.content.trim(),
+        code : data.codeContent.trim(),
+    }
     // SELECT MAX(컬럼) FROM 테이블;
     db.query(`SELECT MAX(no) as maxNo FROM questionstbl WHERE board_id=?`,[data.boardId], function(error2, maxNo){
         if(error2){
@@ -53,7 +64,7 @@ exports.create_process = function(request, response){
         db.query(`
                     INSERT INTO questionstbl (board_id, no, datetime, updated_datetime, user_id, title, content)
                     VALUES(?, ?, NOW(), NOW(), ?, ?, ?)`,
-            [data.boardId, maxNo[0].maxNo+1, data.userId, data.title, data.content],
+            [data.boardId, maxNo[0].maxNo+1, data.userId, data.title, JSON.stringify(content)],
             function(error, result){
                 if(error){
                     throw error;
@@ -76,9 +87,12 @@ exports.update = function (request, response){
 exports.update_process = function(request, response){
 
     var data = request.body;
-    console.log("data", data.content)
+    let content = {
+        text : data.content?.trim(),
+        code : data.codeContent?.trim(),
+    }
     db.query('UPDATE questionstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND no = ?',
-        [data.title.trim(), data.content.trim(), data.boardId, data.questionNo],
+        [data.title.trim(), JSON.stringify(content), data.boardId, data.questionNo],
         function(error, result){
             if(error){
                 throw error;
@@ -109,6 +123,8 @@ exports.delete_process = function(request, response){
 exports.scrap = function(request, response){
     var data = request.body;
     // SELECT MAX(컬럼) FROM 테이블;
+
+    console.log(data)
     db.query(`SELECT * FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
         [data.boardId, data.userId, data.questNo],
         function(error, scrap) {

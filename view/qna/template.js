@@ -1,4 +1,5 @@
 const fs = require('fs');
+const e = require("express");
 
 module.exports = {
   head : function (){
@@ -84,6 +85,56 @@ module.exports = {
         
   </div>`
   },
+    codeHtml : {
+      read : function (data){
+          let html = '';
+          if(data.contents.code !=='' && data.contents.code !==undefined && data.contents.code !==null){
+              html = `<div class="codepen">
+                    <pre><code class="code-font">${data.contents.code.trim()}</code></pre>
+                  </div>`
+          }
+          console.log(html)
+          return html
+      },
+      upsert : function (data){
+          let html = '';
+          if(data.contents.code !==undefined && data.contents.code !==null){
+              if(data.contents.code !==''){
+                  html = `<div id="write-code" class="codepen">
+                  <label for="textareaCodeContent"></label>
+                  <textarea class="textarea-code"
+                            id = "textareaCodeContent"
+                            style="overflow:hidden"
+                            name="codeContent"
+                            onkeyup="adjustHeight(this);">
+                            ${data.contents.code.trim()}
+                  </textarea>
+                </div>`
+              }else {
+                  html = `<div id="write-code" class="codepen" style="display: none;">
+                  <label for="textareaCodeContent"></label>
+                  <textarea class="textarea-code"
+                            id = "textareaCodeContent"
+                            style="overflow:hidden"
+                            name="codeContent"
+                            onkeyup="adjustHeight(this);">
+                  </textarea>
+                </div>`
+              }
+          }else {
+              html = `<div id="write-code" class="codepen" style="display: none;">
+                  <label for="textareaCodeContent"></label>
+                  <textarea class="textarea-code"
+                            id = "textareaCodeContent"
+                            style="overflow:hidden"
+                            name="codeContent"
+                            onkeyup="adjustHeight(this);">
+                  </textarea>
+                </div>`
+          }
+          return html
+      }
+    },
   question_read : function (data){
     return `
       <!DOCTYPE html>
@@ -112,16 +163,9 @@ module.exports = {
           </div>
           <div class="answer-content">
             <div class="content">
-              ${data.content}
+              ${data.contents.text.trim()}
             </div>
-      <!--      <div class="codepen">-->
-      <!--        <pre><code class="code-font">UPDATE purchaseOrder-->
-      <!--  SET purchaseOrder_status = 'COMPLETED'-->
-      <!--  WHERE purchaseOrder_ID = '@purchaseOrder_ID' and-->
-      <!--  not exists (SELECT *-->
-      <!--  FROM itemsOrdered WHERE purchaseOrder_ID = '@purchaseOrdered_ID' AND status = 'PENDING'-->
-      <!--  )</code></pre>-->
-      <!--      </div>-->
+            ${this.codeHtml.read(data)}
           </div>
       
           <div class="answer-info">
@@ -170,9 +214,10 @@ module.exports = {
                         style="overflow:hidden"
                         name="content"
                         onkeyup="adjustHeight(this);">
-                        ${data.content}
+                        ${data.contents.text.trim()}
                 </textarea>
               </div>
+                ${this.codeHtml.upsert(data)}
             </div>
             <div class="answer-info">
               <button class="small_btn info-float-right">완료</button>
@@ -280,10 +325,10 @@ module.exports = {
                       <textarea class="textarea-code"
                                 id = "textareaCodeContent"
                                 style="overflow:hidden"
+                                name="codeContent"
                                 onkeyup="adjustHeight(this);">
                       </textarea>
                     </div>
-            
                   </div>
                   <div class="answer-info">
                     <button class="small_btn info-float-right">완료</button>
@@ -356,17 +401,18 @@ module.exports = {
                 <textarea
                   id = "textareaContent"
                   style="overflow:hidden"
-                  onkeyup="adjustHeight(this);">${data.content.trim()}
+                  onkeyup="adjustHeight(this);">${data.contents.text.trim()}
                 </textarea>
               </div>
-      <!--        <div id="write-code" class="codepen" style="display: none;">-->
-      <!--          <label for="textareaCodeContent"></label>-->
-      <!--          <textarea class="textarea-code"-->
-      <!--                    id = "textareaCodeContent"-->
-      <!--                    style="overflow:hidden"-->
-      <!--                    onkeyup="adjustHeight(this);">-->
-      <!--          </textarea>-->
-      <!--        </div>-->
+              <div id="write-code" class="codepen" style="display: none;">
+                <label for="textareaCodeContent"></label>
+                <textarea class="textarea-code"
+                          id = "textareaCodeContent"
+                          name="codeContent"
+                          style="overflow:hidden"
+                          onkeyup="adjustHeight(this);">${data.contents.code.trim()}
+                </textarea>
+              </div>
       
             </div>
       
