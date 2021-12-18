@@ -4,6 +4,7 @@ const db =  require('../../db.js');
 exports.container = function(request, response) {
     // let userid='abc@naver.com';
     let userid = request.session.userid;
+    console.log(request.session);
     if (!request.session.userid) {
         return response.redirect('/');
     }
