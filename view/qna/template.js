@@ -421,7 +421,7 @@ module.exports = {
                     <h4>${ans[i].title}</h4>
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
-                <div class="adoption ${ans[i].no}">
+                <div class="adoption_container ${ans[i].no}">
                   ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`)}
                 </div>
                 <div class="info-float-right" style="margin: 18px 20px 0 0">
@@ -477,9 +477,9 @@ module.exports = {
     },
     adoption: function(point, adoption, board_id, quest_no, no){
       if(adoption == 1)
-        return `<p>${point} 포인트로 채택됨</p>`;
+        return `<p id="adoption_result">${point} 포인트로 채택됨</p>`;
       else return `
-        <form action="/qna/adoption_process" method="post">
+        <form class="adoption" action="/qna/adoption_process" method="post">
           <input id = "adopt_point" type="text" name="adoptPoint" placeholder="채택 포인트를 입력하세요">
           <input type="hidden" name="boardId" value="${board_id}">
           <input type="hidden" name="questNo" value="${quest_no}">

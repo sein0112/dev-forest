@@ -212,3 +212,33 @@ code, pre, .code-font {
 #cancle_btn:hover{
     background-color: #b5b5b5;
 }
+
+/* 채택 */
+#adoption_result{
+    font-size: 14px;
+    font-weight: 700;
+    padding: 5px 10px;
+    margin: 14px 10px 0 0;
+}
+.adoption_container{
+    float: right;
+    margin: 0;
+}
+.adoption{
+    float: left;
+    margin: 0;
+}
+#adopt_point{
+    margin: 20px 10px 0 0;
+    float: left;
+}
+#adopt_btn{
+    float: left;
+    padding: 5px 10px;
+    margin: 15px 10px 0 0;
+    display: block;
+    color: #ffffff;
+    background-color: #3F3F3F;
+    border-radius: 12px;
+    border-style: none;
+}
