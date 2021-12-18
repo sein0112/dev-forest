@@ -11,7 +11,11 @@ module.exports = {
         <div id="nav_userInfo">
             <img id="usrProfImg" src="#" alt="userpng">
             <p id="usrNname"><b>${userinfo.nickname}</b></p>
-            <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
+            <div id ="logoutform">
+                <form action='/login/logoutprocess' method='post'>
+                    <input type="submit" value="로그아웃" id="logout_btn" style="cursor: pointer;>
+                </form>
+            </div>
         </div>
         `;
     },

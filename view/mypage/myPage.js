@@ -2,7 +2,11 @@ const template = require('./myPageTemplate.js');
 const db =  require('../../db.js'); 
 
 exports.container = function(request, response) {
-    let userid='abc@naver.com';
+    // let userid='abc@naver.com';
+    let userid = request.session.userid;
+    if (!request.session.userid) {
+        return response.redirect('/');
+    }
     let html;
     let user;
     let userinfohtml, navhtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml;

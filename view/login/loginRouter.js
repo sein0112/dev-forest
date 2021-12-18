@@ -33,4 +33,13 @@ router.post('/loginprocess', function(request, response){
     });
 });
 
+router.post('/logoutprocess', function(request, response){
+    if (request.session.authenticate == false) {}
+    else {
+        delete request.session.userid;
+        request.session.authenticate = false;
+        response.redirect('/');
+    }
+});
+
 module.exports = router;
