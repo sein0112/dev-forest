@@ -47,6 +47,7 @@ code, pre, .code-font {
 .info-float-right{
     float: right;
     margin-right: 20px;
+    margin-left: -10px;
 }
 #section_user_img{
     width: 60px;

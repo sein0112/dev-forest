@@ -129,10 +129,11 @@ exports.delete_process = function(request, response){
 
 exports.scrap = function(request, response){
     var data = request.body;
+    let userId = request.session.userid
     // SELECT MAX(컬럼) FROM 테이블;
 
     db.query(`SELECT * FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
-        [data.boardId, data.userId, data.questNo],
+        [data.boardId, userId, data.questNo],
         function(error, scrap) {
         if (error) {
             throw error;
@@ -141,7 +142,7 @@ exports.scrap = function(request, response){
         if(scrap.length === 0){
             db.query(`INSERT INTO scraptbl (user_id, board_id, quest_no, datetime)
                       VALUES(?, ?, ?, NOW())`,
-                [ data.userId, data.boardId, data.questNo],
+                [ userId, data.boardId, data.questNo],
                 function(error2, result){
                     if(error2){
                         throw error2;
@@ -151,7 +152,7 @@ exports.scrap = function(request, response){
             )
         } else {
             db.query(`DELETE FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
-                [data.boardId, data.userId, data.questNo],
+                [data.boardId, userId, data.questNo],
                 function(error2, result2){
                     if(error2){
                         throw error2;

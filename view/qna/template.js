@@ -187,7 +187,8 @@ module.exports = {
               <h4>${data.title}</h4>
               <span>${data.user_id}</span> | <span>${data.updated_datetime}</span>
             </div>
-            ${writer? '<div class="info-float info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
+            ${writer? '<div class="info-float-right"><button id="delete_btn" class="small_btn">삭제</button></div>' : ''}
+            ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
           </div>
           <div class="answer-content">
             <div class="content"><pre>${data.contents.text.trim()}</pre></div>
@@ -216,7 +217,7 @@ module.exports = {
         function onClickScrap(boardId, questNo){
             $.ajax({
                 url: "/qna/scrap_process",
-                data: { boardId, questNo, userId : request.session.userid},
+                data: { boardId, questNo},
                 method: "post", 
                 dataType: "json" 
             })
@@ -235,7 +236,14 @@ module.exports = {
                 alert("오류발생 >>>>>> " + errorThrown)
             })
             // 
-        }
+        }delete_btn
+        $("#delete_btn").click(function() {
+            if(confirm('정말 삭제하시겠습니까?')){
+                
+            }else {
+                
+            }
+        });
       
         $("#update_btn").click(function() {
           $("#write-question").show();
