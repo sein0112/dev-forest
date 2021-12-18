@@ -41,7 +41,6 @@ module.exports={
                         <p class="pw_info">*영문, 숫자 조합으로 8~20자 사이로 입력하세요.</p>
                         <p class="list_name">비밀번호 확인</p>
                         <input type="text" name="user_pwcheck" class="list_blank" placeholder="비밀번호 확인">
-                        <p class="warn_info">*비밀번호가 일치하지 않습니다.</p>
                         <input type="submit" value="저장" class="save_btn">
                     </form>
                     
