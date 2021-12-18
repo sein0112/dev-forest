@@ -2,6 +2,51 @@ const fs = require('fs');
 const e = require("express");
 
 module.exports = {
+    writeHtml : function (url, data, display){
+        let html = `<div id="write-question" class="write-ask" style="display: ${display};">
+          <form action="${url}" method="post">
+            <input type="hidden" id="boardId" name="boardId" value="${data.board_id}">
+            <input type="hidden" id="questionNo" name="questionNo" value="${data.no}">
+            <div class="answer-info">
+              <div class="info-float info-img">
+                <img id = "section_user_img" >
+              </div>
+              <div class="info-float">
+                <label for="inputTitle"></label>
+                <input id = "inputTitle"
+                       style="width: 100%;"
+                       type="text"
+                       name="title"
+                       value="${data.title ?? ''}"
+                       placeholder="질문 제목을 입력하세요">
+              </div>
+              <div class="info-float-right">
+                <div class="add-codepen">
+                  <p id="codepen_btn">소스코드 추가하기</p>
+                </div>
+              </div>
+      
+            </div>
+            <div class="answer-content">
+              <div class="content">
+                <label for="textareaContent"></label>
+                <textarea
+                        id = "textareaContent"
+                        style="overflow:hidden"
+                        name="content"
+                        onfocus="adjustHeight(this);"
+                        onkeyup="adjustHeight(this);">${data.contents?.text?.trim()?? ''}</textarea>
+              </div>
+                ${this.codeHtml.upsert(data)}
+            </div>
+            <div class="answer-info">
+              <button class="small_btn info-float-right">완료</button>
+            </div>
+          </form>
+        </div>`
+
+        return html
+    },
   head : function (){
     return `<head>
               <meta charset="UTF-8">
@@ -93,14 +138,12 @@ module.exports = {
                     <pre><code class="code-font">${data.contents.code.trim()}</code></pre>
                   </div>`
           }
-          console.log(html)
           return html
       },
       upsert : function (data){
           let html = '';
-          if(data.contents.code !==undefined && data.contents.code !==null){
-              if(data.contents.code !==''){
-                  html = `<div id="write-code" class="codepen">
+          if(data.contents?.code !==undefined && data.contents?.code !==null && data.contents.code !==''){
+              html = `<div id="write-code" class="codepen">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
                             id = "textareaCodeContent"
@@ -109,18 +152,6 @@ module.exports = {
                             onfocus="adjustHeight(this);"
                             onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
                 </div>`
-              }else {
-                  html = `<div id="write-code" class="codepen" style="display: none;">
-                  <label for="textareaCodeContent"></label>
-                  <textarea class="textarea-code"
-                            id = "textareaCodeContent"
-                            style="overflow:hidden"
-                            name="codeContent"
-                            onfocus="adjustHeight(this);"
-                            onkeyup="adjustHeight(this);">
-                  </textarea>
-                </div>`
-              }
           }else {
               html = `<div id="write-code" class="codepen" style="display: none;">
                   <label for="textareaCodeContent"></label>
@@ -128,14 +159,14 @@ module.exports = {
                             id = "textareaCodeContent"
                             style="overflow:hidden"
                             name="codeContent"
-                            onkeyup="adjustHeight(this);">
-                  </textarea>
+                            onfocus="adjustHeight(this);"
+                            onkeyup="adjustHeight(this);"></textarea>
                 </div>`
           }
           return html
       }
     },
-  question_read : function (data){
+  question_read : function (data, writer){
     return `
       <!DOCTYPE html>
       <html lang="en">
@@ -156,10 +187,7 @@ module.exports = {
               <h4>${data.title}</h4>
               <span>${data.user_id}</span> | <span>${data.updated_datetime}</span>
             </div>
-            <div class="info-float info-float-right">
-              <button id="update_btn" class="small_btn">수정</button>
-            </div>
-      
+            ${writer? '<div class="info-float info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
           </div>
           <div class="answer-content">
             <div class="content"><pre>${data.contents.text.trim()}</pre></div>
@@ -167,7 +195,7 @@ module.exports = {
           </div>
       
           <div class="answer-info">
-            <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no},'tpdls973@naver.com')" class="like_img">
+            <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no})" class="like_img">
               <div id="like_btn" >
                 <img id="answer_like" />
               </div>
@@ -177,50 +205,7 @@ module.exports = {
             </div>
           </div>
         </div>
-      
-        <div id="write-question" class="write-ask" style="display: none;">
-          <form action="/qna/${data.board_id}/${data.no}/update_process" method="post">
-<!--                      임시하드코딩-->
-            <input type="hidden" id="userId" name="userId" value="tpdls973@naver.com">
-            <input type="hidden" id="boardId" name="boardId" value="${data.board_id}">
-            <input type="hidden" id="questionNo" name="questionNo" value="${data.no}">
-            <div class="answer-info">
-              <div class="info-float info-img">
-                <img id = "section_user_img" >
-              </div>
-              <div class="info-float">
-                <label for="inputTitle"></label>
-                <input id = "inputTitle"
-                       style="width: 100%;"
-                       type="text"
-                       name="title"
-                       value="${data.title}"
-                       placeholder="질문 제목을 입력하세요">
-              </div>
-              <div class="info-float-right">
-                <div class="add-codepen">
-                  <p id="codepen_btn">소스코드 추가하기</p>
-                </div>
-              </div>
-      
-            </div>
-            <div class="answer-content">
-              <div class="content">
-                <label for="textareaContent"></label>
-                <textarea
-                        id = "textareaContent"
-                        style="overflow:hidden"
-                        name="content"
-                        onfocus="adjustHeight(this);"
-                        onkeyup="adjustHeight(this);">${data.contents.text.trim()}</textarea>
-              </div>
-                ${this.codeHtml.upsert(data)}
-            </div>
-            <div class="answer-info">
-              <button class="small_btn info-float-right">완료</button>
-            </div>
-          </form>
-        </div>
+        ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
         </div>
       </div>
       </body>
@@ -228,10 +213,10 @@ module.exports = {
       </html>
       <script>
       
-        function onClickScrap(boardId, questNo, userId){
+        function onClickScrap(boardId, questNo){
             $.ajax({
                 url: "/qna/scrap_process",
-                data: { boardId, questNo, userId},
+                data: { boardId, questNo, userId : request.session.userid},
                 method: "post", 
                 dataType: "json" 
             })
@@ -285,58 +270,7 @@ module.exports = {
           <body>
             <div id="wrap">
               ${this.nav()}
-              <div id="write-question" class="write-ask">
-                <form action="/qna/create_process" method="post">
-                  <div class="answer-info">
-                    <div class="info-float info-img">
-                      <img id = "section_user_img" >
-                    </div>
-                    <div class="info-float">
-                      <label for="inputTitle"></label>
-                      <input id = "inputTitle"
-                             style="width: 100%;"
-                             type="text"
-                             name="title"
-                             placeholder="질문 제목을 입력하세요">
-                      
-                      <input type="hidden" id ="boardId" name="boardId" value="${data.boardId}">
-<!--                      임시하드코딩-->
-                      <input type="hidden" id="userId" name="userId" value="tpdls973@naver.com">
-                    </div>
-                    <div class="info-float-right">
-                      <div class="add-codepen">
-                        <p id="codepen_btn">소스코드 추가하기</p>
-                      </div>
-                    </div>
-            
-                  </div>
-                  <div class="answer-content">
-                    <div class="content">
-                      <label for="textareaContent"></label>
-                      <textarea
-                              id = "textareaContent"
-                              name = "content"
-                              style="overflow:hidden"
-                              onfocus="adjustHeight(this);"
-                              onkeyup="adjustHeight(this);">
-                      </textarea>
-                    </div>
-                    <div id="write-code" class="codepen" style="display: none;">
-                      <label for="textareaCodeContent"></label>
-                      <textarea class="textarea-code"
-                                id = "textareaCodeContent"
-                                style="overflow:hidden"
-                                name="codeContent"
-                                onfocus="adjustHeight(this);"
-                                onkeyup="adjustHeight(this);">
-                      </textarea>
-                    </div>
-                  </div>
-                  <div class="answer-info">
-                    <button class="small_btn info-float-right">완료</button>
-                  </div>
-                </form>
-              </div>
+              ${this.writeHtml('/qna/create_process',data, '')}
             </div>
           </body>
           

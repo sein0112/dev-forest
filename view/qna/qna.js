@@ -30,12 +30,13 @@ exports.read = function(request, response){
                 }
                 let data = {
                     contents,
+                    boardId : question[0].board_id,
                     ...question[0],
                     ...scrap[0],
                     ...answerCount[0]
                 }
-                console.log("readData", data)
-                let html = qTemplate.question_read(data);
+                let writer = request.session.userid === data.user_id
+                let html = qTemplate.question_read(data, writer);
                 response.writeHead(200);
                 response.end(html);
             })
@@ -45,6 +46,10 @@ exports.read = function(request, response){
 
 exports.create = function (request, response){
     let data = request.params;
+    data = {
+        board_id : data.boardId,
+            ...data
+    }
     let html = qTemplate.question_create(data)
     response.writeHead(200)
     response.end(html);
@@ -52,10 +57,12 @@ exports.create = function (request, response){
 
 exports.create_process = function(request, response){
     var data = request.body;
+    console.log(data)
     let content = {
         text : data.content.trim(),
         code : data.codeContent.trim(),
     }
+    let userId = request.session.userid;
     // SELECT MAX(컬럼) FROM 테이블;
     db.query(`SELECT MAX(no) as maxNo FROM questionstbl WHERE board_id=?`,[data.boardId], function(error2, maxNo){
         if(error2){
@@ -64,7 +71,7 @@ exports.create_process = function(request, response){
         db.query(`
                     INSERT INTO questionstbl (board_id, no, datetime, updated_datetime, user_id, title, content)
                     VALUES(?, ?, NOW(), NOW(), ?, ?, ?)`,
-            [data.boardId, maxNo[0].maxNo+1, data.userId, data.title, JSON.stringify(content)],
+            [data.boardId, maxNo[0].maxNo+1, userId, data.title, JSON.stringify(content)],
             function(error, result){
                 if(error){
                     throw error;
@@ -124,7 +131,6 @@ exports.scrap = function(request, response){
     var data = request.body;
     // SELECT MAX(컬럼) FROM 테이블;
 
-    console.log(data)
     db.query(`SELECT * FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
         [data.boardId, data.userId, data.questNo],
         function(error, scrap) {
