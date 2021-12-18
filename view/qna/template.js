@@ -55,7 +55,7 @@ module.exports = {
               <link rel="stylesheet" type="text/css" href="/css/qna/qna.css">
             </head>`
   },
-  nav : function (){
+  nav : function (nickname){
     return `<div id="nav">
         <div id="menu">
             <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" onclick="menuClick()" style="cursor: pointer;">
@@ -121,7 +121,7 @@ module.exports = {
                                         
         <div id="nav_userInfo">
             <img id="usrProfImg" src="#" alt="userpng">
-            <p id="usrNname"><b>수룡이</b></p>
+            <p id="usrNname"><b>${nickname}</b></p>
             <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
         </div>
         
@@ -171,7 +171,7 @@ module.exports = {
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <body>
       <div id="wrap"> 
-          ${this.nav()}
+          ${this.nav(data.nickname)}
         <div>
         <div id="read-question" class="answer-container">
           <div class="answer-info">
@@ -394,7 +394,7 @@ module.exports = {
           <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
           <body>
             <div id="wrap">
-              ${this.nav()}
+              ${this.nav(data.nickname)}
               ${this.writeHtml('/qna/create_process',data, '')}
             </div>
           </body>

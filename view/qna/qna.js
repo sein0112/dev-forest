@@ -37,6 +37,7 @@ exports.read = function(request, response){
                             contents,
                             boardId : question[0].board_id,
                             answer : answer,
+                            nickname : request.session.nickname,
                             ...question[0],
                             ...scrap[0],
                             scrapMe,
@@ -57,6 +58,7 @@ exports.read = function(request, response){
 exports.create = function (request, response){
     let data = request.params;
     data = {
+        nickname : request.session.nickname,
         board_id : data.boardId,
             ...data
     }
@@ -92,15 +94,6 @@ exports.create_process = function(request, response){
         )
     })
 }
-
-exports.update = function (request, response){
-    let html = qTemplate.question_create()
-
-    response.writeHead(200)
-    response.end(html);
-}
-
-
 exports.update_process = function(request, response){
 
     var data = request.body;
