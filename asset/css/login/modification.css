@@ -61,12 +61,11 @@ a{
 }
 
 .container{
-    height: 850px;
+    height: 1000px;
     width: 1300px;
     border-radius: 12px;
     background-color: white;
-    margin: 0 auto;
-    margin-top: 70px;
+    margin: 70px auto;
     box-shadow: 5px 5px 3px #B8B8B8;
 }
 

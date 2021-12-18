@@ -13,22 +13,22 @@ router.post('/loginprocess', function(request, response){
 
     db.query('SELECT * FROM usertbl WHERE id=? and password=?', [id, pwd], function(error, user) {
         if (error) {
-            response.send("alert('로그인 실패');");
+            console.log(error);
         }
         else {
-            console.log(user);
             if(user.length == 0) {
-                response.send("alert('로그인 실패');");
                 request.session.authenticate = false;
+                response.write("<script>alert('login failed')</script>");
+                return response.write("<script>window.location='/login'</script>");
             }
             else{
-                console.log("로그인 성공!");
+                response.write("<script>alert('login success')</script>");
                 request.session.authenticate = true;
                 request.session.userid = id;
+                console.log(request.session);
+                return response.write("<script>window.location='/myPage'</script>");
             }
 
-            console.log(request.session);
-            response.redirect('/myPage');
         }
     });
 });
