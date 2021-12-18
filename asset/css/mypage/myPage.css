@@ -11,6 +11,10 @@ a {
     color: black;
 }
 
+#logoutform{
+    float: left;
+}
+
 #wrap{
     margin: 30px 40px;
 }
@@ -23,7 +27,14 @@ a {
     text-align: center;
 }
 
-
+#userInfo{
+    height: 200px;
+    width: 850px;
+    overflow: auto;
+    margin: 0 auto;
+    padding-top: 80px;
+    padding-bottom: 30px;
+}
 
 #usrProfImgBig{
     float: left;
@@ -31,8 +42,8 @@ a {
     height: 200px;
     border-radius: 50%;
 }
-#useInfoTable{
-    width: 350px;
+
+#userInfoTable{
     height: 105px;
     margin: auto 0;
     margin-left: 30px;
@@ -139,7 +150,7 @@ a {
 .myAnswPost_writer, .myScrapPost_writer, .myLikePost_writer{
     float: left;
     margin-left: 10px;
-    width: 90px;
+    width: 80px;
     font-size: 15px;
     color: #A1A1A1;
     overflow: hidden;
