@@ -1,0 +1,124 @@
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:wght@700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=PT+Serif:wght@700&display=swap');
+
+body{
+    background-color: #E1E1E1;
+    margin: 0;
+    text-align: center;
+    font-family: 'Jua', sans-serif;
+}
+a{
+    color: black;
+    font-size: 24px;
+    margin: 10px;
+    text-decoration: none;
+}
+a:hover{
+    color: gray;
+}
+.ranking-container{
+    margin: 20px;
+    background-color: #ffffff;
+    border-radius: 12px;
+    height: 100%;
+}
+.top-rankers{
+    margin-top: 80px;
+    text-align: center;
+    height: 300px;
+}
+.ranker{
+    width: 150px;
+    height: 150px;
+    margin: 0 30px;
+    /* line-height: 40px; */
+    border-radius: 12px;
+    display: inline-block;
+    /* vertical-align: middle; */
+}
+.ranker p{
+    color: black;
+    font-size: 2rem;
+    text-align: center;
+    /* font-family: 'Do Hyeon', sans-serif; */
+    font-family: 'Jua', sans-serif;
+
+}
+
+#ranking_user_img{
+    margin-top: 10px;
+    width: 130px;
+    height: 130px;
+    border-radius: 12px;
+    filter: drop-shadow(5px 5px 5px #000)
+}
+
+
+.top_rank_num{
+    font-size: 5rem;
+    font-family: 'PT Serif', serif;
+    z-index: 100;
+    position: absolute;
+    margin: -40px 0 0 -20px;
+}
+#rank_1{
+    color: rgb(243, 210, 22);
+    text-shadow: 2px 2px 2px rgb(133, 114, 2);
+}
+#rank_2{
+    color: silver;
+    text-shadow: 2px 2px 2px rgb(132, 132, 132);
+}
+#rank_3{
+    color: rgb(126, 83, 83);
+    text-shadow: 2px 2px 2px rgb(78, 36, 36);
+}
+
+#others_ranking_user_img{
+    width: 30px;
+    height: 30px;
+    border-radius: 50px;
+    vertical-align: middle;
+}
+
+.other-rankers{
+    text-align: center;
+}
+#others{
+    width: 100%;
+    list-style: none;
+    line-height: 40px;
+}
+#rank_num{
+    width: 20px;
+    display: inline-block;
+    font-size: 20px;
+    font-family: 'PT Serif', serif;
+    vertical-align: middle;
+}
+#others_username{
+    font-size: 20px;
+    margin-right: 20px;
+    vertical-align: middle;
+}
+.others_user_info{
+    width: 200px;
+    display: inline-block;
+}
+
+#more_rankings{
+    height: 50px;
+    display: none;
+}
+#show_rank{
+    background: none;
+    color: black;
+    font-size: 20px;
+    /* margin: 10px; */
+    /* text-decoration: none; */
+    border:none;
+    font-family: 'Jua', sans-serif;
+}
+#show_rank:hover{
+    color: gray;
+}
