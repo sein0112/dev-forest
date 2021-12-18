@@ -421,11 +421,13 @@ module.exports = {
                     <h4>${ans[i].title}</h4>
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
+                <div class="adoption ${ans[i].no}">
+                  ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`)}
+                </div>
                 <div class="info-float-right" style="margin: 18px 20px 0 0">
                     <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no})">
                         <div id="like_btn">
                             <img id="answer_like" src="./../../image/favorite_border_black_24dp.svg"/>
-
                         </div>
                     </div>
                     <div class="like_num">
@@ -472,5 +474,18 @@ module.exports = {
             <button id="cancle_btn">취소</button>
         </div>
       </div>`;
+    },
+    adoption: function(point, adoption, board_id, quest_no, no){
+      if(adoption == 1)
+        return `<p>${point} 포인트로 채택됨</p>`;
+      else return `
+        <form action="/qna/adoption_process" method="post">
+          <input id = "adopt_point" type="text" name="adoptPoint" placeholder="채택 포인트를 입력하세요">
+          <input type="hidden" name="boardId" value="${board_id}">
+          <input type="hidden" name="questNo" value="${quest_no}">
+          <input type="hidden" name="no" value="${no}">
+          <input id="adopt_btn" type="submit" value="채택">
+      </form>
+      `;
     },
 }

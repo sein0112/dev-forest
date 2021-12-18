@@ -23,6 +23,10 @@ router.post('/scrap_process', function(request, response){
     qna.scrap(request, response);
 });
 
+router.post('/delete_process', function(request, response){
+    qna.delete_process(request, response);
+});
+
 router.post('/anscreate_process', function(request, response){
     qna.anscreate_process(request, response);
 });
@@ -35,8 +39,8 @@ router.post('/likecount', function(request, response){
     qna.likeCnt(request, response);
 });
 
-router.post('/delete_process', function(request, response){
-    qna.delete_process(request, response);
+router.post('/adoption_process', function(request, response){
+    qna.adoption(request, response);
 });
 
 module.exports = router;
