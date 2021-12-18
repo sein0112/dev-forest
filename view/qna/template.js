@@ -206,41 +206,9 @@ module.exports = {
         </div>
           ${this.ansList(data.answer, 10)}
           <div class="btn-wrapper">
-                <button id="answer_btn">답변 작성하기</button>
-            </div>
-            <div class="write-answer" style="display: none;">
-            <form method="post">
-                <div class="answer-info">
-                    <div class="info-float info-img">
-                        <img id = "section_user_img" src="image/water-839590_1920.jpg">
-                    </div>
-                    <div class="info-float info-content">
-                        <input id = "inputTitle" type="text" name="input" placeholder="답변 제목을 입력하세요">
-                        <span>작성자이름</span> | <span>2019.09.24</span>
-                    </div>
-                    <div class="info-float-right">
-                        <div class="add-codepen">
-                            <p id="codepen_btn">소스코드 추가하기</p>
-                        </button>
-                        </div>
-                    </div>
-                    
-                </div>
-                <div class="answer-content">
-                    <div class="content">
-                        <textarea id = "inputContent" type="text" name="input" placeholder="내용을 입력하세요"></textarea>
-                    </div>
-                    <div>
-                        <pre><code><textarea class="codepen" style="display: none;"></textarea></code></pre>
-                    </div>
-                </div>
-            </form>
-        </div>
-        <div class="option_write" style="display: none;">
-            <button id="store_btn">저장</button>
-            <button id="cancle_btn">취소</button>
-        </div>
-      </div>
+              <button id="answer_btn">답변 작성하기</button>
+          </div>
+          ${this.answer_create(data.answer, data.nickname)}
       </body>
       
       </html>
@@ -447,17 +415,40 @@ module.exports = {
                 <div class="content">
                     ${ans[i].content}
                 </div>
-                <div class="codepen">
-                    <pre>
-                        <code>
-                코드 작성
-                        </code>
-                    </pre>
-                </div>
             </div>
         </div>`;
             i = i+1;
         }
         return list;
+    },
+    answer_create : function (ans, nickname){
+      var today = new Date();
+      return `
+      <div class="write-answer" style="display: none;">
+            <form action="/qna/anscreate_process" method="post">
+                <div class="answer-info">
+                    <div class="info-float info-img">
+                        <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                    </div>
+                    <div class="info-float info-content">
+                        <input id = "inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요">
+                        <span>${nickname}</span> | <span>${today}</span>
+                    </div>        
+                </div>
+                <div class="answer-content">
+                    <div class="content">
+                    <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
+                    </div>
+                </div>
+                <input type="hidden" name="boardId" value="${ans[0].board_id}">
+                <input type="hidden" name="questNo" value="${ans[0].quest_no}">
+                <input type="hidden" name="datetime" value="${ans[0].datetime}">
+                <input id="store_btn" type="submit" value="저장">
+            </form>
+        </div>
+        <div class="option_write" style="display: none;">
+            <button id="cancle_btn">취소</button>
+        </div>
+      </div>`;
     },
 }
