@@ -217,7 +217,7 @@ module.exports = {
                         <table id="userInfoTable">
                         ${userinfohtml}
                         </table>
-                        <button id="userInfoEdit_btn" style="cursor: pointer;">편집</button>
+                        <button id="userInfoEdit_btn" style="cursor: pointer;" onClick="location.href='/modify'">편집</button>
                     </div>
                     <hr style="width: 80%; margin: 0 auto; margin-bottom: 20px; border: solid 1px #A1A1A1">
                     <div id="userPost">

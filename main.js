@@ -5,6 +5,7 @@ var qna = require('./view/qna/qna.js');
 var myPage = require('./view/mypage/myPage.js')
 var loginRoutes = require('./view/login/loginRouter.js');
 var boardRoutes = require('./view/board/boardRouter.js');
+var modRoutes = require('./view/login/usermodRouter.js');
 var express = require('express');
 const session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -48,6 +49,7 @@ app.post('/qna/create_process', function(request, response){
     qna.create_process(request, response);
 });
 app.use('/login', loginRoutes);
+app.use('/modify', modRoutes);
 
 app.get('/answer', function(request, response){
     answer.container(request, response);
