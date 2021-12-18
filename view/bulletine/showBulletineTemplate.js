@@ -51,16 +51,21 @@ module.exports = {
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
             result += `
-            <div class="myQuestPost" style="cursor: pointer;">
-                <div id="myQuestPost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                    <div class="myQuestPost_title">${questions[i].title}</div>
-                    <p class="myQuestPost_time">${this.parseDate(questions[i].datetime)}</p>
-                </div>
-                <div class="myQuestPost_contents">
-                    <P class="myQuestPost_content">${questions[i].content}</P>
-                </div>
-            </div>
+
+            <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px; cursor: pointer;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            ${questions[i].title}<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">${questions[i].nickname}<span>  |   ${this.parseDate(questions[i].datetime)}</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">${questions[i].contents.text}
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/scrap_star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
             `;
             i++;
         }
@@ -73,17 +78,22 @@ module.exports = {
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
             result += `
-            <div class="myAnswPost" style="cursor: pointer;">
-                <div id="myAnswPost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                    <div class="myAnswPost_title"><p class="userPost_title">${questions[i].title}</p></div>
-                    <div class="myAnswPost_writer">${questions[i].nickname}</div>
-                    <p class="myAnswPost_time">${this.parseDate(questions[i].datetime)}</p>
-                </div>
-                <div class="myAnswPost_contents">
-                    <P class="myAnswPost_content">${questions[i].content}</P>
-                </div>
-            </div>
+
+            <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px; cursor: pointer;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            ${questions[i].title}<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">${questions[i].nickname}<span>  |   ${this.parseDate(questions[i].datetime)}</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">${questions[i].contents.text}
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/scrap_star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+
 
             `;
             i++;
@@ -97,16 +107,21 @@ module.exports = {
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
             result += `
-                <div class="myScrapPost" style="cursor: pointer;">
-                <div id="myScrapPost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                    <div class="myScrapPost_title"><p class="userPost_title">${questions[i].title}</p></div>
-                    <div class="myScrapPost_writer">${questions[i].nickname}</div>
-                    <p class="myScrapPost_time">${this.parseDate(questions[i].datetime)}</p>
-                </div>
-                <div class="myScrapPost_contents">
-                    <P class="myScrapPost_content">${questions[i].content}</P>
-                </div>
+
+            <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px; cursor: pointer;">
+            <div style="display: inline-block; margin-left: 70px; ">
+                <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                    ${questions[i].title}<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">${questions[i].nickname}<span>  |   ${this.parseDate(questions[i].datetime)}</span></small>
+                </h3>
+            </div>
+            
+            <p class="question">${questions[i].contents.text}
+            </p>
+
+            <div>
+                <img class="starImage" src="../../asset/image/scrap_star.png">
+                <p class="staredPerson">86</p>
+
             </div>
             `;
             i++;
@@ -120,17 +135,22 @@ module.exports = {
         if (answers.length < 3) maxi = answers.length;
         while (i < maxi) {
             result += `
-            <div class="myLikePost" style="cursor: pointer;">
-                <div id="myLikePost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                    <div class="myLikePost_title"><p class="userPost_title">${answers[i].title}</p></div>
-                    <div class="myLikePost_writer">${answers[i].nickname}</div>
-                    <p class="myLikePost_time">${this.parseDate(answers[i].datetime)}</p>
-                </div>
-                <div class="myLikePost_contents">
-                    <P class="myLikePost_content">${answers[i].content}</P>
-                </div>
-            </div>
+
+            <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px; cursor: pointer;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            ${questions[i].title}<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">${questions[i].nickname}<span>  |   ${this.parseDate(questions[i].datetime)}</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">${questions[i].contents.text}
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/scrap_star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+
             `;
             i++;
         }
@@ -141,7 +161,9 @@ module.exports = {
         <!DOCTYPE html>
         <head>
             <meta charset="utf-8">
-            <title>마이페이지 - 내가 좋아요 / 즐겨찾기 한 글</title>
+
+            <title>질문게시판 - Java Script</title>
+
             <link rel="stylesheet" href="../../asset/css/mypage/myPage.css">
             <link rel="stylesheet" href="../../asset/css/nav.css">
             <link rel="stylesheet" href="../../asset/css/mypage/myPageDetails.css">
@@ -232,32 +254,14 @@ module.exports = {
                 <span class ="box1", style="margin-left: 0px;">
                     ${myscraphtml}
                 </span>
-        
-                <span class ="box1", style="margin-left: 15px; margin-right: 15px;">
-                    ${myscraphtml}
-                </span>
-                
-                <span class ="box1", style="margin-left: 0px; margin-right: 0px;">
-                    ${myscraphtml}
-                </span>
             </div>
         
             <div class="box1-group", style="margin-top: 20px;">
                 <span class ="box1", style="margin-left: 0px;">
-                    ${myscraphtml}
-                </span>
-        
-                <span class ="box1", style="margin-left: 15px; margin-right: 15px;">
-                    ${myscraphtml}
-                </span>
-                
-                <span class ="box1", style="margin-left: 0px; margin-right: 0px;">
-                    ${myscraphtml}
+
+                    ${mylikehtml}
                 </span>
             </div>
-        
-            <button style="width:200px; height:55px; margin-left: 690px; margin-right: auto; margin-top: 40px; background-color: #e5e5e5; border: 0px;">
-                <img src="../../asset/image/more.png" style="position:absolute; width: 100px; height: auto; margin-left: -50px; margin-top: -15px;">
         </div>
         </div>
     </body>

@@ -1,4 +1,8 @@
+<<<<<<< Updated upstream
 const template = require('./searchResultTemplete.js');
+=======
+const template = require('./searchResultTemplate.js');
+>>>>>>> Stashed changes
 const db =  require('../../db.js'); 
 
 exports.container = function(request, response) {

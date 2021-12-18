@@ -5,7 +5,6 @@ var qna = require('./view/qna/qna.js');
 var myPage = require('./view/mypage/myPage.js');
 var rank = require('./view/rank/rank.js');
 var myLikeAndStar = require('./view/mypage/myLikeAndStar.js');
-var searchResult = require('./view/bulletine/searchResult.js');
 var showBulletine = require('./view/bulletine/showBulletine.js');
 var loginRoutes = require('./view/login/loginRouter.js');
 var boardRoutes = require('./view/board/boardRouter.js');
@@ -60,6 +59,14 @@ app.get('/searchResult', function(request, response){
 });
 
 app.get('/showBulletine', function(request, response){
+    showBulletine.container(request, response);
+});
+
+app.get('/myLikeAndStar', function(request, response){
+    myLikeAndStar.container(request, response);
+});
+
+app.get('/showBulletine', function(request, response) {
     showBulletine.container(request, response);
 });
 

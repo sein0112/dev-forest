@@ -1,4 +1,4 @@
-const template = require('./showBulletine.js');
+const template = require('./showBulletineTemplate.js');
 const db =  require('../../db.js'); 
 
 exports.container = function(request, response) {
@@ -19,6 +19,7 @@ exports.container = function(request, response) {
             navhtml = template.nav(user);
         }
         //최근 내가 질문 한 글
+
         db.query('SELECT * FROM questionstbl WHERE user_id=? ORDER BY datetime DESC LIMIT 3', [userid], function(error, questions) {
             if(error) console.log(error); 
             else{
