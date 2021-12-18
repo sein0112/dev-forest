@@ -106,9 +106,7 @@ module.exports = {
                             id = "textareaCodeContent"
                             style="overflow:hidden"
                             name="codeContent"
-                            onkeyup="adjustHeight(this);">
-                            ${data.contents.code.trim()}
-                  </textarea>
+                            onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
                 </div>`
               }else {
                   html = `<div id="write-code" class="codepen" style="display: none;">
@@ -162,9 +160,7 @@ module.exports = {
       
           </div>
           <div class="answer-content">
-            <div class="content">
-              ${data.contents.text.trim()}
-            </div>
+            <div class="content">${data.contents.text.trim()}</div>
             ${this.codeHtml.read(data)}
           </div>
       
@@ -213,9 +209,7 @@ module.exports = {
                         id = "textareaContent"
                         style="overflow:hidden"
                         name="content"
-                        onkeyup="adjustHeight(this);">
-                        ${data.contents.text.trim()}
-                </textarea>
+                        onkeyup="adjustHeight(this);">${data.contents.text.trim()}</textarea>
               </div>
                 ${this.codeHtml.upsert(data)}
             </div>
@@ -401,8 +395,7 @@ module.exports = {
                 <textarea
                   id = "textareaContent"
                   style="overflow:hidden"
-                  onkeyup="adjustHeight(this);">${data.contents.text.trim()}
-                </textarea>
+                  onkeyup="adjustHeight(this);">${data.contents.text.trim()}</textarea>
               </div>
               <div id="write-code" class="codepen" style="display: none;">
                 <label for="textareaCodeContent"></label>
@@ -410,8 +403,7 @@ module.exports = {
                           id = "textareaCodeContent"
                           name="codeContent"
                           style="overflow:hidden"
-                          onkeyup="adjustHeight(this);">${data.contents.code.trim()}
-                </textarea>
+                          onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
               </div>
       
             </div>
