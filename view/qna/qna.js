@@ -198,6 +198,20 @@ exports.anscreate_process = function(request, response){
         })
     })
 }
+exports.adoption = function(request, response){
+    var data = request.body;
+    console.log(data)
+    let userId = request.session.userid;
+    db.query(`UPDATE answerstbl SET point=?, adoption=? WHERE  board_id=? AND quest_no=? AND no=?`,
+    [data.adoptPoint, 1, data.boardId, data.questNo, data.no],
+    function(error, result){
+        if(error){
+            throw error;
+        }
+        response.writeHead(302, {Location: `/qna/${data.boardId}/${data.questNo}}`});
+        response.end();
+    })
+}
 
 exports.like = function(request, response){
     var data = request.body;
