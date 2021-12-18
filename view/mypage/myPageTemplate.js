@@ -43,7 +43,9 @@ module.exports = {
     myQuests:function(questions) {
         let i = 0;
         let result = '';
-        while (i < questions.length) {
+        let maxi = 3;
+        if (questions.length < 3) maxi = questions.length;
+        while (i < maxi) {
             result += `
             <div class="myQuestPost" style="cursor: pointer;">
                 <div id="myQuestPost_info">
@@ -63,7 +65,9 @@ module.exports = {
     myAnswerQuests:function(questions) {
         let i = 0;
         let result = '';
-        while (i < questions.length) {
+        let maxi = 3;
+        if (questions.length < 3) maxi = questions.length;
+        while (i < maxi) {
             result += `
             <div class="myAnswPost" style="cursor: pointer;">
                 <div id="myAnswPost_info">
@@ -85,7 +89,9 @@ module.exports = {
     myScraps:function(questions){
         let i = 0;
         let result = '';
-        while (i < questions.length) {
+        let maxi = 3;
+        if (questions.length < 3) maxi = questions.length;
+        while (i < maxi) {
             result += `
                 <div class="myScrapPost" style="cursor: pointer;">
                 <div id="myScrapPost_info">
@@ -106,7 +112,9 @@ module.exports = {
     myLikes:function(answers){
         let i = 0;
         let result = '';
-        while (i < answers.length) {
+        let maxi = 3;
+        if (answers.length < 3) maxi = answers.length;
+        while (i < maxi) {
             result += `
             <div class="myLikePost" style="cursor: pointer;">
                 <div id="myLikePost_info">
