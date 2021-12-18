@@ -125,13 +125,13 @@ module.exports = {
           </div>
       
           <div class="answer-info">
-            <div class="like_img">
+            <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no},'tpdls973@naver.com')" class="like_img">
               <div id="like_btn" >
                 <img id="answer_like" />
               </div>
             </div>
             <div class="like_num">
-              <p id=like_numbers>${data.scrap}</p>
+              <p id=scrap_numbers>${data.scrap}</p>
             </div>
           </div>
         </div>
@@ -185,6 +185,30 @@ module.exports = {
       
       </html>
       <script>
+        function onClickScrap(boardId, questNo, userId){
+            $.ajax({
+                url: "/qna/scrap_process",
+                data: { boardId, questNo, userId},
+                method: "post", 
+                dataType: "json" 
+            })
+            // HTTP 요청이 성공하면 요청한 데이터가 done() 메소드로 전달됨.
+            .done(function(data) {
+                if(data){
+                    let oldScrap = document.getElementById("scrap_numbers").innerHTML
+                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1
+                }else {
+                    let oldScrap = document.getElementById("scrap_numbers").innerHTML
+                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1
+                }
+            })
+            // HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() 메소드로 전달됨.
+            .fail(function(xhr, status, errorThrown) {
+                alert("오류발생 >>>>>> " + errorThrown)
+            })
+            // 
+        }
+      
         $("#update_btn").click(function() {
           $("#write-question").show();
           $("#update_btn").hide();
