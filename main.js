@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 var answer = require('./view/qna/answer.js');
 var myPage = require('./view/mypage/myPage.js')
 var loginRoutes = require('./view/login/loginRouter.js');
+var boardRoutes = require('./view/board/boardRouter.js');
 var express = require('express');
 const session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
@@ -39,5 +40,8 @@ app.get('/answer', function(request, response){
 app.get('/myPage', function(request, response) {
     myPage.container(request, response);
 })
+
+app.get('/board/:boardId', boardRoutes);
+
 app.listen(5000);
 
