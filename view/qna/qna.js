@@ -22,7 +22,7 @@ exports.read = function(request, response){
                     if(error3){
                         throw error3;
                     }
-                    db.query(`SELECT count(*) as answerCount FROM answerstbl WHERE board_id=? AND quest_no=?`,[boardId, questionNo], function(error4, answerCount){
+                    db.query(`SELECT * FROM scraptbl WHERE board_id=? AND quest_no=? AND user_id=?`,[boardId, questionNo, request.session.userid], function(error4, scrapMe){
                         if(error4){
                             throw error4;
                         }
@@ -32,13 +32,14 @@ exports.read = function(request, response){
                         } catch (e) {
                             contents = { text : question[0].content}
                         }
+                        scrapMe = scrapMe.length > 0
                         let data = {
                             contents,
                             boardId : question[0].board_id,
                             answer : answer,
                             ...question[0],
                             ...scrap[0],
-                            ...answerCount[0]
+                            scrapMe,
                         }
 
                         console.log(data)
@@ -119,20 +120,19 @@ exports.update_process = function(request, response){
 }
 
 exports.delete_process = function(request, response){
-    var body = '';
-    request.on('data', function(data){
-        body = body + data;
-    });
-    request.on('end', function(){
-        let query = qs.parse(body);
-        db.query('DELETE FROM questionstbl WHERE board_id = ? AND no = ?', [query.board_id, query.no], function(error, result){
+    var data = request.body;
+    let userId = request.session.userid
+
+    console.log(data, userId)
+    db.query('DELETE FROM questionstbl WHERE board_id = ? AND user_id=? AND no = ?',
+        [data.boardId, userId, data.questNo],
+        function(error, result){
             if(error){
+                alert("삭제할 수 없습니다.");
                 throw error;
             }
-            response.writeHead(302, {Location: `/`});
-            response.end();
+            response.status(200).json(true);
         });
-    });
 }
 
 

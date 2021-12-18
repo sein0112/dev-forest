@@ -35,4 +35,8 @@ router.post('/likecount', function(request, response){
     qna.likeCnt(request, response);
 });
 
+router.post('/delete_process', function(request, response){
+    qna.delete_process(request, response);
+});
+
 module.exports = router;

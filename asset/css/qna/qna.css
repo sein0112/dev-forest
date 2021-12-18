@@ -19,6 +19,10 @@ code, pre, .code-font {
     margin-left: 20px;
 }
 
+.pd5-right {
+    padding-right: 5px;
+}
+
 .answer-container, .write-answer{
     background-color: #ffffff;
     border-radius: 12px;
@@ -66,6 +70,10 @@ code, pre, .code-font {
     width: 20px;
     height: 20px;
 }
+#question_scrap{
+    width: 20px;
+    height: 20px;
+}
 .like_img{
     float: left;
     padding-left: 30px;
@@ -74,6 +82,10 @@ code, pre, .code-font {
     float: left;
 }
 #like_btn{
+    border-style: none;
+    background-color: #ffffff;
+}
+#scrap_btn{
     border-style: none;
     background-color: #ffffff;
 }
