@@ -10,7 +10,8 @@ exports.container = function(request, response) {
     let html;
     let user;
     let userinfohtml, navhtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml;
-    db.query('SELECT * FROM usertbl JOIN gradetbl ON usertbl.level = gradetbl.level where usertbl.id=?', [userid], function(error, users) {
+
+    db.query('SELECT id, nickname, belong, image, name FROM usertbl JOIN gradetbl ON usertbl.level = gradetbl.level where usertbl.id=?', [userid], function(error, users) {
         if(error) console.log(error);
         else{
             user = users[0];
@@ -20,6 +21,7 @@ exports.container = function(request, response) {
         }
         //최근 내가 질문 한 글
         db.query('SELECT * FROM questionstbl LEFT JOIN usertbl ON usertbl.id=questionstbl.user_id ORDER BY datetime DESC LIMIT 3', [userid], function(error, questions) {
+
             if(error) console.log(error); 
             else{
                 questionshtml = template.myQuests(questions);
@@ -46,6 +48,7 @@ exports.container = function(request, response) {
                         else {
                             mylikehtml = template.myLikes(answers[0]);
                             html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml, user.image);
+
                         }
                        response.send(html);
                     });

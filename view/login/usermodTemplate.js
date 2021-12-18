@@ -1,6 +1,11 @@
+<<<<<<< HEAD
 
 module.exports={
     container: function(userid, usernickname, userbelong,image) {
+=======
+module.exports={
+    container: function(userid, usernickname, userbelong) {
+>>>>>>> dev_jieun
         return`
             <!DOCTYPE html>
             <html lang="en">
@@ -13,6 +18,7 @@ module.exports={
             </head>
             
             <body class="modification">
+<<<<<<< HEAD
                 <form class="container" action="/modify/modprocess" method="post" enctype="multipart/form-data">
                     <div class="insert_image">
                         <img id="userImgId" src="/uploads/${image}" class="user_image"/>
@@ -21,6 +27,15 @@ module.exports={
                             <input type="file" id="click_image" name="click_image" accept="image/*" onchange="loadFile(event)">
                             
                         </div>
+=======
+                <div class="container">
+                    <div class="insert_image">
+                        <img src="/image/user_image.png" class="user_image"/>
+                        <form method="post" enctype="multipart/form-data">
+                            <div class="image_button"><label for="click_image">이미지 선택</label></div>
+                            <input type="file" id="click_image" name="click_image" accept="image/*" onchange="loadFile(this)">
+                        </form>
+>>>>>>> dev_jieun
                     <div class="line">
                         <img src="/image/line.png"
                             style="margin-left: 20px; margin-right:20px; margin-top: 10px; width: 1250px; height: 1.5px;">
@@ -31,7 +46,11 @@ module.exports={
                             <p class="user_id">${userid}</p>
                         </div>
                     </div>
+<<<<<<< HEAD
                     <div>
+=======
+                    <form action="/modify/modprocess" method="post">
+>>>>>>> dev_jieun
                         <p class="list_name">닉네임</p>
                         <input type="text" name="user_nickname" class="list_blank" value="${usernickname}">
                         <p class="list_name">소속</p>
@@ -44,12 +63,17 @@ module.exports={
                         <p class="list_name">비밀번호 확인</p>
                         <input type="text" name="user_pwcheck" class="list_blank" placeholder="비밀번호 확인">
                         <input type="submit" value="저장" class="save_btn">
+<<<<<<< HEAD
                     </div>
+=======
+                    </form>
+>>>>>>> dev_jieun
                     
                 </div>
             </body>
             
             </html>
+<<<<<<< HEAD
             <script>
             function loadFile(event) {
                 let reader = new FileReader();
@@ -63,6 +87,8 @@ module.exports={
             }
 
             </script>
+=======
+>>>>>>> dev_jieun
         `;
     }
 }

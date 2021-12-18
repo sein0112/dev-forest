@@ -1,3 +1,9 @@
+<<<<<<< HEAD
+=======
+const fs = require('fs');
+const e = require("express");
+
+>>>>>>> dev_jieun
 module.exports = {
     writeHtml : function (url, data, display){
         let html = `<div id="write-question" class="write-ask" style="display: ${display};">
@@ -37,7 +43,11 @@ module.exports = {
                 ${this.codeHtml.upsert(data)}
             </div>
             <div class="answer-info">
+<<<<<<< HEAD
               <button class="small_btn info-float-right" style="cursor:pointer">완료</button>
+=======
+              <button class="small_btn info-float-right">완료</button>
+>>>>>>> dev_jieun
             </div>
           </form>
         </div>`
@@ -55,7 +65,11 @@ module.exports = {
               <link rel="stylesheet" type="text/css" href="/css/qna/qna.css">
             </head>`
   },
+<<<<<<< HEAD
   nav : function (data){
+=======
+  nav : function (){
+>>>>>>> dev_jieun
     return `<div id="nav">
         <div id="menu">
             <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" onclick="menuClick()" style="cursor: pointer;">
@@ -120,8 +134,13 @@ module.exports = {
         </div>
                                         
         <div id="nav_userInfo">
+<<<<<<< HEAD
             <img id="usrProfImg" src="/uploads/${data.loginUserImage}" style="background-color:white; cursor:pointer;" onclick="window.location='/myPage'">
             <p id="usrNname"><b>${data.loginUserNickname}</b></p>
+=======
+            <img id="usrProfImg" src="#" alt="userpng">
+            <p id="usrNname"><b>수룡이</b></p>
+>>>>>>> dev_jieun
             <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
         </div>
         
@@ -171,6 +190,7 @@ module.exports = {
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <body>
       <div id="wrap"> 
+<<<<<<< HEAD
           ${this.nav(data)}
         <div>
         <div id="read-question" class="answer-container">
@@ -187,10 +207,31 @@ module.exports = {
           </div>
           <div class="answer-content">
             <div class="content">${data.contents?.text?.trim()}</div>
+=======
+          ${this.nav()}
+        <div>
+        <h5 class="count-answer">${data.answerCount}개의 답변이 있습니다.</h5>
+      
+        <div id="read-question" class="answer-container">
+          <div class="answer-info">
+            <div class="info-float info-img">
+              <img id = "section_user_img" >
+            </div>
+            <div class="info-float info-content">
+              <h4>${data.title}</h4>
+              <span>${data.user_id}</span> | <span>${data.updated_datetime}</span>
+            </div>
+            ${writer? '<div class="info-float-right"><button id="delete_btn" class="small_btn">삭제</button></div>' : ''}
+            ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
+          </div>
+          <div class="answer-content">
+            <div class="content"><pre>${data.contents.text.trim()}</pre></div>
+>>>>>>> dev_jieun
             ${this.codeHtml.read(data)}
           </div>
       
           <div class="answer-info">
+<<<<<<< HEAD
             <div id="scrap_img" style="cursor:pointer" onclick="onClickScrap(${data.board_id},${data.no});" class="like_img">
               <div id="scrap_btn" class="pd5-right">
                 ${data.scrapMe?`<img id="question_scrap" src='/image/scrap_star.png'/>`
@@ -199,20 +240,34 @@ module.exports = {
             </div>
             <div>
               <b><p style="color: gold; cursor:default" id=scrap_numbers>${data.scrap}</p></b>
+=======
+            <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no})" class="like_img">
+              <div id="like_btn" >
+                <img id="answer_like" />
+              </div>
+            </div>
+            <div class="like_num">
+              <p id=scrap_numbers>${data.scrap}</p>
+>>>>>>> dev_jieun
             </div>
           </div>
         </div>
         ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
         </div>
+<<<<<<< HEAD
           ${this.ansList(data.answer, 10)}
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
           </div>
           ${this.answer_create(data.answer, data.nickname)}
+=======
+      </div>
+>>>>>>> dev_jieun
       </body>
       
       </html>
       <script>
+<<<<<<< HEAD
         function menuClick(){
             var toggle = document.getElementById('menuList').style.visibility;
             if (toggle === 'hidden'){
@@ -224,6 +279,8 @@ module.exports = {
                 document.getElementById('menuiconX').style.visibility = 'hidden';
             }
         }
+=======
+>>>>>>> dev_jieun
       
         function onClickScrap(boardId, questNo){
             $.ajax({
@@ -236,6 +293,7 @@ module.exports = {
             .done(function(data) {
                 if(data){
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
+<<<<<<< HEAD
                     document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1;
                     $("#question_scrap").attr("src", "/image/scrap_star.png");
                 }else {
@@ -243,10 +301,17 @@ module.exports = {
                     document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1;
                     $("#question_scrap").attr("src", '/image/no_scrap_star.png');
                 
+=======
+                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1
+                }else {
+                    let oldScrap = document.getElementById("scrap_numbers").innerHTML
+                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1
+>>>>>>> dev_jieun
                 }
             })
             // HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() 메소드로 전달됨.
             .fail(function(xhr, status, errorThrown) {
+<<<<<<< HEAD
                 console.log("error >>>>>>>>>> ",errorThrown)
             })
         }
@@ -292,6 +357,17 @@ module.exports = {
                     console.log("error >>>>>>>>>> ",errorThrown)
                 })
                
+=======
+                alert("오류발생 >>>>>> " + errorThrown)
+            })
+            // 
+        }delete_btn
+        $("#delete_btn").click(function() {
+            if(confirm('정말 삭제하시겠습니까?')){
+                
+            }else {
+                
+>>>>>>> dev_jieun
             }
         });
       
@@ -317,6 +393,7 @@ module.exports = {
           target.style.height = "1px";
           target.style.height = (target.scrollHeight)+"px";
         }
+<<<<<<< HEAD
       
       $(document).ready(function() {
           $("#answer_btn").click(function() {
@@ -352,6 +429,8 @@ module.exports = {
               }              
           });
       });
+=======
+>>>>>>> dev_jieun
       </script>`;
   },
   question_create : function (data){
@@ -362,7 +441,11 @@ module.exports = {
           <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
           <body>
             <div id="wrap">
+<<<<<<< HEAD
               ${this.nav(data)}
+=======
+              ${this.nav()}
+>>>>>>> dev_jieun
               ${this.writeHtml('/qna/create_process',data, '')}
             </div>
           </body>
@@ -370,6 +453,7 @@ module.exports = {
         </html>
         
         <script>
+<<<<<<< HEAD
             function menuClick(){
                 var toggle = document.getElementById('menuList').style.visibility;
                 if (toggle === 'hidden'){
@@ -381,6 +465,8 @@ module.exports = {
                     document.getElementById('menuiconX').style.visibility = 'hidden';
                 }
             }
+=======
+>>>>>>> dev_jieun
           $("#update_btn").click(function() {
             $("#write-question").show();
             $("#update_btn").hide();
@@ -405,6 +491,7 @@ module.exports = {
           }
         </script>`;
   },
+<<<<<<< HEAD
 
   //답변글
     ansList: function(ans, likeCnt) {
@@ -489,3 +576,6 @@ module.exports = {
       `;
     },
 }
+=======
+}
+>>>>>>> dev_jieun

@@ -9,8 +9,7 @@ module.exports = {
     nav:function(userinfo) {
         return `                    
         <div id="nav_userInfo">
-            <img id="usrProfImg" src="/uploads/${userinfo.image}" style="background-color:white; cursor:pointer; " onclick="window.location='/myPage'">
-
+            <img id="usrProfImg" src="#" alt="userpng">
             <p id="usrNname"><b>${userinfo.nickname}</b></p>
             <div id ="logoutform">
                 <form action='/login/logoutprocess' method='post'>
@@ -38,8 +37,7 @@ module.exports = {
             <tr class="userRealInfo">
                 <td>${userinfo.nickname}</td>
                 <td>${userinfo.belong}</td>
-                <td>${userinfo.name}<img style="width: 30px; height: 30px" id="question_scrap" src='/image/grade_${userinfo.level}.png'/></td>
-
+                <td>${userinfo.name}</td>
                 <td>포인트</td>
             </tr>
             <tr></tr>
@@ -52,28 +50,21 @@ module.exports = {
         let maxi = 3;
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
-
-            let contents
-            try {
-                contents = JSON.parse(questions[i].content)
-            } catch (e) {
-                contents = { text : questions[i].content}
-            }
-            questions[i] = { ...questions[i], contents }
-
             result += `
-            <div class="myQuestPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].no})">
-                <div id="myQuestPost_info" >
-                    <img src="/uploads/${questions[i].image}" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
+            <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+            <div style="display: inline-block; margin-left: 70px; ">
+                <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                    ${questions[i].title}<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">${answers[i].nickname}<span>  |   ${this.parseDate(answers[i].datetime)}</span></small>
+                </h3>
+            </div>
+            
+            <p class="question">
+                ${questions[i].content}
+            </p>
 
-                    <div class="myQuestPost_title">${questions[i].title}</div>
-                    <p class="myQuestPost_time">${this.parseDate(questions[i].datetime)}</p>
-                </div>
-                <div class="myQuestPost_contents">
-
-                    <P class="myQuestPost_content">${questions[i].contents.text}</P>
-
-                </div>
+            <div>
+                <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                <p class="staredPerson">86</p>
             </div>
             `;
             i++;
@@ -86,24 +77,16 @@ module.exports = {
         let maxi = 3;
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
-            let contents
-            try {
-                contents = JSON.parse(questions[i].content)
-            } catch (e) {
-                contents = { text : questions[i].content}
-            }
-            questions[i] = { ...questions[i], contents }
             result += `
-            <div class="myAnswPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
+            <div class="myAnswPost" style="cursor: pointer;">
                 <div id="myAnswPost_info">
-                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;" >
-
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myAnswPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myAnswPost_writer">${questions[i].nickname}</div>
                     <p class="myAnswPost_time">${this.parseDate(questions[i].datetime)}</p>
                 </div>
                 <div class="myAnswPost_contents">
-                    <P class="myAnswPost_content">${questions[i].contents.text}</P>
+                    <P class="myAnswPost_content">${questions[i].content}</P>
                 </div>
             </div>
 
@@ -118,18 +101,10 @@ module.exports = {
         let maxi = 3;
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
-            let contents
-            try {
-                contents = JSON.parse(questions[i].content)
-            } catch (e) {
-                contents = { text : questions[i].content}
-            }
-            questions[i] = { ...questions[i], contents }
             result += `
-                <div class="myScrapPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
+                <div class="myScrapPost" style="cursor: pointer;">
                 <div id="myScrapPost_info">
-                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
-
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myScrapPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myScrapPost_writer">${questions[i].nickname}</div>
                     <p class="myScrapPost_time">${this.parseDate(questions[i].datetime)}</p>
@@ -150,25 +125,28 @@ module.exports = {
         if (answers.length < 3) maxi = answers.length;
         while (i < maxi) {
             result += `
-            <div class="myLikePost" style="cursor: pointer;" onclick="onClickQna(${answers[i].board_id}, ${answers[i].quest_no})">
-                <div id="myLikePost_info">
-                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
+            <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+            <div style="display: inline-block; margin-left: 70px; ">
+                <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                    ${answers[i].title}<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">
+                    ${answers[i].nickname}<span>  |   ${this.parseDate(answers[i].datetime)}</span></small>
+                </h3>
+            </div>
+            
+            <p class="question">
+                ${answers[i].content}
+            </p>
 
-                    <div class="myLikePost_title"><p class="userPost_title">${answers[i].title}</p></div>
-                    <div class="myLikePost_writer">${answers[i].nickname}</div>
-                    <p class="myLikePost_time">${this.parseDate(answers[i].datetime)}</p>
-                </div>
-                <div class="myLikePost_contents">
-                    <P class="myLikePost_content">${answers[i].content}</P>
-                </div>
+            <div>
+                <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                <p class="staredPerson">86</p>
             </div>
             `;
             i++;
         }
         return result;
     },
-    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml, filename){
-
+    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml){
         return `
         <!DOCTYPE html>
         <head>
@@ -245,8 +223,7 @@ module.exports = {
                 </div>
                 <div id="contents">
                     <div id="userInfo">
-                        <img id="usrProfImgBig" src="/uploads/${filename}">
-
+                        <img id="usrProfImgBig" src="내사진.jpg" alt="userpng">
                         <table id="userInfoTable">
                         ${userinfohtml}
                         </table>
@@ -259,28 +236,11 @@ module.exports = {
                             ${questionshtml}
                             <!--<img src="점점점.png" style="width:150px; height: 50px; float:left; margin-top: 115px;">-->
                         </div>
-                        <p class="userPost_label" style="cursor: pointer;">최근 내가 답변 한 글</p>
-                        <div id="myAnsw">
-                            ${myanswerquestshtml}
-                        </div>
-                        <p class="userPost_label" style="cursor: pointer;">즐겨찾기한 글</p>
-                        <div id="myScrap">
-                            ${myscraphtml}
-                        </div>
-                        <p class="userPost_label" style="cursor: pointer;">좋아요한 답변</p>
-                        <div id="myLike">
-                            ${mylikehtml}
-                        </div>
                     </div>
                 </div>
             </div>
         </body>
         <script>
-
-            function onClickQna(boardId, questionId){
-                window.location='/qna/'+boardId + "/" + questionId
-            }
-
             function menuClick(){
                 var toggle = document.getElementById('menuList').style.visibility;
                 if (toggle === 'hidden'){

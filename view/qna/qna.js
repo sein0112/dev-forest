@@ -3,12 +3,16 @@ const qTemplate = require('./template.js');
 const qs = require("querystring");
 const url = require("url");
 const sanitizeHtml = require('sanitize-html');
+<<<<<<< HEAD
 const template = require("./ansTemplate.js");
+=======
+>>>>>>> dev_jieun
 
 exports.read = function(request, response){
     var _url = request.url;
     let boardId = request.params.boardId;
     let questionNo = request.params.questionNo;
+<<<<<<< HEAD
     db.query(`SELECT board_id, no, datetime, updated_datetime, user_id, title, content, u.nickname, u.image FROM questionstbl left JOIN usertbl u on questionstbl.user_id = u.id where board_id = ? AND no = ?`,[boardId, questionNo], function(error, question){
         if(error){
             throw error;
@@ -62,13 +66,51 @@ exports.read = function(request, response){
                 })
             });
 
+=======
+    db.query(`SELECT * FROM questionstbl WHERE board_id=? AND no=?`,[boardId, questionNo], function(error, question){
+        if(error){
+            throw error;
+        }
+        db.query(`SELECT count(*) as scrap FROM scraptbl WHERE board_id=?AND quest_no=?`,
+            [boardId, questionNo], function(error2, scrap){
+            if(error2){
+                throw error2;
+            }
+
+            db.query(`SELECT count(*) as answerCount FROM answerstbl WHERE board_id=? AND quest_no=?`,[boardId, questionNo], function(error3, answerCount){
+                if(error3){
+                    throw error3;
+                }
+                let contents
+                try {
+                    contents = JSON.parse(question[0].content)
+                } catch (e) {
+                    contents = { text : question[0].content}
+                }
+                let data = {
+                    contents,
+                    boardId : question[0].board_id,
+                    ...question[0],
+                    ...scrap[0],
+                    ...answerCount[0]
+                }
+                let writer = request.session.userid === data.user_id
+                let html = qTemplate.question_read(data, writer);
+                response.writeHead(200);
+                response.end(html);
+            })
+        })
+>>>>>>> dev_jieun
     })
 }
 
 exports.create = function (request, response){
     let data = request.params;
     data = {
+<<<<<<< HEAD
         nickname : request.session.nickname,
+=======
+>>>>>>> dev_jieun
         board_id : data.boardId,
             ...data
     }
@@ -104,6 +146,18 @@ exports.create_process = function(request, response){
         )
     })
 }
+<<<<<<< HEAD
+=======
+
+exports.update = function (request, response){
+    let html = qTemplate.question_create()
+
+    response.writeHead(200)
+    response.end(html);
+}
+
+
+>>>>>>> dev_jieun
 exports.update_process = function(request, response){
 
     var data = request.body;
@@ -123,6 +177,7 @@ exports.update_process = function(request, response){
 }
 
 exports.delete_process = function(request, response){
+<<<<<<< HEAD
     var data = request.body;
     let userId = request.session.userid
 
@@ -136,6 +191,22 @@ exports.delete_process = function(request, response){
             }
             response.status(200).json(true);
         });
+=======
+    var body = '';
+    request.on('data', function(data){
+        body = body + data;
+    });
+    request.on('end', function(){
+        let query = qs.parse(body);
+        db.query('DELETE FROM questionstbl WHERE board_id = ? AND no = ?', [query.board_id, query.no], function(error, result){
+            if(error){
+                throw error;
+            }
+            response.writeHead(302, {Location: `/`});
+            response.end();
+        });
+    });
+>>>>>>> dev_jieun
 }
 
 
@@ -174,6 +245,7 @@ exports.scrap = function(request, response){
             )
         }
     })
+<<<<<<< HEAD
 }
 
 
@@ -248,4 +320,6 @@ exports.like = function(request, response){
             )
         }
     })
+=======
+>>>>>>> dev_jieun
 }
