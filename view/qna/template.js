@@ -37,7 +37,7 @@ module.exports = {
                 ${this.codeHtml.upsert(data)}
             </div>
             <div class="answer-info">
-              <button class="small_btn info-float-right">완료</button>
+              <button class="small_btn info-float-right" style="cursor:pointer">완료</button>
             </div>
           </form>
         </div>`
@@ -182,8 +182,8 @@ module.exports = {
               <h4>${data.title}</h4>
               <span>${data.nickname}</span> | <span>${data.updated_datetime}</span>
             </div>
-            ${writer && data.answer.length === 0?'<div class="info-float-right"><button id="delete_btn" class="small_btn">삭제</button></div>' : ''}
-            ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
+            ${writer && data.answer.length === 0?'<div class="info-float-right"><button id="delete_btn" class="small_btn" style="cursor:pointer">삭제</button></div>' : ''}
+            ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn" style="cursor:pointer">수정</button></div>' : ''}
           </div>
           <div class="answer-content">
             <div class="content"><pre>${data.contents.text.trim()}</pre></div>
@@ -191,14 +191,14 @@ module.exports = {
           </div>
       
           <div class="answer-info">
-            <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no});" class="like_img">
+            <div id="scrap_img" style="cursor:pointer" onclick="onClickScrap(${data.board_id},${data.no});" class="like_img">
               <div id="scrap_btn" class="pd5-right">
                 ${data.scrapMe?`<img id="question_scrap" src='/image/scrap_star.png'/>`
         : `<img id="question_scrap" src='/image/no_scrap_star.png'/>`}
               </div>
             </div>
             <div>
-              <b><p style="color: gold" id=scrap_numbers>${data.scrap}</p></b>
+              <b><p style="color: gold; cursor:default" id=scrap_numbers>${data.scrap}</p></b>
             </div>
           </div>
         </div>
@@ -245,6 +245,17 @@ module.exports = {
       
       </html>
       <script>
+        function menuClick(){
+            var toggle = document.getElementById('menuList').style.visibility;
+            if (toggle === 'hidden'){
+                document.getElementById('menuList').style.visibility = 'visible';
+                document.getElementById('menuiconX').style.visibility = 'visible';
+            }
+            else{
+                document.getElementById('menuList').style.visibility = 'hidden';
+                document.getElementById('menuiconX').style.visibility = 'hidden';
+            }
+        }
       
         function onClickScrap(boardId, questNo){
             $.ajax({
@@ -391,6 +402,17 @@ module.exports = {
         </html>
         
         <script>
+            function menuClick(){
+                var toggle = document.getElementById('menuList').style.visibility;
+                if (toggle === 'hidden'){
+                    document.getElementById('menuList').style.visibility = 'visible';
+                    document.getElementById('menuiconX').style.visibility = 'visible';
+                }
+                else{
+                    document.getElementById('menuList').style.visibility = 'hidden';
+                    document.getElementById('menuiconX').style.visibility = 'hidden';
+                }
+            }
           $("#update_btn").click(function() {
             $("#write-question").show();
             $("#update_btn").hide();
