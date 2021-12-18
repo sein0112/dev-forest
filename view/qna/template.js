@@ -236,7 +236,7 @@ module.exports = {
                 alert("오류발생 >>>>>> " + errorThrown)
             })
             // 
-        }delete_btn
+        }
         $("#delete_btn").click(function() {
             if(confirm('정말 삭제하시겠습니까?')){
                 
