@@ -37,7 +37,7 @@ module.exports = {
             <tr class="userRealInfo">
                 <td>${userinfo.nickname}</td>
                 <td>${userinfo.belong}</td>
-                <td>${userinfo.name}</td>
+                <td>${userinfo.name}<img style="width: 30px; height: 30px" id="question_scrap" src='/image/grade_${userinfo.level}.png'/></td>
                 <td>포인트</td>
             </tr>
             <tr></tr>
