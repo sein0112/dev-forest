@@ -13,4 +13,5 @@ db.query('SELECT * from gradetbl',
         console.log('The gradetbl is >>>>>>>>>>>>>>>>>> : ', results);
     });
 // db.end();
+
 module.exports = db;
