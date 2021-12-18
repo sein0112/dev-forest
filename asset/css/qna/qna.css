@@ -7,17 +7,15 @@ code, pre, .code-font {
     font-family: Consolas, Courier New, monospace;
     font-size: 13px;
 }
-.count-answer{
-    margin-left: 26px;
+.content {
+    margin-bottom: 10px;
 }
 
 .answer-container, .write-answer{
-    margin: 20px;
     background-color: #ffffff;
     border-radius: 12px;
 }
 .answer-container, .write-ask{
-    margin: 20px;
     background-color: #ffffff;
     border-radius: 12px;
 }
@@ -67,13 +65,12 @@ code, pre, .code-font {
     float: left;
 }
 #like_btn{
-    margin: 18px 3px 0 0;
     border-style: none;
     background-color: #ffffff;
 }
 
 .answer-content{
-    margin: 10px 10px 0 10px;
+    margin: 40px 10px 10px 10px;
     padding: 20px;
 }
 .answer-content .content p{

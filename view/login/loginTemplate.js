@@ -24,17 +24,8 @@ module.exports={
                 <form action="/login/loginprocess" method="post">
                     <input type="text" name="user_email" class="text_input" placeholder="아이디">
                     <input type="password" name="user_pw" id="user_pw" class="text_input" placeholder="비밀번호">
-                    <div class="checkbox">
-                        <img src="/image/checkbox.png" vertical-align="middle" height="20px" width="20px" margin-left="20px"
-                            margin-top="100px">
-                        <a href="rememberid_links">아이디 기억하기</a>
-                    </div>
                     <input type="submit" value="로그인" class="submit_btn">
                 </form>
-                <p class="login_links">
-                    <a href="findID.html">아이디 찾기 | </a>
-                    <a href="resetPW.html">비밀번호 변경</a>
-                </p>
             </div>
         </body>
 
