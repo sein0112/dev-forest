@@ -9,16 +9,15 @@
 
 </head>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-
 <body>
 <div>
   <!-- 질문 -->
   <h5 class="count-answer">3개의 답변이 있습니다.</h5>
 
-  <div class="answer-container">
+  <div id="read-question" class="answer-container">
     <div class="answer-info">
       <div class="info-float info-img">
-        <img id = "section_user_img" src="water-839590_1920.jpg">
+        <img id = "section_user_img" >
       </div>
       <div class="info-float info-content">
         <h4>질문 제목입니다.</h4>
@@ -47,7 +46,7 @@
     <div class="answer-info">
       <div class="like_img">
         <div id="like_btn" >
-          <img id="answer_like" src="favorite_border_black_24dp.svg"/>
+          <img id="answer_like" />
         </div>
       </div>
       <div class="like_num">
@@ -56,11 +55,11 @@
     </div>
   </div>
 
-  <div class="write-ask" style="display: none;">
+  <div id="write-question" class="write-ask" style="display: none;">
     <form method="post">
       <div class="answer-info">
         <div class="info-float info-img">
-          <img id = "section_user_img" src="water-839590_1920.jpg">
+          <img id = "section_user_img" >
         </div>
         <div class="info-float">
           <label for="inputTitle"></label>
@@ -86,12 +85,12 @@
                   onkeyup="adjustHeight(this);">
           </textarea>
         </div>
-        <div class="codepen" style="display: none;">
+        <div id="write-code" class="codepen" style="display: none;">
           <label for="textareaCodeContent"></label>
           <textarea class="textarea-code"
-                  id = "textareaCodeContent"
-                  style="overflow:hidden"
-                  onkeyup="adjustHeight(this);">
+                    id = "textareaCodeContent"
+                    style="overflow:hidden"
+                    onkeyup="adjustHeight(this);">
           </textarea>
         </div>
 
@@ -102,22 +101,15 @@
       </div>
     </form>
   </div>
-
-  <div id="answer_view">
-
-  </div>
 </div>
 </body>
 
 </html>
 <script>
-  $(document).ready( function() {
-	$("#answer_view").load("answer.html");
-  });
-
   $("#update_btn").click(function() {
-    $(".write-ask").show();
-    // $("#update_btn").hide();
+    $("#write-question").show();
+    $("#update_btn").hide();
+    $("#read-question").hide();
   });
 
   $("#cancle_btn").click(function() {
@@ -126,15 +118,12 @@
     $(".option_write").hide();
   });
 
+  $("#codepen_btn").click(function() {
+    $("#write-code").show();
+  });
+
   function adjustHeight(target) {
     target.style.height = "1px";
     target.style.height = (target.scrollHeight)+"px";
   }
-  // function adjustHeight(target) {
-  //   let textel = document.getElementById(target)
-  //   var textEle = $('textarea');
-  //   textEle[0].style.height = 'auto';
-  //   var textEleHeight = textEle.prop('scrollHeight');
-  //   textEle.css('height', textEleHeight);
-  // }
 </script>
