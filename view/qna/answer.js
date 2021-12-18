@@ -3,7 +3,7 @@ var router = express.Router();
 var url = require('url');
 const template = require('./ansTemplate.js');
 
-var db = require('./db.js');
+var db = require('../../db.js');
 
 router.get('/answer', function(request, response){
     

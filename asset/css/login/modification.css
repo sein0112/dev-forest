@@ -55,7 +55,7 @@ a{
 
 
 .modification{
-    width: 1440px;
+    width: 100%;
     height: 1024px;
     background-color: #E5E5E5;
 }
@@ -65,8 +65,8 @@ a{
     width: 1300px;
     border-radius: 12px;
     background-color: white;
+    margin: 0 auto;
     margin-top: 70px;
-    margin-left: 114px;
     box-shadow: 5px 5px 3px #B8B8B8;
 }
 
