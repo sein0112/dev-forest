@@ -15,13 +15,12 @@ router.post('/emailcheck', function(request, response) {
         if(error) throw error;
         console.log(users);
         if (users.length != 0) {  //중복된 경우
-            response.write('<script>alert("id duplicated");</script>');
-            response.write('<script>location.href="/register";</script>'); 
-            console.log('중복 됨');
+            // response.write('<script>alert("id duplicated");</script>');
+            // response.write('<script>location.href="/register";</script>');
+            response.status(200).json({ data : false, message :'이미 있는 아이디입니다.' })
         } else { //성공한 경우
-            console.log('중복 안됨');
             // response.write('<script>alert("id not duplicated");</script>');
-            response.send(template.container(id, 'Success'));
+            response.status(200).json({data: true, message: 'Success'})
         }
     }) 
 });
@@ -38,7 +37,7 @@ router.post('/registerprocess', function(request, response){
         else {
             console.log("성공");
             response.write('<script>alert("signUp success");</script>');
-            response.write('<script>location.href="/";</script>'); 
+            response.write('<script>location.href="/";</script>');
         }
     });
 });

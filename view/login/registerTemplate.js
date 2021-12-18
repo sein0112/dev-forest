@@ -9,6 +9,7 @@ module.exports ={
                 <title>register</title>
                 <link rel="stylesheet" , href="/css/login/register.css">
             </head>
+            <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
             
             <body class="register">
                 <div class="container">
@@ -30,38 +31,83 @@ module.exports ={
                             style="margin-left: 20px; margin-right:20px; margin-top: 15px; width: 460px; height: 1.5px;">
                     </div>
                     
-                    <form action="/register/emailcheck" method="post">
+                    <div >
                         <input type="text" name="user_email" id="firstFormUserId" class="text_email" placeholder="이메일" value="${idBeforeCheck}">
-                        <input type="submit" name="email_check" value="중복조회" class="doublecheck_btn" onClick="copyId()">
+                        <input id="checkEmail" type="button" name="email_check" value="중복조회" class="doublecheck_btn">
                         <p id="checking">${loginChecked}</p>
-                    </form>
+                    </div>
 
                     <form action="/register/registerprocess" method="post">
                         <input type="hidden" name="user_id" id="secondFormUserId" value="${idBeforeCheck}">
-                        <input type="text" name="user_nickname" id="user_nickname" class="text_input" placeholder="닉네임">
+                        <input required type="text" name="user_nickname" id="user_nickname" class="text_input" placeholder="닉네임">
                         <input type="text" name="user_belong" id="user_group" class="text_input" placeholder="소속">
-                        <input type="password" name="user_pwd" id="user_pw" class="text_input" placeholder="비밀번호">
+                        <input required type="password" onkeyup="checkSamePw(this)" name="user_pwd" id="user_pw" class="text_input" placeholder="비밀번호">
                         <div class="pw_info">
                             <p class="pw_info">*영문, 숫자 조합으로 8~20자 사이로 입력하세요.</p>
                         </div>
-                        <input type="password" id="user_dbpw" class="text_dbpw" placeholder="비밀번호 확인">
-                        <input type="submit" value="회원가입" class="register_btn" onClick="checkLoginChecked()">
+                        <input required type="password" id="user_dbpw" onkeyup="checkSameDPw(this)" class="text_dbpw" placeholder="비밀번호 확인">
+                        <div id="pwRedInfo" class="pw_info" style="display: none;">
+                            <p class="pw_info" style="color: #ff0000">*비밀번호가 일치하지 않습니다.</p>
+                        </div>
+                        <input disabled type="submit" id="submitRegister" value="회원가입" class="register_btn">
                     </form>
                 </div>
             </body>
             <script>
-                function copyId() {
-                    var firstFormUserIdValue = document.getElementById('firstFormUserId').value;
-                    document.getElementById('secondFormUserId').value = firstFormUserIdValue;
+                function checkSameDPw(target) {
+                  let user_pw = document.getElementById('user_pw').value;
+                  console.log(user_pw, target.value)
+                  if(user_pw !== target.value){
+                    document.getElementById("pwRedInfo").style.display = "block"
+                    document.getElementById("submitRegister").disabled = true;
+                  } else {
+                    document.getElementById("pwRedInfo").style.display = "none"
+                    document.getElementById("submitRegister").disabled = false;
+                  }
                 }
-
-                function checkLoginChecked() {
-                    var checked = document.getElementById('checking').value;                      
-                    if(checked != "Success") { //체크 안됨
-                        alert('아이디 중복 체크를 하십시오');
-                        break;
-                    } else {return;}
+                function checkSamePw(target) {
+                  let user_pw = document.getElementById('user_dbpw').value;
+                  console.log(user_pw, target.value)
+                  if(user_pw !== target.value){
+                    document.getElementById("pwRedInfo").style.display = "block"
+                    document.getElementById("submitRegister").disabled = true;
+                  } else {
+                    document.getElementById("pwRedInfo").style.display = "none"
+                    document.getElementById("submitRegister").disabled = false;
+                  }
                 }
+                   
+                    
+                $("#checkEmail").click(function() {
+                    var user_email = document.getElementById('firstFormUserId').value;
+                    let regExp = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/i;
+                      if (user_email.match(regExp) != null) {
+                        $.ajax({
+                                url: "/register/emailcheck",
+                                data: { user_email },
+                                method: "post", 
+                                dataType: "json" 
+                            })
+                            .done(function(res) {
+                                console.log(res)
+                                if(res.data){
+                                    document.getElementById('secondFormUserId').value = user_email;
+                                    document.getElementById("checking").innerHTML = res.message;
+                                    document.getElementById("submitRegister").disabled = false;
+                                }else {
+                                    document.getElementById("checking").innerHTML = res.message;
+                                    document.getElementById("submitRegister").disabled = true;
+                                }
+                            })
+                            .fail(function(xhr, status, errorThrown) {
+                                console.log("error >>>>>>>>>> ",errorThrown)
+                            })
+                      }
+                      else {
+                        alert('이메일 형식에 맞게 입력해주세요.');
+                      }
+                            
+                });
             </script>
         </html>
         `;
