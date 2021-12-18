@@ -48,6 +48,11 @@ app.post('/qna/:boardId/:questionNo/update_process', function(request, response)
 app.post('/qna/create_process', function(request, response){
     qna.create_process(request, response);
 });
+
+app.post('/qna/scrap_process', function(request, response){
+    qna.scrap(request, response);
+});
+
 app.use('/login', loginRoutes);
 app.use('/modify', modRoutes);
 

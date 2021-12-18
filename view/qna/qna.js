@@ -12,7 +12,8 @@ exports.read = function(request, response){
         if(error){
             throw error;
         }
-        db.query(`SELECT count(*) as scrap FROM scraptbl WHERE quest_no=?`,[questionNo], function(error2, scrap){
+        db.query(`SELECT count(*) as scrap FROM scraptbl WHERE board_id=?AND quest_no=?`,
+            [boardId, questionNo], function(error2, scrap){
             if(error2){
                 throw error2;
             }
@@ -77,7 +78,7 @@ exports.update_process = function(request, response){
     var data = request.body;
     console.log("data", data.content)
     db.query('UPDATE questionstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND no = ?',
-        [data.title, data.content, data.boardId, data.questionNo],
+        [data.title.trim(), data.content.trim(), data.boardId, data.questionNo],
         function(error, result){
             if(error){
                 throw error;
@@ -102,4 +103,40 @@ exports.delete_process = function(request, response){
             response.end();
         });
     });
+}
+
+
+exports.scrap = function(request, response){
+    var data = request.body;
+    // SELECT MAX(컬럼) FROM 테이블;
+    db.query(`SELECT * FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
+        [data.boardId, data.userId, data.questNo],
+        function(error, scrap) {
+        if (error) {
+            throw error;
+        }
+
+        if(scrap.length === 0){
+            db.query(`INSERT INTO scraptbl (user_id, board_id, quest_no, datetime)
+                      VALUES(?, ?, ?, NOW())`,
+                [ data.userId, data.boardId, data.questNo],
+                function(error2, result){
+                    if(error2){
+                        throw error2;
+                    }
+                    return response.status(200).json(result)
+                }
+            )
+        } else {
+            db.query(`DELETE FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
+                [data.boardId, data.userId, data.questNo],
+                function(error2, result2){
+                    if(error2){
+                        throw error2;
+                    }
+                    return response.status(200).json(false)
+                }
+            )
+        }
+    })
 }
