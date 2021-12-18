@@ -15,6 +15,7 @@ var MySQLStore = require('express-mysql-session')(session);
 var app = express();
 var bodyParser = require('body-parser');
 
+
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/asset'));
 
@@ -54,6 +55,8 @@ app.use('/rank', function(request, response){
 });
 
 app.get('/board/:boardId', boardRoutes);
+
+app.use('/uploads', express.static('uploads'));
 
 app.use(function(request, response){
     response.sendFile(__dirname+'/view/notFound.html')

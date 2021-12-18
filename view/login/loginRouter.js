@@ -25,7 +25,7 @@ router.post('/loginprocess', function(request, response){
                 request.session.authenticate = true;
                 request.session.userid = id;
                 request.session.nickname = user[0].nickname;
-                console.log(request.session);
+                request.session.image = user[0].image;
                 response.redirect("/myPage");
             }
 

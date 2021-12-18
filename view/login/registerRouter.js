@@ -9,11 +9,9 @@ router.get('/', function(request, response) {
 
 router.post('/emailcheck', function(request, response) {
     let id = request.body.user_email;
-    console.log(id);
     // response.send(template.container(id, 'Checked'));
     db.query('SELECT id FROM usertbl where id=?', [id], function(error, users){
         if(error) throw error;
-        console.log(users);
         if (users.length != 0) {  //중복된 경우
             // response.write('<script>alert("id duplicated");</script>');
             // response.write('<script>location.href="/register";</script>');

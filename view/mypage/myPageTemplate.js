@@ -9,7 +9,7 @@ module.exports = {
     nav:function(userinfo) {
         return `                    
         <div id="nav_userInfo">
-            <img id="usrProfImg" src="#" alt="userpng">
+            <img id="usrProfImg" src="/uploads/${userinfo.image}" style="background-color:white; cursor:pointer; " onclick="window.location='/myPage'">
             <p id="usrNname"><b>${userinfo.nickname}</b></p>
             <div id ="logoutform">
                 <form action='/login/logoutprocess' method='post'>
@@ -45,15 +45,11 @@ module.exports = {
         `;
     },
     myQuests:function(questions) {
-
-        console.log(questions)
-
         let i = 0;
         let result = '';
         let maxi = 3;
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
-
             let contents
             try {
                 contents = JSON.parse(questions[i].content)
@@ -65,7 +61,7 @@ module.exports = {
             result += `
             <div class="myQuestPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].no})">
                 <div id="myQuestPost_info" >
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="/uploads/${questions[i].image}" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myQuestPost_title">${questions[i].title}</div>
                     <p class="myQuestPost_time">${this.parseDate(questions[i].datetime)}</p>
                 </div>
@@ -82,7 +78,6 @@ module.exports = {
         let i = 0;
         let result = '';
         let maxi = 3;
-        console.log(questions)
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
 
@@ -96,7 +91,7 @@ module.exports = {
             result += `
             <div class="myAnswPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
                 <div id="myAnswPost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;" >
+                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;" >
                     <div class="myAnswPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myAnswPost_writer">${questions[i].nickname}</div>
                     <p class="myAnswPost_time">${this.parseDate(questions[i].datetime)}</p>
@@ -127,7 +122,7 @@ module.exports = {
             result += `
                 <div class="myScrapPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
                 <div id="myScrapPost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myScrapPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myScrapPost_writer">${questions[i].nickname}</div>
                     <p class="myScrapPost_time">${this.parseDate(questions[i].datetime)}</p>
@@ -150,7 +145,7 @@ module.exports = {
             result += `
             <div class="myLikePost" style="cursor: pointer;" onclick="onClickQna(${answers[i].board_id}, ${answers[i].quest_no})">
                 <div id="myLikePost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myLikePost_title"><p class="userPost_title">${answers[i].title}</p></div>
                     <div class="myLikePost_writer">${answers[i].nickname}</div>
                     <p class="myLikePost_time">${this.parseDate(answers[i].datetime)}</p>
@@ -164,7 +159,7 @@ module.exports = {
         }
         return result;
     },
-    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml){
+    container:function(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml, filename){
         return `
         <!DOCTYPE html>
         <head>
@@ -241,7 +236,7 @@ module.exports = {
                 </div>
                 <div id="contents">
                     <div id="userInfo">
-                        <img id="usrProfImgBig" src="내사진.jpg" alt="userpng">
+                        <img id="usrProfImgBig" src="/uploads/${filename}">
                         <table id="userInfoTable">
                         ${userinfohtml}
                         </table>

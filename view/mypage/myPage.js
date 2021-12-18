@@ -4,7 +4,6 @@ const db =  require('../../db.js');
 exports.container = function(request, response) {
     // let userid='abc@naver.com';
     let userid = request.session.userid;
-    console.log(request.session);
     if (!request.session.userid) {
         return response.redirect('/');
     }
@@ -20,7 +19,7 @@ exports.container = function(request, response) {
             navhtml = template.nav(user);
         }
         //최근 내가 질문 한 글
-        db.query('SELECT * FROM questionstbl WHERE user_id=? ORDER BY datetime DESC LIMIT 3', [userid], function(error, questions) {
+        db.query('SELECT * FROM questionstbl LEFT JOIN usertbl ON usertbl.id=questionstbl.user_id ORDER BY datetime DESC LIMIT 3', [userid], function(error, questions) {
             if(error) console.log(error); 
             else{
                 questionshtml = template.myQuests(questions);
@@ -46,7 +45,7 @@ exports.container = function(request, response) {
                         if(error) console.log(error);
                         else {
                             mylikehtml = template.myLikes(answers[0]);
-                            html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml);
+                            html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml, user.image);
                         }
                        response.send(html);
                     });

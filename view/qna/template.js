@@ -55,7 +55,7 @@ module.exports = {
               <link rel="stylesheet" type="text/css" href="/css/qna/qna.css">
             </head>`
   },
-  nav : function (nickname){
+  nav : function (data){
     return `<div id="nav">
         <div id="menu">
             <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" onclick="menuClick()" style="cursor: pointer;">
@@ -120,8 +120,8 @@ module.exports = {
         </div>
                                         
         <div id="nav_userInfo">
-            <img id="usrProfImg" src="#" alt="userpng">
-            <p id="usrNname"><b>${nickname}</b></p>
+            <img id="usrProfImg" src="/uploads/${data.image}" style="background-color:white; cursor:pointer;" onclick="window.location='/myPage'">
+            <p id="usrNname"><b>${data.nickname}</b></p>
             <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
         </div>
         
@@ -171,12 +171,12 @@ module.exports = {
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <body>
       <div id="wrap"> 
-          ${this.nav(data.nickname)}
+          ${this.nav(data)}
         <div>
         <div id="read-question" class="answer-container">
           <div class="answer-info">
             <div class="info-float info-img">
-              <img id = "section_user_img" >
+              <img id = "section_user_img" src="/uploads/${data.image}">
             </div>
             <div class="info-float info-content">
               <h4>${data.title}</h4>
@@ -362,7 +362,7 @@ module.exports = {
           <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
           <body>
             <div id="wrap">
-              ${this.nav(data.nickname)}
+              ${this.nav(data)}
               ${this.writeHtml('/qna/create_process',data, '')}
             </div>
           </body>
@@ -462,9 +462,9 @@ module.exports = {
                     <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
                     </div>
                 </div>
-                <input type="hidden" name="boardId" value="${ans[0].board_id}">
-                <input type="hidden" name="questNo" value="${ans[0].quest_no}">
-                <input type="hidden" name="datetime" value="${ans[0].datetime}">
+                <input type="hidden" name="boardId" value="${ans[0]?.board_id}">
+                <input type="hidden" name="questNo" value="${ans[0]?.quest_no}">
+                <input type="hidden" name="datetime" value="${ans[0]?.datetime}">
                 <input id="store_btn" type="submit" value="저장">
             </form>
         </div>

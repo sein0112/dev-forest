@@ -9,7 +9,7 @@ exports.read = function(request, response){
     var _url = request.url;
     let boardId = request.params.boardId;
     let questionNo = request.params.questionNo;
-    db.query(`SELECT board_id, no, datetime, updated_datetime, user_id, title, content, u.nickname FROM questionstbl left JOIN usertbl u on questionstbl.user_id = u.id where board_id = ? AND no = ?`,[boardId, questionNo], function(error, question){
+    db.query(`SELECT board_id, no, datetime, updated_datetime, user_id, title, content, u.nickname, u.image FROM questionstbl left JOIN usertbl u on questionstbl.user_id = u.id where board_id = ? AND no = ?`,[boardId, questionNo], function(error, question){
         if(error){
             throw error;
         }
@@ -32,6 +32,7 @@ exports.read = function(request, response){
                                 throw error5;
                             }
                             let nickname = userinfo[0].nickname;
+                            let image = userinfo[0].image;
                             let contents
                             try {
                                 contents = JSON.parse(question[0].content)
@@ -47,6 +48,7 @@ exports.read = function(request, response){
                                 ...scrap[0],
                                 scrapMe,
                                 nickname,
+                                image,
                             }
 
                             // console.log(data)
