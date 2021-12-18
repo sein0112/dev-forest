@@ -195,12 +195,13 @@ module.exports = {
       
           <div class="answer-info">
             <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no})" class="like_img">
-              <div id="like_btn" >
-                <img id="answer_like" />
+              <div id="scrap_btn" class="pd5-right">
+                ${data.scrapMe?`<img id="question_scrap" src='https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F08044898-6524-4839-97e7-4e62772dad80%2FUntitled.png?table=block&id=2f495aa4-ea6e-47c1-aa6b-fb83bd9de117&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=110&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2'/>`
+        : `<img id="question_scrap" src='https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F325458df-0388-43a4-a306-00fdf3ae3c4a%2FUntitled.png?table=block&id=e18d3453-d668-40be-8ef3-1f483ae69363&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=120&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2'/>`}
               </div>
             </div>
-            <div class="like_num">
-              <p id=scrap_numbers>${data.scrap}</p>
+            <div>
+              <b><p style="color: gold" id=scrap_numbers>${data.scrap}</p></b>
             </div>
           </div>
         </div>
@@ -224,10 +225,13 @@ module.exports = {
             .done(function(data) {
                 if(data){
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
-                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1
+                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1;
+                    $("#question_scrap").attr("src", "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F08044898-6524-4839-97e7-4e62772dad80%2FUntitled.png?table=block&id=2f495aa4-ea6e-47c1-aa6b-fb83bd9de117&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=110&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2");
                 }else {
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
-                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1
+                    document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1;
+                    $("#question_scrap").attr("src", 'https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F325458df-0388-43a4-a306-00fdf3ae3c4a%2FUntitled.png?table=block&id=e18d3453-d668-40be-8ef3-1f483ae69363&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=120&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2');
+                
                 }
             })
             // HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() 메소드로 전달됨.
@@ -324,7 +328,7 @@ module.exports = {
                 </div>
                 <div class="info-float-right">
                     <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no}, ${ans[i].id})" >
-                        <div id="like_btn" style="margin: 18px 4px 0 0">
+                        <div id="scrap_btn" style="margin: 18px 4px 0 0">
                             <img id="answer_like" src="image/favorite_border_black_24dp.svg"/>
                         </div>
                     </div>

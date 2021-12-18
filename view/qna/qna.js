@@ -21,7 +21,7 @@ exports.read = function(request, response){
                     if(error3){
                         throw error3;
                     }
-                    db.query(`SELECT count(*) as answerCount FROM answerstbl WHERE board_id=? AND quest_no=?`,[boardId, questionNo], function(error4, answerCount){
+                    db.query(`SELECT * FROM scraptbl WHERE board_id=? AND quest_no=? AND user_id=?`,[boardId, questionNo, request.session.userid], function(error4, scrapMe){
                         if(error4){
                             throw error4;
                         }
@@ -31,13 +31,14 @@ exports.read = function(request, response){
                         } catch (e) {
                             contents = { text : question[0].content}
                         }
+                        scrapMe = scrapMe.length > 0
                         let data = {
                             contents,
                             boardId : question[0].board_id,
                             answer : answer,
                             ...question[0],
                             ...scrap[0],
-                            ...answerCount[0]
+                            scrapMe,
                         }
 
                         console.log(data)
