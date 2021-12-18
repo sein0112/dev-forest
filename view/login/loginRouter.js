@@ -22,11 +22,10 @@ router.post('/loginprocess', function(request, response){
                 return response.write("<script>window.location='/login'</script>");
             }
             else{
-                response.write("<script>alert('login success')</script>");
                 request.session.authenticate = true;
                 request.session.userid = id;
                 console.log(request.session);
-                return response.write("<script>window.location='/myPage'</script>");
+                return response.redirect("/myPage");
             }
 
         }
