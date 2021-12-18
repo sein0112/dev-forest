@@ -1,9 +1,9 @@
 module.exports = {
-
-    ansList: function(ans, likeCnt) {
-        var list;
+    ansList: function(ans) {
+        var list =[];
+        var LikeCnt  = 0;
         var i = 0;
-        while(i < ans.length) {
+        while(i < ans.length) {           
             list += `
         <div class="answer-container">
             <div class="answer-info">
@@ -21,7 +21,7 @@ module.exports = {
                         </div>
                     </div>
                     <div class="like_num">
-                        <p id=like_numbers>${likeCnt}</p>
+                        <p id=like_numbers>${ LikeCnt }</p>
                     </div>
                 </div>
             </div>
@@ -42,7 +42,7 @@ module.exports = {
         }
         return list;
     },
-    HTML: function(ans, likeCnt) {
+    HTML: function(ans) {
         return `
         <!DOCTYPE html>
         <html lang="en">
@@ -56,7 +56,7 @@ module.exports = {
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
         <body>
             <h5 class="count-answer">${ans.length}개의 답변이 있습니다.</h5>
-            ${this.ansList(ans, likeCnt)}
+            ${this.ansList(ans)}
         </body>
 
         </html>
@@ -83,6 +83,7 @@ module.exports = {
                     alert("오류발생 >>>>>> " + errorThrown)
                 })
             };
+
             
             $(document).ready(function() {
                 $("#answer_btn").click(function() {
