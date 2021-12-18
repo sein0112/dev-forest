@@ -186,7 +186,7 @@ module.exports = {
             ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn" style="cursor:pointer">수정</button></div>' : ''}
           </div>
           <div class="answer-content">
-            <div class="content"><pre>${data.contents?.text?.trim()}</pre></div>
+            <div class="content">${data.contents?.text?.trim()}</div>
             ${this.codeHtml.read(data)}
           </div>
       

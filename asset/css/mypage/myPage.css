@@ -58,6 +58,10 @@ td {
     margin-top: 60px;
 }
 
+.pd5 {
+    padding: 5px;
+}
+
 .userInfo_label {
     text-align: left;
     color: #A1A1A1;
@@ -111,7 +115,7 @@ td {
     margin-bottom: 20px;
     border-radius: 10%;
     overflow: auto;
-    box-shadow: 5px 5px 5px rgb(68, 57, 57);
+    box-shadow: 5px 5px 5px rgb(209, 209, 209);
 }
 #myQuestPost_info, #myAnswPost_info, #myScrapPost_info, #myLikePost_info{
     float: left;
