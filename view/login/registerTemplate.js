@@ -33,7 +33,7 @@ module.exports ={
                     <form action="/register/emailcheck" method="post">
                         <input type="text" name="user_email" id="firstFormUserId" class="text_email" placeholder="이메일" value="${idBeforeCheck}">
                         <input type="submit" name="email_check" value="중복조회" class="doublecheck_btn" onClick="copyId()">
-                        <p id="checking" >${loginChecked}</p>
+                        <p id="checking">${loginChecked}</p>
                     </form>
 
                     <form action="/register/registerprocess" method="post">
