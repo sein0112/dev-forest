@@ -11,7 +11,11 @@ module.exports = {
         <div id="nav_userInfo">
             <img id="usrProfImg" src="#" alt="userpng">
             <p id="usrNname"><b>${userinfo.nickname}</b></p>
-            <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
+            <div id ="logoutform">
+                <form action='/login/logoutprocess' method='post'>
+                    <input type="submit" value="로그아웃" id="logout_btn" style="cursor: pointer;">
+                </form>
+            </div>
         </div>
         `;
     },
@@ -43,7 +47,9 @@ module.exports = {
     myQuests:function(questions) {
         let i = 0;
         let result = '';
-        while (i < questions.length) {
+        let maxi = 3;
+        if (questions.length < 3) maxi = questions.length;
+        while (i < maxi) {
             result += `
             <div class="myQuestPost" style="cursor: pointer;">
                 <div id="myQuestPost_info">
@@ -63,7 +69,9 @@ module.exports = {
     myAnswerQuests:function(questions) {
         let i = 0;
         let result = '';
-        while (i < questions.length) {
+        let maxi = 3;
+        if (questions.length < 3) maxi = questions.length;
+        while (i < maxi) {
             result += `
             <div class="myAnswPost" style="cursor: pointer;">
                 <div id="myAnswPost_info">
@@ -85,7 +93,9 @@ module.exports = {
     myScraps:function(questions){
         let i = 0;
         let result = '';
-        while (i < questions.length) {
+        let maxi = 3;
+        if (questions.length < 3) maxi = questions.length;
+        while (i < maxi) {
             result += `
                 <div class="myScrapPost" style="cursor: pointer;">
                 <div id="myScrapPost_info">
@@ -106,7 +116,9 @@ module.exports = {
     myLikes:function(answers){
         let i = 0;
         let result = '';
-        while (i < answers.length) {
+        let maxi = 3;
+        if (answers.length < 3) maxi = answers.length;
+        while (i < maxi) {
             result += `
             <div class="myLikePost" style="cursor: pointer;">
                 <div id="myLikePost_info">
@@ -157,34 +169,34 @@ module.exports = {
                                     <img class="menu_icon" src="/image/tag.png">
                                     <li class="bigMenu"><a href="../..">게시판</a></li>
                                     <div id="tags">
-                                        <a href="../.." class="left">javasript</a>
-                                        <a href="../.." class="right">ruby</a>
-                                        <a href="../.." class="left">python</a>
-                                        <a href="../.." class="right">swift</a>
-                                        <a href="../.." class="left">java</a>
-                                        <a href="../.." class="right">arrays</a>
-                                        <a href="../.." class="left">php</a>
-                                        <a href="../.." class="right">c</a>
-                                        <a href="../.." class="left">android</a>
-                                        <a href="../.." class="right">asp.net</a>
-                                        <a href="../.." class="left">html</a>
-                                        <a href="../.." class="right">.net</a>
-                                        <a href="../.." class="left">jquery</a>
-                                        <a href="../.." class="right">sql</a>
-                                        <a href="../.." class="left">css</a>
-                                        <a href="../.." class="right">r</a>
-                                        <a href="../.." class="left">mysql</a>
-                                        <a href="../.." class="right">sql-server</a>
-                                        <a href="../.." class="left">c++</a>
-                                        <a href="../.." class="right">swift</a>
-                                        <a href="../.." class="left">reactjs</a>
-                                        <a href="../.." class="right">ajax</a>
-                                        <a href="../.." class="left">ios</a>
-                                        <a href="../.." class="right">pandas</a>
-                                        <a href="../.." class="left">node.js</a>
-                                        <a href="../.." class="right">linux</a>
-                                        <a href="../.." class="left">django</a>
-                                        <a href="../.." class="right">angularjs</a>
+                                        <a href="/board/1" class="left">javasript</a>
+                                        <a href="/board/2" class="right">ruby</a>
+                                        <a href="/board/3" class="left">python</a>
+                                        <a href="/board/4" class="right">swift</a>
+                                        <a href="/board/5" class="left">java</a>
+                                        <a href="/board/6" class="right">arrays</a>
+                                        <a href="/board/7" class="left">php</a>
+                                        <a href="/board/8" class="right">c</a>
+                                        <a href="/board/9" class="left">android</a>
+                                        <a href="/board/10" class="right">asp.net</a>
+                                        <a href="/board/11" class="left">html</a>
+                                        <a href="/board/12" class="right">.net</a>
+                                        <a href="/board/13" class="left">jquery</a>
+                                        <a href="/board/14" class="right">sql</a>
+                                        <a href="/board/15" class="left">css</a>
+                                        <a href="/board/16" class="right">r</a>
+                                        <a href="/board/17" class="left">mysql</a>
+                                        <a href="/board/18" class="right">sql-server</a>
+                                        <a href="/board/19" class="left">c++</a>
+                                        <a href="/board/20" class="right">swift</a>
+                                        <a href="/board/21" class="left">reactjs</a>
+                                        <a href="/board/22" class="right">ajax</a>
+                                        <a href="/board/23" class="left">ios</a>
+                                        <a href="/board/24" class="right">pandas</a>
+                                        <a href="/board/25" class="left">node.js</a>
+                                        <a href="/board/26" class="right">linux</a>
+                                        <a href="/board/27" class="left">django</a>
+                                        <a href="/board/28" class="right">angularjs</a>
                                     </div>
                                 </div>
                             </ul>                        
