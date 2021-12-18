@@ -11,6 +11,14 @@ code, pre, .code-font {
     margin-bottom: 10px;
 }
 
+.mg15-top-bottom {
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+.mg20-left {
+    margin-left: 20px;
+}
+
 .answer-container, .write-answer{
     background-color: #ffffff;
     border-radius: 12px;

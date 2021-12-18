@@ -1,10 +1,10 @@
 module.exports = {
-
     ansList: function(ans) {
-        var list;
+        var list =[];
+        var LikeCnt  = 0;
         var i = 0;
-        while(i < ans.length) {
-            list = `
+        while(i < ans.length) {           
+            list += `
         <div class="answer-container">
             <div class="answer-info">
                 <div class="info-float info-img">
@@ -12,16 +12,16 @@ module.exports = {
                 </div>
                 <div class="info-float info-content">
                     <h4>${ans[i].title}</h4>
-                    <span>${ans[i].id}</span> | <span>${ans[i].datetime}</span>
+                    <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
                 <div class="info-float-right">
-                    <div class="like_img">
-                    <div id="like_btn">
-                        <img id="answer_like" src="image/favorite_border_black_24dp.svg"/>
-                    </div>
+                    <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no}, ${ans[i].id})" >
+                        <div id="like_btn" style="margin: 18px 4px 0 0">
+                            <img id="answer_like" src="image/favorite_border_black_24dp.svg"/>
+                        </div>
                     </div>
                     <div class="like_num">
-                        <p id=like_numbers>${ans[i].adoption}</p>
+                        <p id=like_numbers>${ LikeCnt }</p>
                     </div>
                 </div>
             </div>
@@ -54,7 +54,37 @@ module.exports = {
             <link href="css/qna/qna.css" rel="stylesheet">
         </head>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <body>
+            <h5 class="count-answer">${ans.length}개의 답변이 있습니다.</h5>
+            ${this.ansList(ans)}
+        </body>
+
+        </html>
         <script>
+            function onClickLike(boardId, questNo, answNo, userId){
+                $.ajax({
+                    url: "/qna/like_process",
+                    data: { boardId, questNo, answNo, userId},
+                    method: "post", 
+                    dataType: "json" 
+                })
+                // HTTP 요청이 성공하면 요청한 데이터가 done() 메소드로 전달됨.
+                .done(function(data) {
+                    if(data){
+                        let oldLike = document.getElementById("like_numbers").innerHTML
+                        document.getElementById("like_numbers").innerHTML = Number(oldLike) + 1
+                    }else {
+                        let oldLike = document.getElementById("like_numbers").innerHTML
+                        document.getElementById("like_numbers").innerHTML = Number(oldLike) -1
+                    }
+                })
+                // HTTP 요청이 실패하면 오류와 상태에 관한 정보가 fail() 메소드로 전달됨.
+                .fail(function(xhr, status, errorThrown) {
+                    alert("오류발생 >>>>>> " + errorThrown)
+                })
+            };
+
+            
             $(document).ready(function() {
                 $("#answer_btn").click(function() {
                     $(".write-answer").show();
@@ -89,12 +119,6 @@ module.exports = {
                     }              
                 });
             });
-        </script>
-        <body>
-            <h5 class="count-answer">${ans.length}개의 답변이 있습니다.</h5>
-            ${this.ansList(ans)}
-        </body>
-
-        </html>`
+        </script>`
     }
 }

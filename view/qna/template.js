@@ -176,8 +176,6 @@ module.exports = {
       <div id="wrap"> 
           ${this.nav()}
         <div>
-        <h5 class="count-answer">${data.answerCount}개의 답변이 있습니다.</h5>
-      
         <div id="read-question" class="answer-container">
           <div class="answer-info">
             <div class="info-float info-img">
@@ -185,7 +183,7 @@ module.exports = {
             </div>
             <div class="info-float info-content">
               <h4>${data.title}</h4>
-              <span>${data.user_id}</span> | <span>${data.updated_datetime}</span>
+              <span>${data.nickname}</span> | <span>${data.updated_datetime}</span>
             </div>
             ${writer? '<div class="info-float-right"><button id="delete_btn" class="small_btn">삭제</button></div>' : ''}
             ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
@@ -208,6 +206,7 @@ module.exports = {
         </div>
         ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
         </div>
+          ${this.ansList(data.answer, 10)}
       </div>
       </body>
       
@@ -236,7 +235,7 @@ module.exports = {
                 alert("오류발생 >>>>>> " + errorThrown)
             })
             // 
-        }delete_btn
+        }
         $("#delete_btn").click(function() {
             if(confirm('정말 삭제하시겠습니까?')){
                 
@@ -309,4 +308,46 @@ module.exports = {
           }
         </script>`;
   },
+    ansList: function(ans, likeCnt) {
+        var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
+        var i = 0;
+        while(i < ans.length) {
+            list += `
+        <div class="answer-container mg20-left">
+            <div class="answer-info">
+                <div class="info-float info-img">
+                    <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                </div>
+                <div class="info-float info-content">
+                    <h4>${ans[i].title}</h4>
+                    <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
+                </div>
+                <div class="info-float-right">
+                    <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no}, ${ans[i].id})" >
+                        <div id="like_btn" style="margin: 18px 4px 0 0">
+                            <img id="answer_like" src="image/favorite_border_black_24dp.svg"/>
+                        </div>
+                    </div>
+                    <div class="like_num">
+                        <p id=like_numbers>${likeCnt}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="answer-content">
+                <div class="content">
+                    ${ans[i].content}
+                </div>
+                <div class="codepen">
+                    <pre>
+                        <code>
+                코드 작성
+                        </code>
+                    </pre>
+                </div>
+            </div>
+        </div>`;
+            i = i+1;
+        }
+        return list;
+    },
 }

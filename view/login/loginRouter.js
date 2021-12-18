@@ -25,7 +25,7 @@ router.post('/loginprocess', function(request, response){
                 request.session.authenticate = true;
                 request.session.userid = id;
                 console.log(request.session);
-                return response.redirect("/myPage");
+                response.redirect("/myPage");
             }
 
         }
