@@ -106,6 +106,7 @@ module.exports = {
                             id = "textareaCodeContent"
                             style="overflow:hidden"
                             name="codeContent"
+                            onfocus="adjustHeight(this);"
                             onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
                 </div>`
               }else {
@@ -115,6 +116,7 @@ module.exports = {
                             id = "textareaCodeContent"
                             style="overflow:hidden"
                             name="codeContent"
+                            onfocus="adjustHeight(this);"
                             onkeyup="adjustHeight(this);">
                   </textarea>
                 </div>`
@@ -160,7 +162,7 @@ module.exports = {
       
           </div>
           <div class="answer-content">
-            <div class="content">${data.contents.text.trim()}</div>
+            <div class="content"><pre>${data.contents.text.trim()}</pre></div>
             ${this.codeHtml.read(data)}
           </div>
       
@@ -209,6 +211,7 @@ module.exports = {
                         id = "textareaContent"
                         style="overflow:hidden"
                         name="content"
+                        onfocus="adjustHeight(this);"
                         onkeyup="adjustHeight(this);">${data.contents.text.trim()}</textarea>
               </div>
                 ${this.codeHtml.upsert(data)}
@@ -224,6 +227,7 @@ module.exports = {
       
       </html>
       <script>
+      
         function onClickScrap(boardId, questNo, userId){
             $.ajax({
                 url: "/qna/scrap_process",
@@ -252,6 +256,8 @@ module.exports = {
           $("#write-question").show();
           $("#update_btn").hide();
           $("#read-question").hide();
+          $('textarea').focus();
+          $('input[name=title]').focus();
         });
       
         $("#cancle_btn").click(function() {
@@ -311,6 +317,7 @@ module.exports = {
                               id = "textareaContent"
                               name = "content"
                               style="overflow:hidden"
+                              onfocus="adjustHeight(this);"
                               onkeyup="adjustHeight(this);">
                       </textarea>
                     </div>
@@ -320,6 +327,7 @@ module.exports = {
                                 id = "textareaCodeContent"
                                 style="overflow:hidden"
                                 name="codeContent"
+                                onfocus="adjustHeight(this);"
                                 onkeyup="adjustHeight(this);">
                       </textarea>
                     </div>
@@ -339,6 +347,8 @@ module.exports = {
             $("#write-question").show();
             $("#update_btn").hide();
             $("#read-question").hide();
+            $('textarea').focus();
+            $('input[name=title]').focus();
           });
         
           $("#cancle_btn").click(function() {
@@ -357,89 +367,4 @@ module.exports = {
           }
         </script>`;
   },
-  question_update : function (){
-    return `
-      <!DOCTYPE html>
-      <html lang="en">
-      ${this.head()}
-      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-      <body>
-      <div id="wrap">
-        ${this.nav()}
-        <link href="../../asset/css/qna/qna.css" rel="stylesheet">
-        <div id="write-question" class="write-ask">
-          <form action="/update_process" method="post">
-            <div class="answer-info">
-              <div class="info-float info-img">
-                <img id = "section_user_img" >
-              </div>
-              <div class="info-float">
-                <label for="inputTitle"></label>
-                <input id = "inputTitle"
-                       style="width: 100%;"
-                       type="text"
-                       name="input"
-                       value="${data.title}"
-                       placeholder="질문 제목을 입력하세요">
-              </div>
-              <div class="info-float-right">
-                <div class="add-codepen">
-                  <p id="codepen_btn">소스코드 추가하기</p>
-                </div>
-              </div>
-      
-            </div>
-            <div class="answer-content">
-              <div class="content">
-                <label for="textareaContent"></label>
-                <textarea
-                  id = "textareaContent"
-                  style="overflow:hidden"
-                  onkeyup="adjustHeight(this);">${data.contents.text.trim()}</textarea>
-              </div>
-              <div id="write-code" class="codepen" style="display: none;">
-                <label for="textareaCodeContent"></label>
-                <textarea class="textarea-code"
-                          id = "textareaCodeContent"
-                          name="codeContent"
-                          style="overflow:hidden"
-                          onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
-              </div>
-      
-            </div>
-      
-            <div class="answer-info">
-              <button class="small_btn info-float-right">완료</button>
-            </div>
-          </form>
-        </div>
-      </div>
-      </body>
-      
-      </html>
-      
-      <script>
-        $("#update_btn").click(function() {
-          $("#write-question").show();
-          $("#update_btn").hide();
-          $("#read-question").hide();
-        });
-      
-        $("#cancle_btn").click(function() {
-          $(".write-ask").hide();
-          $("#answer_btn").show();
-          $(".option_write").hide();
-        });
-      
-        $("#codepen_btn").click(function() {
-          $("#write-code").show();
-        });
-      
-        function adjustHeight(target) {
-          target.style.height = "1px";
-          target.style.height = (target.scrollHeight)+"px";
-        }
-      </script>`;
-  },
-
 }

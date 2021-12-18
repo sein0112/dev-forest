@@ -7,6 +7,9 @@ code, pre, .code-font {
     font-family: Consolas, Courier New, monospace;
     font-size: 13px;
 }
+.content {
+    margin-bottom: 10px;
+}
 
 .answer-container, .write-answer{
     background-color: #ffffff;
