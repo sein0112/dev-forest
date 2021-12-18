@@ -23,8 +23,8 @@ router.post('/scrap_process', function(request, response){
     qna.scrap(request, response);
 });
 
-router.post('/answer_create_process', function(request, response){
-    qna.create_process(request, response);
+router.post('/anscreate_process', function(request, response){
+    qna.anscreate_process(request, response);
 });
 
 router.post('/like_process', function(request, response){

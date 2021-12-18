@@ -26,31 +26,39 @@ exports.read = function(request, response){
                         if(error4){
                             throw error4;
                         }
-                        let contents
-                        try {
-                            contents = JSON.parse(question[0]?.content)
-                        } catch (e) {
-                            contents = { text : question[0]?.content}
-                        }
-                        scrapMe = scrapMe.length > 0
-                        let data = {
-                            contents,
-                            boardId : question[0]?.board_id,
-                            answer : answer,
-                            nickname : request.session.nickname,
-                            ...question[0],
-                            ...scrap[0],
-                            scrapMe,
-                        }
+                        let userid = request.session.userid;
+                        db.query(`SELECT * FROM usertbl WHERE id=?`, [userid], function(error5, userinfo) {
+                            if(error5){
+                                throw error5;
+                            }
+                            let nickname = userinfo[0].nickname;
+                            let contents
+                            try {
+                                contents = JSON.parse(question[0].content)
+                            } catch (e) {
+                                contents = { text : question[0].content}
+                            }
+                            scrapMe = scrapMe.length > 0
+                            let data = {
+                                contents,
+                                boardId : question[0].board_id,
+                                answer : answer,
+                                ...question[0],
+                                ...scrap[0],
+                                scrapMe,
+                                nickname,
+                            }
 
-                        console.log(data)
-                        let writer = request.session.userid === data.user_id
-                        let html = qTemplate.question_read(data, writer);
-                        response.writeHead(200);
-                        response.end(html);
+                            // console.log(data)
+                            let writer = request.session.userid === data.user_id
+                            let html = qTemplate.question_read(data, writer);
+                            response.writeHead(200);
+                            response.end(html);
+                        })
+
                     })
                 })
-        });
+            });
 
     })
 }
@@ -168,42 +176,24 @@ exports.scrap = function(request, response){
 
 
 //답변글
-exports.answer_create = function (request, response){
-    let data = request.params;
-    data = {
-        board_id : data.boardId,
-            ...data
-    }
-    let html = qTemplate.question_create(data)
-    response.writeHead(200)
-    response.end(html);
-}
-
-exports.answer_create_process = function(request, response){
+exports.anscreate_process = function(request, response){
     var data = request.body;
     console.log(data)
-    let content = {
-        text : data.content.trim(),
-        code : data.codeContent.trim(),
-    }
     let userId = request.session.userid;
-    // SELECT MAX(컬럼) FROM 테이블;
-    db.query(`SELECT MAX(no) as maxNo FROM questionstbl WHERE board_id=?`,[data.boardId], function(error2, maxNo){
+    db.query(`SELECT MAX(no) as maxNo FROM answerstbl WHERE board_id=? AND quest_no=?`,[data.boardId, data.questNo], function(error2, maxNo){
         if(error2){
             throw error2;
         }
-        db.query(`
-                    INSERT INTO questionstbl (board_id, no, datetime, updated_datetime, user_id, title, content)
-                    VALUES(?, ?, NOW(), NOW(), ?, ?, ?)`,
-            [data.boardId, maxNo[0].maxNo+1, userId, data.title, JSON.stringify(content)],
-            function(error, result){
-                if(error){
-                    throw error;
-                }
-                response.writeHead(302, {Location: `/qna/${data.boardId}/${maxNo[0].maxNo+1}`});
-                response.end();
+        db.query(`INSERT INTO answerstbl (board_id, quest_no, no, user_id, datetime, title, content)
+                VALUES(?, ?, ?, ?, NOW(), ?, ?)`,
+        [data.boardId, data.questNo, maxNo[0].maxNo+1, userId, data.title, data.content],
+        function(error, result){
+            if(error){
+                throw error;
             }
-        )
+            response.writeHead(302, {Location: `/qna/${data.boardId}/${data.questNo}}`});
+            response.end();
+        })
     })
 }
 
@@ -211,7 +201,7 @@ exports.like = function(request, response){
     var data = request.body;
     let userId = request.session.userid
 
-    console.log(data)
+    // console.log(data)
     db.query(`SELECT * FROM liketbl WHERE board_id=? AND quest_no=? AND answ_no=? AND user_id=?`,
         [data.boardId, data.questNo, data.answNo, userId],
         function(error, like) {
