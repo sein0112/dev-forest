@@ -1,11 +1,19 @@
+var express = require('express'); 
+var router = express.Router();
 var url = require('url');
 const template = require('./ansTemplate.js');
 
-exports.container = function(request, response) {
-    var _url = request.url;
-    var queryData = url.parse(_url, true).query;
+var db = require('./db.js');
 
-    var html = template.container();
+router.get('/answer', function(request, response){
+    
+});
 
-    response.send(html);
-}
+// exports.container = function(request, response) {
+//     var _url = request.url;
+//     var queryData = url.parse(_url, true).query;
+
+//     var html = template.container();
+
+//     response.send(html);
+// }
