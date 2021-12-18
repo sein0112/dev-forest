@@ -119,20 +119,19 @@ exports.update_process = function(request, response){
 }
 
 exports.delete_process = function(request, response){
-    var body = '';
-    request.on('data', function(data){
-        body = body + data;
-    });
-    request.on('end', function(){
-        let query = qs.parse(body);
-        db.query('DELETE FROM questionstbl WHERE board_id = ? AND no = ?', [query.board_id, query.no], function(error, result){
+    var data = request.body;
+    let userId = request.session.userid
+
+    console.log(data, userId)
+    db.query('DELETE FROM questionstbl WHERE board_id = ? AND user_id=? AND no = ?',
+        [data.boardId, userId, data.questNo],
+        function(error, result){
             if(error){
+                alert("삭제할 수 없습니다.");
                 throw error;
             }
-            response.writeHead(302, {Location: `/`});
-            response.end();
+            response.status(200).json(true);
         });
-    });
 }
 
 
