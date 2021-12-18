@@ -20,8 +20,6 @@ exports.container = function(request, response) {
     });
 }
 
-
-
 exports.like = function(request, response){
     var data = request.body;
     let userId = request.session.userid
