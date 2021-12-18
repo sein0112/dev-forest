@@ -1,4 +1,4 @@
-const template = require('./myPageTemplate.js');
+const template = require('./showBulletine.js');
 const db =  require('../../db.js'); 
 
 exports.container = function(request, response) {
@@ -9,7 +9,7 @@ exports.container = function(request, response) {
     }
     let html;
     let user;
-    let userinfohtml, navhtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml;
+    let userinfohtml, navhtml, questionshtml;
     db.query('SELECT id, nickname, belong, image, name FROM usertbl JOIN gradetbl ON usertbl.level = gradetbl.level where usertbl.id=?', [userid], function(error, users) {
         if(error) console.log(error);
         else{
@@ -23,34 +23,7 @@ exports.container = function(request, response) {
             if(error) console.log(error); 
             else{
                 questionshtml = template.myQuests(questions);
-            }
-
-            //최근 내가 답변 한 글
-            db.query('call getlatelyAnswered(?)', [userid], function(error, questions) {
-                if(error) console.log(error);
-                else{
-                    //console.log(questions[0]);
-                    myanswerquestshtml = template.myAnswerQuests(questions[0]);
-                }
-
-                //내가 즐겨찾기한 글
-                db.query('call getMyScrap(?)', [userid], function(error, questions) {
-                    if(error) console.log(error);
-                    else {
-                        myscraphtml = template.myScraps(questions[0]);
-                    }
-
-                    //좋아요 한 답변
-                    db.query('call getMyLike(?)', [userid], function(error, answers) {
-                        if(error) console.log(error);
-                        else {
-                            mylikehtml = template.myLikes(answers[0]);
-                            html = template.container(navhtml, userinfohtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml);
-                        }
-                       response.send(html);
-                    });
-                });
-            });            
+            }           
         });
     });
 }
