@@ -60,14 +60,6 @@
 
 }
 
-#userInfo{
-    height: 200px;
-    width: 650px;
-    overflow: auto;
-    margin: 0 auto;
-    padding-top: 80px;
-    padding-bottom: 30px;
-}
 #nav_userInfo{
     float: right;
 }
