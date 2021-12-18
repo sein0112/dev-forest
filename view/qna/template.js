@@ -196,8 +196,8 @@ module.exports = {
           <div class="answer-info">
             <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no});" class="like_img">
               <div id="scrap_btn" class="pd5-right">
-                ${data.scrapMe?`<img id="question_scrap" src='https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F08044898-6524-4839-97e7-4e62772dad80%2FUntitled.png?table=block&id=2f495aa4-ea6e-47c1-aa6b-fb83bd9de117&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=110&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2'/>`
-        : `<img id="question_scrap" src='https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F325458df-0388-43a4-a306-00fdf3ae3c4a%2FUntitled.png?table=block&id=e18d3453-d668-40be-8ef3-1f483ae69363&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=120&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2'/>`}
+                ${data.scrapMe?`<img id="question_scrap" src='/image/scrap_star.png'/>`
+        : `<img id="question_scrap" src='/image/no_scrap_star.png'/>`}
               </div>
             </div>
             <div>
@@ -226,11 +226,11 @@ module.exports = {
                 if(data){
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
                     document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1;
-                    $("#question_scrap").attr("src", "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F08044898-6524-4839-97e7-4e62772dad80%2FUntitled.png?table=block&id=2f495aa4-ea6e-47c1-aa6b-fb83bd9de117&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=110&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2");
+                    $("#question_scrap").attr("src", "/image/scrap_star.png");
                 }else {
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
                     document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1;
-                    $("#question_scrap").attr("src", 'https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F325458df-0388-43a4-a306-00fdf3ae3c4a%2FUntitled.png?table=block&id=e18d3453-d668-40be-8ef3-1f483ae69363&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=120&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2');
+                    $("#question_scrap").attr("src", '/image/no_scrap_star.png');
                 
                 }
             })
