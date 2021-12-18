@@ -12,7 +12,8 @@ exports.read = function(request, response){
         if(error){
             throw error;
         }
-        db.query(`SELECT count(*) as scrap FROM scraptbl WHERE quest_no=?`,[questionNo], function(error2, scrap){
+        db.query(`SELECT count(*) as scrap FROM scraptbl WHERE board_id=?AND quest_no=?`,
+            [boardId, questionNo], function(error2, scrap){
             if(error2){
                 throw error2;
             }
@@ -77,7 +78,7 @@ exports.update_process = function(request, response){
     var data = request.body;
     console.log("data", data.content)
     db.query('UPDATE questionstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND no = ?',
-        [data.title, data.content, data.boardId, data.questionNo],
+        [data.title.trim(), data.content.trim(), data.boardId, data.questionNo],
         function(error, result){
             if(error){
                 throw error;
