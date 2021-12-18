@@ -4,7 +4,7 @@ module.exports = {
         var list;
         var i = 0;
         while(i < ans.length) {
-            list = `
+            list += `
         <div class="answer-container">
             <div class="answer-info">
                 <div class="info-float info-img">
