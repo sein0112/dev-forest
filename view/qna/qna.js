@@ -8,7 +8,7 @@ exports.read = function(request, response){
     var _url = request.url;
     let boardId = request.params.boardId;
     let questionNo = request.params.questionNo;
-    db.query(`SELECT * FROM questionstbl WHERE board_id=? AND no=?`,[boardId, questionNo], function(error, question){
+    db.query(`SELECT board_id, no, datetime, updated_datetime, user_id, title, content, u.nickname FROM questionstbl left JOIN usertbl u on questionstbl.user_id = u.id where board_id = ? AND no = ?`,[boardId, questionNo], function(error, question){
         if(error){
             throw error;
         }

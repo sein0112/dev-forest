@@ -185,7 +185,7 @@ module.exports = {
             </div>
             <div class="info-float info-content">
               <h4>${data.title}</h4>
-              <span>${data.user_id}</span> | <span>${data.updated_datetime}</span>
+              <span>${data.nickname}</span> | <span>${data.updated_datetime}</span>
             </div>
             ${writer? '<div class="info-float-right"><button id="delete_btn" class="small_btn">삭제</button></div>' : ''}
             ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
