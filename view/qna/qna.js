@@ -13,6 +13,7 @@ exports.read = function(request, response){
         if(error){
             throw error;
         }
+        //답변글
         db.query('SELECT * FROM usertbl JOIN answerstbl ON usertbl.id = answerstbl.user_id WHERE answerstbl.board_id=? AND answerstbl.quest_no=?', [boardId, questionNo], function(error2, answer) {
             if(error2) throw error;
 
@@ -161,6 +162,84 @@ exports.scrap = function(request, response){
         } else {
             db.query(`DELETE FROM scraptbl WHERE board_id=? AND user_id=? AND quest_no=?`,
                 [data.boardId, userId, data.questNo],
+                function(error2, result2){
+                    if(error2){
+                        throw error2;
+                    }
+                    return response.status(200).json(false)
+                }
+            )
+        }
+    })
+}
+
+
+//답변글
+exports.answer_create = function (request, response){
+    let data = request.params;
+    data = {
+        board_id : data.boardId,
+            ...data
+    }
+    let html = qTemplate.question_create(data)
+    response.writeHead(200)
+    response.end(html);
+}
+
+exports.answer_create_process = function(request, response){
+    var data = request.body;
+    console.log(data)
+    let content = {
+        text : data.content.trim(),
+        code : data.codeContent.trim(),
+    }
+    let userId = request.session.userid;
+    // SELECT MAX(컬럼) FROM 테이블;
+    db.query(`SELECT MAX(no) as maxNo FROM questionstbl WHERE board_id=?`,[data.boardId], function(error2, maxNo){
+        if(error2){
+            throw error2;
+        }
+        db.query(`
+                    INSERT INTO questionstbl (board_id, no, datetime, updated_datetime, user_id, title, content)
+                    VALUES(?, ?, NOW(), NOW(), ?, ?, ?)`,
+            [data.boardId, maxNo[0].maxNo+1, userId, data.title, JSON.stringify(content)],
+            function(error, result){
+                if(error){
+                    throw error;
+                }
+                response.writeHead(302, {Location: `/qna/${data.boardId}/${maxNo[0].maxNo+1}`});
+                response.end();
+            }
+        )
+    })
+}
+
+exports.like = function(request, response){
+    var data = request.body;
+    let userId = request.session.userid
+
+    console.log(data)
+    db.query(`SELECT * FROM liketbl WHERE board_id=? AND quest_no=? AND answ_no=? AND user_id=?`,
+        [data.boardId, data.questNo, data.answNo, userId],
+        function(error, like) {
+        if (error) {
+            throw error;
+        }
+
+        if(like.length === 0){
+            db.query(`INSERT INTO liketbl (user_id, board_id, quest_no, answ_no, datetime)
+                      VALUES(?, ?, ?, ?, NOW())`,
+                [userId, data.boardId, data.questNo, data.answNo],
+                function(error2, result){
+                    if(error2){
+                        throw error2;
+                    }
+                    return response.status(200).json(result)
+                }
+            )
+        } else {
+            db.query(`DELETE FROM liketbl WHERE board_id=? AND quest_no=? AND answ_no=? AND user_id=?`,
+                [data.boardId, data.questNo, data.answNo, userId],
                 function(error2, result2){
                     if(error2){
                         throw error2;

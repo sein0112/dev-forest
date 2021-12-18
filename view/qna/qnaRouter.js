@@ -23,6 +23,18 @@ router.post('/scrap_process', function(request, response){
     qna.scrap(request, response);
 });
 
+router.post('/answer_create_process', function(request, response){
+    qna.create_process(request, response);
+});
+
+router.post('/like_process', function(request, response){
+    qna.like(request, response);
+});
+
+router.post('/likecount', function(request, response){
+    qna.likeCnt(request, response);
+});
+
 router.post('/delete_process', function(request, response){
     qna.delete_process(request, response);
 });
