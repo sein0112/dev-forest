@@ -37,7 +37,7 @@ module.exports = {
                 ${this.codeHtml.upsert(data)}
             </div>
             <div class="answer-info">
-              <button class="small_btn info-float-right">완료</button>
+              <button class="small_btn info-float-right" style="cursor:pointer">완료</button>
             </div>
           </form>
         </div>`
@@ -55,7 +55,7 @@ module.exports = {
               <link rel="stylesheet" type="text/css" href="/css/qna/qna.css">
             </head>`
   },
-  nav : function (){
+  nav : function (nickname){
     return `<div id="nav">
         <div id="menu">
             <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" onclick="menuClick()" style="cursor: pointer;">
@@ -121,7 +121,7 @@ module.exports = {
                                         
         <div id="nav_userInfo">
             <img id="usrProfImg" src="#" alt="userpng">
-            <p id="usrNname"><b>수룡이</b></p>
+            <p id="usrNname"><b>${nickname}</b></p>
             <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
         </div>
         
@@ -171,7 +171,7 @@ module.exports = {
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <body>
       <div id="wrap"> 
-          ${this.nav()}
+          ${this.nav(data.nickname)}
         <div>
         <div id="read-question" class="answer-container">
           <div class="answer-info">
@@ -182,23 +182,23 @@ module.exports = {
               <h4>${data.title}</h4>
               <span>${data.nickname}</span> | <span>${data.updated_datetime}</span>
             </div>
-            ${writer && data.answer.length === 0?'<div class="info-float-right"><button id="delete_btn" class="small_btn">삭제</button></div>' : ''}
-            ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn">수정</button></div>' : ''}
+            ${writer && data.answer.length === 0?'<div class="info-float-right"><button id="delete_btn" class="small_btn" style="cursor:pointer">삭제</button></div>' : ''}
+            ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn" style="cursor:pointer">수정</button></div>' : ''}
           </div>
           <div class="answer-content">
-            <div class="content"><pre>${data.contents.text.trim()}</pre></div>
+            <div class="content"><pre>${data.contents?.text?.trim()}</pre></div>
             ${this.codeHtml.read(data)}
           </div>
       
           <div class="answer-info">
-            <div id="scrap_img" onclick="onClickScrap(${data.board_id},${data.no});" class="like_img">
+            <div id="scrap_img" style="cursor:pointer" onclick="onClickScrap(${data.board_id},${data.no});" class="like_img">
               <div id="scrap_btn" class="pd5-right">
-                ${data.scrapMe?`<img id="question_scrap" src='https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F08044898-6524-4839-97e7-4e62772dad80%2FUntitled.png?table=block&id=2f495aa4-ea6e-47c1-aa6b-fb83bd9de117&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=110&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2'/>`
-        : `<img id="question_scrap" src='https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F325458df-0388-43a4-a306-00fdf3ae3c4a%2FUntitled.png?table=block&id=e18d3453-d668-40be-8ef3-1f483ae69363&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=120&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2'/>`}
+                ${data.scrapMe?`<img id="question_scrap" src='/image/scrap_star.png'/>`
+        : `<img id="question_scrap" src='/image/no_scrap_star.png'/>`}
               </div>
             </div>
             <div>
-              <b><p style="color: gold" id=scrap_numbers>${data.scrap}</p></b>
+              <b><p style="color: gold; cursor:default" id=scrap_numbers>${data.scrap}</p></b>
             </div>
           </div>
         </div>
@@ -213,6 +213,17 @@ module.exports = {
       
       </html>
       <script>
+        function menuClick(){
+            var toggle = document.getElementById('menuList').style.visibility;
+            if (toggle === 'hidden'){
+                document.getElementById('menuList').style.visibility = 'visible';
+                document.getElementById('menuiconX').style.visibility = 'visible';
+            }
+            else{
+                document.getElementById('menuList').style.visibility = 'hidden';
+                document.getElementById('menuiconX').style.visibility = 'hidden';
+            }
+        }
       
         function onClickScrap(boardId, questNo){
             $.ajax({
@@ -226,11 +237,11 @@ module.exports = {
                 if(data){
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
                     document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) + 1;
-                    $("#question_scrap").attr("src", "https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F08044898-6524-4839-97e7-4e62772dad80%2FUntitled.png?table=block&id=2f495aa4-ea6e-47c1-aa6b-fb83bd9de117&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=110&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2");
+                    $("#question_scrap").attr("src", "/image/scrap_star.png");
                 }else {
                     let oldScrap = document.getElementById("scrap_numbers").innerHTML
                     document.getElementById("scrap_numbers").innerHTML = Number(oldScrap) -1;
-                    $("#question_scrap").attr("src", 'https://www.notion.so/image/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F325458df-0388-43a4-a306-00fdf3ae3c4a%2FUntitled.png?table=block&id=e18d3453-d668-40be-8ef3-1f483ae69363&spaceId=778db70e-e5a4-4678-99f9-811d2fec1fd4&width=120&userId=4683e5bc-792b-4e93-a20f-0c179321ef32&cache=v2');
+                    $("#question_scrap").attr("src", '/image/no_scrap_star.png');
                 
                 }
             })
@@ -351,7 +362,7 @@ module.exports = {
           <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
           <body>
             <div id="wrap">
-              ${this.nav()}
+              ${this.nav(data.nickname)}
               ${this.writeHtml('/qna/create_process',data, '')}
             </div>
           </body>
@@ -359,6 +370,17 @@ module.exports = {
         </html>
         
         <script>
+            function menuClick(){
+                var toggle = document.getElementById('menuList').style.visibility;
+                if (toggle === 'hidden'){
+                    document.getElementById('menuList').style.visibility = 'visible';
+                    document.getElementById('menuiconX').style.visibility = 'visible';
+                }
+                else{
+                    document.getElementById('menuList').style.visibility = 'hidden';
+                    document.getElementById('menuiconX').style.visibility = 'hidden';
+                }
+            }
           $("#update_btn").click(function() {
             $("#write-question").show();
             $("#update_btn").hide();

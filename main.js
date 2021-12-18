@@ -55,5 +55,8 @@ app.use('/rank', function(request, response){
 
 app.get('/board/:boardId', boardRoutes);
 
+app.use(function(request, response){
+    response.sendFile(__dirname+'/view/notFound.html')
+})
 app.listen(5000);
 

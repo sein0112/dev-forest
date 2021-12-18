@@ -229,6 +229,22 @@ a{
     border-radius: 5px;
 }
 
+
+.register_btn:disabled{
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 200px;
+    background-color: #f1f1f1;
+    width:405px;
+    font-size: 20px;
+    color: white;
+    margin-top: 50px;
+    margin-left: 46px;
+    padding:20px;
+    border:none;
+    border-radius: 5px;
+}
+
 .agree_check{
     width: 50%;
     display:flex;

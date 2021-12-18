@@ -37,7 +37,7 @@ module.exports = {
             <tr class="userRealInfo">
                 <td>${userinfo.nickname}</td>
                 <td>${userinfo.belong}</td>
-                <td>${userinfo.name}</td>
+                <td>${userinfo.name}<img style="width: 30px; height: 30px" id="question_scrap" src='/image/grade_${userinfo.level}.png'/></td>
                 <td>포인트</td>
             </tr>
             <tr></tr>
@@ -45,20 +45,32 @@ module.exports = {
         `;
     },
     myQuests:function(questions) {
+
+        console.log(questions)
+
         let i = 0;
         let result = '';
         let maxi = 3;
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
+
+            let contents
+            try {
+                contents = JSON.parse(questions[i].content)
+            } catch (e) {
+                contents = { text : questions[i].content}
+            }
+            questions[i] = { ...questions[i], contents }
+
             result += `
-            <div class="myQuestPost" style="cursor: pointer;">
-                <div id="myQuestPost_info">
+            <div class="myQuestPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].no})">
+                <div id="myQuestPost_info" >
                     <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myQuestPost_title">${questions[i].title}</div>
                     <p class="myQuestPost_time">${this.parseDate(questions[i].datetime)}</p>
                 </div>
                 <div class="myQuestPost_contents">
-                    <P class="myQuestPost_content">${questions[i].content}</P>
+                    <P class="myQuestPost_content">${questions[i].contents.text}</P>
                 </div>
             </div>
             `;
@@ -70,18 +82,27 @@ module.exports = {
         let i = 0;
         let result = '';
         let maxi = 3;
+        console.log(questions)
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
+
+            let contents
+            try {
+                contents = JSON.parse(questions[i].content)
+            } catch (e) {
+                contents = { text : questions[i].content}
+            }
+            questions[i] = { ...questions[i], contents }
             result += `
-            <div class="myAnswPost" style="cursor: pointer;">
+            <div class="myAnswPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
                 <div id="myAnswPost_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;" >
                     <div class="myAnswPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myAnswPost_writer">${questions[i].nickname}</div>
                     <p class="myAnswPost_time">${this.parseDate(questions[i].datetime)}</p>
                 </div>
                 <div class="myAnswPost_contents">
-                    <P class="myAnswPost_content">${questions[i].content}</P>
+                    <P class="myAnswPost_content">${questions[i].contents.text}</P>
                 </div>
             </div>
 
@@ -96,8 +117,15 @@ module.exports = {
         let maxi = 3;
         if (questions.length < 3) maxi = questions.length;
         while (i < maxi) {
+            let contents
+            try {
+                contents = JSON.parse(questions[i].content)
+            } catch (e) {
+                contents = { text : questions[i].content}
+            }
+            questions[i] = { ...questions[i], contents }
             result += `
-                <div class="myScrapPost" style="cursor: pointer;">
+                <div class="myScrapPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
                 <div id="myScrapPost_info">
                     <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myScrapPost_title"><p class="userPost_title">${questions[i].title}</p></div>
@@ -120,7 +148,7 @@ module.exports = {
         if (answers.length < 3) maxi = answers.length;
         while (i < maxi) {
             result += `
-            <div class="myLikePost" style="cursor: pointer;">
+            <div class="myLikePost" style="cursor: pointer;" onclick="onClickQna(${answers[i].board_id}, ${answers[i].quest_no})">
                 <div id="myLikePost_info">
                     <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myLikePost_title"><p class="userPost_title">${answers[i].title}</p></div>
@@ -243,6 +271,9 @@ module.exports = {
             </div>
         </body>
         <script>
+            function onClickQna(boardId, questionId){
+                window.location='/qna/'+boardId + "/" + questionId
+            }
             function menuClick(){
                 var toggle = document.getElementById('menuList').style.visibility;
                 if (toggle === 'hidden'){

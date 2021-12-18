@@ -55,6 +55,7 @@ exports.read = function(request, response){
                             response.writeHead(200);
                             response.end(html);
                         })
+
                     })
                 })
             });
@@ -65,6 +66,7 @@ exports.read = function(request, response){
 exports.create = function (request, response){
     let data = request.params;
     data = {
+        nickname : request.session.nickname,
         board_id : data.boardId,
             ...data
     }
@@ -100,15 +102,6 @@ exports.create_process = function(request, response){
         )
     })
 }
-
-exports.update = function (request, response){
-    let html = qTemplate.question_create()
-
-    response.writeHead(200)
-    response.end(html);
-}
-
-
 exports.update_process = function(request, response){
 
     var data = request.body;
