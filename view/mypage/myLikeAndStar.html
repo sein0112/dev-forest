@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+    <head>
+        <meta charset="utf-8">
+        <title>마이페이지 - 내가 좋아요 / 즐겨찾기 한 글</title>
+        <link rel="stylesheet" href="../../asset/css/mypage/myPage.css">
+        <link rel="stylesheet" href="../../asset/css/nav.css">
+        <link rel="stylesheet" href="../../asset/css/mypage/myPageDetails.css">
+
+    </head>
+    <body>
+        <div id="wrap">
+            <div id="nav">
+                <div id="menu">
+                    <img id="menuicon" src="../../asset/image/hamburgerbar2.png" alt="menu" onClick="menuClick()" style="cursor: pointer;">
+                    <img id="menuiconX" src="../../asset/image/X.png" onClick="menuClick()" style="visibility: hidden; cursor: pointer;">
+                    <div id="menuList" style="visibility: hidden;">
+                        <ul id="hamburger_menu">
+                            <div id="toHome" style="cursor:pointer;" onClick="location.href='../mainPage.html'">
+                                <img class="menu_icon" src="../../asset/image/home.png">
+                                <li class="bigMenu"><a href="../..">Home</a></li>
+                            </div>
+                            <div id="recentlyAsked">
+                                <img class="menu_icon" src="../../asset/image/chat.png">
+                                <li class="bigMenu"><a href="../..">최근 질문 보기</a></li>
+                            </div>
+                            <div id="postQuest">
+                                <img class="menu_icon" src="../../asset/image/pencil.png">
+                                <li class="bigMenu"><a href="../..">질문 작성하기</a></li>
+                            </div>
+                            <div id="posts">
+                                <img class="menu_icon" src="../../asset/image/tag.png">
+                                <li class="bigMenu"><a href="../..">게시판</a></li>
+                                <div id="tags">
+                                    <a href="../.." class="left">javasript</a>
+                                    <a href="../.." class="right">ruby</a>
+                                    <a href="../.." class="left">python</a>
+                                    <a href="../.." class="right">swift</a>
+                                    <a href="../.." class="left">java</a>
+                                    <a href="../.." class="right">arrays</a>
+                                    <a href="../.." class="left">php</a>
+                                    <a href="../.." class="right">c</a>
+                                    <a href="../.." class="left">android</a>
+                                    <a href="../.." class="right">asp.net</a>
+                                    <a href="../.." class="left">html</a>
+                                    <a href="../.." class="right">.net</a>
+                                    <a href="../.." class="left">jquery</a>
+                                    <a href="../.." class="right">sql</a>
+                                    <a href="../.." class="left">css</a>
+                                    <a href="../.." class="right">r</a>
+                                    <a href="../.." class="left">mysql</a>
+                                    <a href="../.." class="right">sql-server</a>
+                                    <a href="../.." class="left">c++</a>
+                                    <a href="../.." class="right">swift</a>
+                                    <a href="../.." class="left">reactjs</a>
+                                    <a href="../.." class="right">ajax</a>
+                                    <a href="../.." class="left">ios</a>
+                                    <a href="../.." class="right">pandas</a>
+                                    <a href="../.." class="left">node.js</a>
+                                    <a href="../.." class="right">linux</a>
+                                    <a href="../.." class="left">django</a>
+                                    <a href="../.." class="right">angularjs</a>
+                                </div>
+                            </div>
+                        </ul>                        
+                    </div>
+                </div>
+                <div id="search">
+                    <form action="/">
+                        <img id="search_icon" src="../../asset/image/searchicon.png" alt="search">
+                        <input id="search_query" type="text">
+                        <button id="search_btn" style="cursor:pointer;">search</button>
+                    </form>
+                </div>
+                <div id="nav_userInfo">
+                    <img id="usrProfImg" src="내사진.jpg" alt="userpng">
+                    <p id="usrNname"><b>정준서</b></p>
+                    <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
+                </div>
+            </div>
+
+            <div class="bulletin">
+                <img src="../../asset/image/homeWithNoBack.png" width="35px" height="35px" style="float: left; margin-top: 5px;">
+                <p style="margin-top:12px; margin-left: 10px; float: left; text-align: left;">
+                    <a href="myPage.html", style="color: black;">마이페이지</a> - <span>내가 질문한 글 / 내가 답변한 글</span></p>
+            </div>
+
+
+            <div class="box1-group", style="margin-top: 10px;">
+                <span class ="box1", style="margin-left: 0px;">
+                    <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            질문 제목이 제목제목<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">사용자 이름이름<span>  |   20200202</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">제가 언어를 처음 배우는데, 이렇게 코드를 작성했더니 오류가 나요. 왜이러는 걸까요?
+                        내용이 길어지는 경우는 이렇게 처리하면 될 것 같긴 한데 아무래도 틀렸나 봅니다 도움 구해봅니다!
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+                </span>
+        
+                <span class ="box1", style="margin-left: 15px; margin-right: 15px;">
+                    <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            질문 제목이 제목제목<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">사용자 이름이름<span>  |   20200202</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">제가 언어를 처음 배우는데, 이렇게 코드를 작성했더니 오류가 나요. 왜이러는 걸까요?
+                        내용이 길어지는 경우는 이렇게 처리하면 될 것 같긴 한데 아무래도 틀렸나 봅니다 도움 구해봅니다!
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+                </span>
+                
+                <span class ="box1", style="margin-left: 0px; margin-right: 0px;">
+                    <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            질문 제목이 제목제목<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">사용자 이름이름<span>  |   20200202</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">제가 언어를 처음 배우는데, 이렇게 코드를 작성했더니 오류가 나요. 왜이러는 걸까요?
+                        내용이 길어지는 경우는 이렇게 처리하면 될 것 같긴 한데 아무래도 틀렸나 봅니다 도움 구해봅니다!
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+                </span>
+            </div>
+        
+            <div class="box1-group", style="margin-top: 20px;">
+                <span class ="box1", style="margin-left: 0px;">
+                    <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            질문 제목이 제목제목<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">사용자 이름이름<span>  |   20200202</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">제가 언어를 처음 배우는데, 이렇게 코드를 작성했더니 오류가 나요. 왜이러는 걸까요?
+                        내용이 길어지는 경우는 이렇게 처리하면 될 것 같긴 한데 아무래도 틀렸나 봅니다 도움 구해봅니다!
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+                </span>
+        
+                <span class ="box1", style="margin-left: 15px; margin-right: 15px;">
+                    <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            질문 제목이 제목제목<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">사용자 이름이름<span>  |   20200202</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">제가 언어를 처음 배우는데, 이렇게 코드를 작성했더니 오류가 나요. 왜이러는 걸까요?
+                        내용이 길어지는 경우는 이렇게 처리하면 될 것 같긴 한데 아무래도 틀렸나 봅니다 도움 구해봅니다!
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+                </span>
+                
+                <span class ="box1", style="margin-left: 0px; margin-right: 0px;">
+                    <img class="profile" src="1.jpg" style=" border-radius: 8px; margin-left: 5px; margin-top: 5px;">
+                    <div style="display: inline-block; margin-left: 70px; ">
+                        <h3 style="position:relative; margin-top:6px; font-size: 24px;">
+                            질문 제목이 제목제목<small style="position:relative; display: block; font-size: 14px; font-weight: normal; color: grey;">사용자 이름이름<span>  |   20200202</span></small>
+                        </h3>
+                    </div>
+                    
+                    <p class="question">제가 언어를 처음 배우는데, 이렇게 코드를 작성했더니 오류가 나요. 왜이러는 걸까요?
+                        내용이 길어지는 경우는 이렇게 처리하면 될 것 같긴 한데 아무래도 틀렸나 봅니다 도움 구해봅니다!
+                    </p>
+        
+                    <div>
+                        <img class="starImage" src="../../asset/image/Plain_Yellow_Star.png">
+                        <p class="staredPerson">86</p>
+                    </div>
+                </span>
+            </div>
+        
+            
+        </div>
+        </div>
+    </body>
+    <script>
+        function menuClick(){
+            var toggle = document.getElementById('menuList').style.visibility;
+            if (toggle === 'hidden'){
+                document.getElementById('menuList').style.visibility = 'visible';
+                document.getElementById('menuiconX').style.visibility = 'visible';
+            }
+            else{
+                document.getElementById('menuList').style.visibility = 'hidden';
+                document.getElementById('menuiconX').style.visibility = 'hidden';
+            }
+        }
+    </script>
+</html>
