@@ -142,6 +142,13 @@ module.exports = {
         let maxi = 4;
         if (answers.length < 4) maxi = answers.length;
         while (i < maxi) {
+            let contents
+            try {
+                contents = JSON.parse(answers[i].content)
+            } catch (e) {
+                contents = { text : answers[i].content}
+            }
+            answers[i] = { ...answers[i], contents }
             result += `
             <div class="myLikePost" style="cursor: pointer;" onclick="onClickQna(${answers[i].board_id}, ${answers[i].quest_no})">
                 <div id="myLikePost_info">
@@ -151,7 +158,7 @@ module.exports = {
                     <p class="myLikePost_time">${this.parseDate(answers[i].datetime)}</p>
                 </div>
                 <div class="myLikePost_contents">
-                    <P class="myLikePost_content">${answers[i].content}</P>
+                    <P class="myLikePost_content">${answers[i].contents.text}</P>
                 </div>
             </div>
             `;
