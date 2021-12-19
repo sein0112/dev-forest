@@ -7,7 +7,13 @@ router.get('/board/:boardId', function(request, response) {
     let userinfo = request.session;
     let boardId = request.params.boardId;
     let posttohtml, usertohtml;
+    let boardName;
     usertohtml = template.nav(userinfo);
+    db.query('SELECT name FROM boardtbl WHERE id=?', [boardId], function(error, boardname) {
+        if (error) throw error;
+        boardName = boardname[0].name;
+        console.log(boardName);
+    });
     let sql = '\
         SELECT board_id, name, no, datetime, nickname, title, content,image\
         FROM questionstbl \
@@ -20,7 +26,7 @@ router.get('/board/:boardId', function(request, response) {
         if(error) throw error;
         console.log(questions);
         posttohtml = template.posts(questions);
-        response.send(template.container(questions[0].name, usertohtml, posttohtml));
+        response.send(template.container(boardName, usertohtml, posttohtml));
     });
 });
 
