@@ -30,7 +30,7 @@ router.post('/registerprocess', function(request, response){
     let belong = request.body.user_belong;
 
     // console.log(id, nickname, pwd, belong);
-    db.query('INSERT INTO usertbl (id, password,nickname, belong, level, grade_date) VALUES(?, ?, ?, ?, 1, now())', [id, pwd, nickname, belong], function(error, result) {
+    db.query('INSERT INTO usertbl (id, password, nickname, belong, level, grade_date) VALUES(?, ?, ?, ?, 1, now())', [id, pwd, nickname, belong], function(error, result) {
         if (error) throw error;
         else {
             console.log("성공");

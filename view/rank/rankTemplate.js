@@ -173,10 +173,10 @@ module.exports = {
                     </div>
                 </div>
                 <div id="search">
-                    <form action="/">
+                    <form action="/search">
                         <img id="search_icon" src="/image/searchicon.png" alt="search">
-                        <input id="search_query" type="text">
-                        <button id="search_btn" style="cursor:pointer;">search</button>
+                        <input id="search_query" name="search_query" type="text">
+                        <input type="submit" id="search_btn" value="search" class="submit_btn" style="cursor:pointer;">
                     </form>
                 </div>
                 ${navhtml}
