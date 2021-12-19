@@ -42,6 +42,7 @@ module.exports={
             } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
+            scrapNo = posts[i].scrapno ? `<img src="/image/scrap_star.png" class="scrapstar"><p class="scrapedNo">${posts[i].scrapno}</p>` : '';
             result += `
             <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
@@ -55,13 +56,11 @@ module.exports={
                     <P class="post_content">${contents.text}</P>
                 </div>
                 <div class="scraped">
-                    <img src="/asset/image/scrap_star.png" class="scrapstar">
-                    <p class="scrapedNo">0</p>
+                    ${scrapNo}
                 </div>
             </div>
             `;
-            
-            i++;
+            i++;            
         }
         return result;
     },

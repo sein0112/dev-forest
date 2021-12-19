@@ -12,19 +12,11 @@ router.get('/board/:boardId', function(request, response) {
     db.query('SELECT name FROM boardtbl WHERE id=?', [boardId], function(error, boardname) {
         if (error) throw error;
         boardName = boardname[0].name;
-        console.log(boardName);
     });
-    let sql = '\
-        SELECT board_id, name, no, datetime, nickname, title, content,image\
-        FROM questionstbl \
-        JOIN usertbl\
-        on usertbl.id = user_id\
-        join boardtbl\
-        on questionstbl.board_id = boardtbl.id\
-        WHERE board_id =? LIMIT 10';
-    db.query(sql, [boardId], function(error, questions) {
+    console.log(boardId);
+    db.query('call getPosts(?)', [boardId], function(error, questions) {
         if(error) throw error;
-        posttohtml = template.posts(questions);
+        posttohtml = template.posts(questions[0]);
         response.send(template.container(boardId, boardName, usertohtml, posttohtml));
     });
 });
