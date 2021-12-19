@@ -5,17 +5,17 @@ module.exports = {
                 <div class="top-rankers">
                     <div class="ranker">
                         <span id="rank_1" class="top_rank_num">1</span>
-                        <img id = "ranking_user_img" src="image/user_img.jpg">
+                        <img id = "ranking_user_img" src="/uploads/${rank[0].image}">
                         <p>${rank[0].nickname}</p>
                     </div>
                     <div class="ranker">
                         <span id="rank_2" class="top_rank_num">2</span>
-                        <img id = "ranking_user_img" src="image/user_img.jpg">
+                        <img id = "ranking_user_img" src="/uploads/${rank[1].image}">
                         <p>${rank[1].nickname}</p>
                     </div>
                     <div class="ranker">
                         <span id="rank_3" class="top_rank_num">3</span>
-                        <img id = "ranking_user_img" src="image/user_img.jpg">
+                        <img id = "ranking_user_img" src="/uploads/${rank[2].image}">
                         <p>${rank[2].nickname}</p>
                     </div>
                 </div>
@@ -28,7 +28,7 @@ module.exports = {
             <li id="others">
                 <div id="rank_num">${i+1}</div>
                 <div class="others_user_info">
-                    <img id = "others_ranking_user_img" src="image/user_img.jpg">
+                    <img id = "others_ranking_user_img" src="uploads/${rank[i].image}">
                     <span id="others_username">${rank[i].nickname}</span>
                 </div>
             </li>`;
@@ -72,7 +72,6 @@ module.exports = {
             <li id="others">
                 <div id="rank_num">${i+1}</div>
                 <div class="others_user_info">
-                    <img id = "others_ranking_user_img" src="image/user_img.jpg">
                     <span id="others_username">${rank[i].belong}</span>
                 </div>
             </li>`;
