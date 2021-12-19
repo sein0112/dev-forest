@@ -1,6 +1,12 @@
 const { like } = require("./qna")
 
 module.exports = {
+    parseDate:function(date) {
+      let result='';
+      let datelist = date.toString().split(' ');
+      result += datelist[3] + "/" + datelist[1] + "/" + datelist[2] + " " + datelist[4];
+      return result;
+    },
     writeHtml : function (url, data, display){
         let html = `<div id="write-question" class="write-ask" style="display: ${display};">
           <form action="${url}" method="post">
@@ -64,22 +70,18 @@ module.exports = {
             <img id="menuiconX" src="/image/X.png" onclick="menuClick()" style="visibility: hidden; cursor: pointer;">
             <div id="menuList" style="visibility: hidden;">
                 <ul id="hamburger_menu">
-                    <div id="toHome" style="cursor:pointer;" onclick="location.href='../mainPage.html'">
-                        <img class="menu_icon" src="/image/home.png">
-                        <li class="bigMenu"><a href="/">Home</a></li>
-                    </div>
-                    <div id="recentlyAsked">
-                        <img class="menu_icon" src="/image/chat.png">
-                        <li class="bigMenu"><a href="../..">최근 질문 보기</a></li>
-                    </div>
-                    <div id="postQuest">
-                        <img class="menu_icon" src="/image/pencil.png">
-                        <li class="bigMenu"><a href="../..">질문 작성하기</a></li>
-                    </div>
-                    <div id="posts">
-                        <img class="menu_icon" src="/image/tag.png">
-                        <li class="bigMenu"><a href="/board/1">게시판</a></li>
-                        <div id="tags">
+                <div id="toHome" style="cursor:pointer;" onClick="location.href='/'">
+                  <img class="menu_icon" src="/image/home.png">
+                <li class="bigMenu"><a href="/">Home</a></li>
+            </div>
+            <div id="recentlyAsked">
+                <img class="menu_icon" src="/image/chat.png">
+                <li class="bigMenu"><a href="/myPage">마이 페이지</a></li>
+            </div>
+            <div id="posts">
+                <img class="menu_icon" src="/image/tag.png">
+                <li class="bigMenu"><a href="/board/1">게시판</a></li>
+                <div id="tags">
                           <a href="/board/1" class="left">javasript</a>
                           <a href="/board/2" class="right">ruby</a>
                           <a href="/board/3" class="left">python</a>
@@ -186,7 +188,7 @@ module.exports = {
             </div>
             <div class="info-float info-content">
               <h4>${data.title}</h4>
-              <span>${data.nickname}</span> | <span>${data.updated_datetime}</span>
+              <span>${data.nickname}</span> | <span>${this.parseDate(data.updated_datetime)}</span>
             </div>
             ${writer && data.answer.length === 0?'<div class="info-float-right"><button id="delete_btn" class="small_btn" style="cursor:pointer">삭제</button></div>' : ''}
             ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn" style="cursor:pointer">수정</button></div>' : ''}
@@ -493,7 +495,7 @@ module.exports = {
                 </div>
                 <div class="info-float info-content">
                     <h4>${ans[i].title}</h4>
-                    <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
+                    <span>${ans[i].nickname}</span> | <span>${this.parseDate(ans[i].datetime)}</span>
                 </div>
                 ${ans[i].user_id === loginUserInfo[0].id && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
                 ${ans[i].user_id === loginUserInfo[0].id? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}          

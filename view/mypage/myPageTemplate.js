@@ -176,21 +176,17 @@ module.exports = {
                         <img id="menuiconX" src="/image/X.png" onClick="menuClick()" style="visibility: hidden; cursor: pointer;">
                         <div id="menuList" style="visibility: hidden;">
                             <ul id="hamburger_menu">
-                                <div id="toHome" style="cursor:pointer;" onClick="location.href='../mainPage.html'">
-                                    <img class="menu_icon" src="/image/home.png">
-                                    <li class="bigMenu"><a href="../..">Home</a></li>
-                                </div>
-                                <div id="recentlyAsked">
-                                    <img class="menu_icon" src="/image/chat.png">
-                                    <li class="bigMenu"><a href="../..">최근 질문 보기</a></li>
-                                </div>
-                                <div id="postQuest">
-                                    <img class="menu_icon" src="/image/pencil.png">
-                                    <li class="bigMenu"><a href="../..">질문 작성하기</a></li>
-                                </div>
-                                <div id="posts">
-                                    <img class="menu_icon" src="/image/tag.png">
-                                    <li class="bigMenu"><a href="../..">게시판</a></li>
+                            <div id="toHome" style="cursor:pointer;" onClick="location.href='/'">
+                                <img class="menu_icon" src="/image/home.png">
+                                <li class="bigMenu"><a href="/">Home</a></li>
+                            </div>
+                            <div id="recentlyAsked">
+                                <img class="menu_icon" src="/image/chat.png">
+                                <li class="bigMenu"><a href="/myPage">마이 페이지</a></li>
+                            </div>
+                            <div id="posts">
+                                <img class="menu_icon" src="/image/tag.png">
+                                <li class="bigMenu"><a href="/board/1">게시판</a></li>
                                     <div id="tags">
                                         <a href="/board/1" class="left">javasript</a>
                                         <a href="/board/2" class="right">ruby</a>

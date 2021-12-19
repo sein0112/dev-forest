@@ -98,17 +98,13 @@ module.exports={
                             <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" style="cursor: pointer;">
                             <div id="menuList">
                                 <ul id="hamburger_menu">
-                                    <div id="toHome" style="cursor:pointer;" onClick="location.href='../mainPage.html'">
+                                    <div id="toHome" style="cursor:pointer;" onClick="location.href='/'">
                                         <img class="menu_icon" src="/image/home.png">
                                         <li class="bigMenu"><a href="/">Home</a></li>
                                     </div>
                                     <div id="recentlyAsked">
                                         <img class="menu_icon" src="/image/chat.png">
                                         <li class="bigMenu"><a href="/myPage">마이 페이지</a></li>
-                                    </div>
-                                    <div id="postQuest">
-                                        <img class="menu_icon" src="/image/pencil.png">
-                                        <li class="bigMenu"><a href="../..">질문 작성하기</a></li>
                                     </div>
                                     <div id="posts">
                                         <img class="menu_icon" src="/image/tag.png">
