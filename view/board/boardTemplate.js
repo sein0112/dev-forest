@@ -42,12 +42,6 @@ module.exports={
             } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
-            /*즐겨찾기 개수 세기*/
-            db.query('SELECT count(*) AS scrapno FROM scraptbl WHERE board_id=? and quest_no=?', [posts[i].board_id, posts[i].no] , function(error, results) {
-                if(error) throw error;
-                scrapNo = results[0].scrapno;
-                console.log(scrapNo);
-            })
             result += `
             <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
@@ -62,7 +56,7 @@ module.exports={
                 </div>
                 <div class="scraped">
                     <img src="/asset/image/scrap_star.png" class="scrapstar">
-                    <p class="scrapedNo">${console.log(scrapNo)}</p>
+                    <p class="scrapedNo">0</p>
                 </div>
             </div>
             `;
