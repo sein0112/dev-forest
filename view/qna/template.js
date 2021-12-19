@@ -445,7 +445,6 @@ module.exports = {
                 contents = { text : ans[i]?.content}
             }
             ans[i] = { ...ans[i], contents}
-            console.log(ans[i])
             list += `
         <div class="answer-container mg20-left" id="ans_${ans[i].no}">
             <div class="write-answer" id="ans_w_${ans[i].no}" style="display: none; margin-bottom: 10px;">
@@ -457,11 +456,11 @@ module.exports = {
                       </div>
                     <div class="answer-info">
                         <div class="info-float info-img">
-                            <img id="section_user_img" src="/uploads/제목을 입력해주세요_-002.png">
+                            <img id="section_user_img" src="/uploads/${ans[i].image}">
                         </div>
                         <div class="info-float info-content">
                             <input id="inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요" value="${ans[i].title}">
-                            <span>수룡이</span>
+                            <span>${ans[i].nickname}</span>
                         </div>        
                     </div>
                     <div class="answer-content">
