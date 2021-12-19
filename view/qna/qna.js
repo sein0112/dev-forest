@@ -199,6 +199,37 @@ exports.anscreate_process = function(request, response){
         })
     })
 }
+exports.ans_delete_process = function(request, response){
+    var data = request.body;
+    let userId = request.session.userid
+
+    db.query('DELETE FROM answerstbl WHERE board_id = ? AND user_id=? AND quest_no=? AND no = ?',
+        [data.board_id, userId, data.quest_no, data.no],
+        function(error, result){
+            if(error){
+                alert("삭제할 수 없습니다.");
+                throw error;
+            }
+            response.status(200).json(true);
+        });
+}
+exports.ans_update_process = function(request, response){
+
+    var data = request.body;
+    let content = {
+        text : data.content?.trim(),
+        code : data.codeContent?.trim(),
+    }
+    db.query('UPDATE answerstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND quest_no=?  AND no = ?',
+        [data.title.trim(), data.content, data.board_id, data.quest_no, data.no],
+        function(error, result){
+            if(error){
+                throw error;
+            }
+            response.writeHead(302, {Location: `/qna/${data.board_id}/${data.quest_no}`});
+            response.end();
+        })
+}
 exports.adoption = function(request, response){
     var data = request.body;
     console.log(data)

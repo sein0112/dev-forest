@@ -43,4 +43,12 @@ router.post('/adoption_process', function(request, response){
     qna.adoption(request, response);
 });
 
+router.post('/ans_delete_process', function(request, response){
+    qna.ans_delete_process(request, response);
+});
+
+router.post('/ans_update_process', function(request, response){
+    qna.ans_update_process(request, response);
+});
+
 module.exports = router;
