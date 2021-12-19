@@ -14,7 +14,7 @@ module.exports = {
             <input type="hidden" id="questionNo" name="questionNo" value="${data.no}">
             <div class="answer-info">
               <div class="info-float info-img">
-                <img id = "section_user_img" >
+                <img id = "section_user_img" src="/uploads/${data.loginUserImage}">
               </div>
               <div class="info-float">
                 <label for="inputTitle"></label>
