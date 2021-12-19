@@ -195,7 +195,7 @@ code, pre, .code-font {
     font-size: 13px;
 }
 
-#codepen_btn{
+.codepen_btn{
     margin-top: 20px;
     padding: 4px;
     font-size: 12px;
@@ -203,7 +203,7 @@ code, pre, .code-font {
     border-style: none;
     border-radius: 12px;
 }
-#codepen_btn:hover{
+.codepen_btn:hover{
     background-color: #b5b5b5;
 }
 #store_btn:hover{
