@@ -49,7 +49,7 @@ module.exports={
         }
         return result;
     },
-    container: function(usertohtml, poststohtml) {
+    container: function(boardname, usertohtml, poststohtml) {
         return `
             <!DOCTYPE html>
             <head>
@@ -116,16 +116,16 @@ module.exports={
                             </div>
                         </div>
                         <div id="search">
-                            <form action="/">
+                            <form action="/search">
                                 <img id="search_icon" src="/image/searchicon.png" alt="search">
-                                <input id="search_query" type="text">
-                                <button id="search_btn" style="cursor:pointer;">search</button>
+                                <input id="search_query" name="search_query" type="text">
+                                <input type="submit" id="search_btn" value="search" class="submit_btn" style="cursor:pointer;">
                             </form>
                         </div>
                         ${usertohtml}
                     </div>
                     <div id="boardInfo">
-                        게시판 > Javascript
+                        게시판 > ${boardname}
                     </div>            
                     <div id="contents">
                         ${poststohtml}   
