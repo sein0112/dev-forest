@@ -33,7 +33,7 @@ module.exports={
         let result ='';
         while (i < posts.length) {
             result += `
-            <div class="postss">
+            <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
                     <img src="../../uploads/${posts[i].image}" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="post_title"><p class="userPost_title">${posts[i].title}</p></div>
@@ -72,7 +72,7 @@ module.exports={
                                     </div>
                                     <div id="recentlyAsked">
                                         <img class="menu_icon" src="/image/chat.png">
-                                        <li class="bigMenu"><a href="../..">최근 질문 보기</a></li>
+                                        <li class="bigMenu"><a href="/myPage">마이 페이지</a></li>
                                     </div>
                                     <div id="postQuest">
                                         <img class="menu_icon" src="/image/pencil.png">

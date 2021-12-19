@@ -206,7 +206,7 @@ module.exports = {
           </div>
         </div>
         ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
-        ${this.ansList(data.answer, data.user_id, data.userinfo[0], 0, writer)}
+        ${this.ansList(data.answer, data.user_id, data.userinfo[0], 0,data.userinfo)}
         </div>
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
@@ -425,7 +425,7 @@ module.exports = {
   },
 
   //답변글
-    ansList: function(ans, quest_userId, userInfo_s, likeCnt) {
+    ansList: function(ans, quest_userId, userInfo_s, likeCnt , loginUserInfo) {
         var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
         var i = 0;
         while(i < ans.length) {
@@ -464,9 +464,8 @@ module.exports = {
                     <h4>${ans[i].title}</h4>
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
-                ${ans[i].user_id ===userInfo_s.id && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
-                ${ans[i].user_id ===userInfo_s.id? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}
-          
+                ${ans[i].user_id === loginUserInfo[0].id && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
+                ${ans[i].user_id === loginUserInfo[0].id? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}          
                 <div class="adoption_container ${ans[i].no}">
                 ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, userInfo_s.id)}
                 </div>
