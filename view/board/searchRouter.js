@@ -23,7 +23,7 @@ router.get('/search', function(request, response) {
         if(error) throw error;
         console.log(questions);
         posttohtml = boardTemplate.posts(questions);
-        response.send(boardTemplate.container('검색 결과', usertohtml, posttohtml));
+        response.send(boardTemplate.container(0, '검색 결과', usertohtml, posttohtml));
     });
 });
 
