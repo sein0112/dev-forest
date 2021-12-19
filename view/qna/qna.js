@@ -35,14 +35,14 @@ exports.read = function(request, response){
                             let loginUserImage = userinfo[0].image;
                             let contents
                             try {
-                                contents = JSON.parse(question[0].content)
+                                contents = JSON.parse(question[0]?.content)
                             } catch (e) {
-                                contents = { text : question[0].content}
+                                contents = { text : question[0]?.content}
                             }
                             scrapMe = scrapMe.length > 0
                             let data = {
                                 contents,
-                                boardId : question[0].board_id,
+                                boardId : question[0]?.board_id,
                                 answer : answer,
                                 ...question[0],
                                 ...scrap[0],
