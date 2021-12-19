@@ -435,8 +435,16 @@ module.exports = {
         console.log("ansansansansansansansansansans", ans)
         var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
         var i = 0;
-        while(i < ans.length) {
+        let existAdoption = false
 
+        for( let ansData of ans){
+            if(ansData.adoption > 0 ){
+                let existAdoption = true;
+                break;
+            }
+        }
+
+        while(i < ans.length) {
             let contents
             try {
                 contents = JSON.parse(ans[i]?.content)
@@ -445,7 +453,7 @@ module.exports = {
             }
             ans[i] = { ...ans[i], contents}
             list += `
-        <div class="answer-container mg20-left" id="ans_${ans[i].no}">
+        <div class="answer-container mg20-left ${ans[i].adoption? 'adoption-y' : ''}" id="ans_${ans[i].no}">
             <div class="write-answer" id="ans_w_${ans[i].no}" style="display: none; margin-bottom: 10px;">
                 <form action="/qna/ans_update_process" method="post">
                       <div class="info-float-right">
@@ -488,7 +496,7 @@ module.exports = {
                 ${ans[i].user_id === loginUserInfo[0].id && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
                 ${ans[i].user_id === loginUserInfo[0].id? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}          
                 <div class="adoption_container ${ans[i].no}">
-                ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, userInfo_s.id)}
+                ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, userInfo_s.id , existAdoption)}
                 </div>
                 <div class="info-float-right" style="margin: 18px 20px 0 0">
                     <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no})">
@@ -546,12 +554,12 @@ module.exports = {
         </div>
       </div>`;
     },
-    adoption: function(point, adoption, board_id, quest_no, no, ans_userId, quest_userId, user_id){
+    adoption: function(point, adoption, board_id, quest_no, no, ans_userId, quest_userId, user_id, existAdoption){
       // console.log(ans_userId, quest_userId, user_id);
-      if(adoption == 1)
-          return `<p id="adoption_result">${point} 포인트로 채택됨</p>`;
-        //로그인한 유저가 작성한 게시글이면서 다른 사람이 작성한 답변일 때 채택 가능함
-      if((quest_userId == user_id) && (ans_userId != user_id)) {
+      if(adoption > 0)
+          return `<img style="width: 24px; height: 24px; margin: 18px 20px 0 0" src="/image/adoption.png">`;
+        //로그인한 유저가 작성한 게시글이면서 다른 사람이 작성한 답변이고 다른 채택된 글이 없을 때 채택 가능함
+      if((quest_userId == user_id) && (ans_userId != user_id) && !existAdoption) {
           return `
           <form class="adoption" action="/qna/adoption_process" method="post">
             <input id = "adopt_point" type="text" name="adoptPoint" placeholder="채택 포인트를 입력하세요">
