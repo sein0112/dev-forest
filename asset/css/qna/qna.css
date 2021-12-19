@@ -9,7 +9,6 @@ code, pre, .code-font {
 }
 .content {
     margin-bottom: 10px;
-<<<<<<< HEAD
 }
 
 .mg15-top-bottom {
@@ -22,8 +21,6 @@ code, pre, .code-font {
 
 .pd5-right {
     padding-right: 5px;
-=======
->>>>>>> dev_jieun
 }
 
 .answer-container, .write-answer{
@@ -85,13 +82,11 @@ code, pre, .code-font {
     float: left;
 }
 #like_btn{
-<<<<<<< HEAD
     border-style: none;
     background-color: #ffffff;
 }
 #scrap_btn{
-=======
->>>>>>> dev_jieun
+
     border-style: none;
     background-color: #ffffff;
 }
