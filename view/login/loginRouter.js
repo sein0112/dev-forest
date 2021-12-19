@@ -26,7 +26,7 @@ router.post('/loginprocess', function(request, response){
                 request.session.userid = id;
                 request.session.nickname = user[0].nickname;
                 request.session.image = user[0].image;
-                response.redirect("/myPage");
+                response.redirect("/board/1");
             }
 
         }
