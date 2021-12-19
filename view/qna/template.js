@@ -204,11 +204,11 @@ module.exports = {
         </div>
         ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
         </div>
-          ${this.ansList(data.answer, 10)}
+          ${this.ansList(data.answer, data.user_id, data.userinfo[0], 0)}
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
           </div>
-          ${this.answer_create(data.answer, data.nickname)}
+          ${this.answer_create(data, data.userinfo[0].nickname)}
       </body>
       
       </html>
@@ -407,7 +407,7 @@ module.exports = {
   },
 
   //답변글
-    ansList: function(ans, likeCnt) {
+    ansList: function(ans, quest_userId, userInfo, likeCnt) {
         var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
         var i = 0;
         while(i < ans.length) {
@@ -415,14 +415,14 @@ module.exports = {
         <div class="answer-container mg20-left">
             <div class="answer-info">
                 <div class="info-float info-img">
-                    <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                    <img id = "section_user_img" src="/uploads/${ans[i].image}">
                 </div>
                 <div class="info-float info-content">
                     <h4>${ans[i].title}</h4>
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
                 <div class="adoption_container ${ans[i].no}">
-                  ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`)}
+                ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, userInfo.id)}
                 </div>
                 <div class="info-float-right" style="margin: 18px 20px 0 0">
                     <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no})">
@@ -446,17 +446,16 @@ module.exports = {
         return list;
     },
     answer_create : function (ans, nickname){
-      var today = new Date();
       return `
       <div class="write-answer" style="display: none;">
             <form action="/qna/anscreate_process" method="post">
                 <div class="answer-info">
                     <div class="info-float info-img">
-                        <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                        <img id = "section_user_img" src="/uploads/${ans.image}">
                     </div>
                     <div class="info-float info-content">
                         <input id = "inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요">
-                        <span>${nickname}</span> | <span>${today}</span>
+                        <span>${nickname}</span>
                     </div>        
                 </div>
                 <div class="answer-content">
@@ -464,9 +463,8 @@ module.exports = {
                     <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
                     </div>
                 </div>
-                <input type="hidden" name="boardId" value="${ans[0]?.board_id}">
-                <input type="hidden" name="questNo" value="${ans[0]?.quest_no}">
-                <input type="hidden" name="datetime" value="${ans[0]?.datetime}">
+                <input type="hidden" name="boardId" value="${ans?.board_id}">
+                <input type="hidden" name="questNo" value="${ans?.no}">
                 <input id="store_btn" type="submit" value="저장">
             </form>
         </div>
@@ -475,17 +473,21 @@ module.exports = {
         </div>
       </div>`;
     },
-    adoption: function(point, adoption, board_id, quest_no, no){
+    adoption: function(point, adoption, board_id, quest_no, no, ans_userId, quest_userId, user_id){
+      // console.log(ans_userId, quest_userId, user_id);
       if(adoption == 1)
-        return `<p id="adoption_result">${point} 포인트로 채택됨</p>`;
-      else return `
-        <form class="adoption" action="/qna/adoption_process" method="post">
-          <input id = "adopt_point" type="text" name="adoptPoint" placeholder="채택 포인트를 입력하세요">
-          <input type="hidden" name="boardId" value="${board_id}">
-          <input type="hidden" name="questNo" value="${quest_no}">
-          <input type="hidden" name="no" value="${no}">
-          <input id="adopt_btn" type="submit" value="채택">
-      </form>
-      `;
+          return `<p id="adoption_result">${point} 포인트로 채택됨</p>`;
+        //로그인한 유저가 작성한 게시글이면서 다른 사람이 작성한 답변일 때 채택 가능함
+      if((quest_userId == user_id) && (ans_userId != user_id)) {
+          return `
+          <form class="adoption" action="/qna/adoption_process" method="post">
+            <input id = "adopt_point" type="text" name="adoptPoint" placeholder="채택 포인트를 입력하세요">
+            <input type="hidden" name="boardId" value="${board_id}">
+            <input type="hidden" name="questNo" value="${quest_no}">
+            <input type="hidden" name="no" value="${no}">
+            <input id="adopt_btn" type="submit" value="채택">
+        </form>
+      `;}
+      else return ``;
     },
 }
