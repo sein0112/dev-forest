@@ -39,6 +39,7 @@ td {
     margin-bottom: 15px;
     background-color: white;
     border-radius: 12px;
+    height: 280px;
 }
 
 #contents{
@@ -98,7 +99,7 @@ td {
 .post_content{
     width: calc(100%-40px);
     margin-top: 80px;
-    height: 120px;
+    height: 100px;
     overflow: hidden;
     line-height: 1.2;
     height:8.59em;
@@ -111,6 +112,18 @@ td {
     padding: 20px;
 }
 
+.scrapstar{
+    float: left;
+    width: 25px; 
+    height: 25px; 
+    margin-top: 5px;
+}
+
+.scrapedNo{
+    float: left;
+    margin-top: 10px;
+    margin-left: 5px;
+}
 /*menu*/
 #menuList{
     background-color: white;

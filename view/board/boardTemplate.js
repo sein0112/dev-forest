@@ -1,3 +1,4 @@
+const db =  require('../../db.js');  
 module.exports={
     parseDate:function(date) {
         let result='';
@@ -31,7 +32,7 @@ module.exports={
     posts: function(posts) {
         let i = 0;
         let result ='';
-        let contents, ifCode;
+        let contents, ifCode, scrapNo;
         while (i < posts.length) {
             ifCode = '';
             try { //with code
@@ -41,6 +42,12 @@ module.exports={
             } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
+            /*즐겨찾기 개수 세기*/
+            db.query('SELECT count(*) AS scrapno FROM scraptbl WHERE board_id=? and quest_no=?', [posts[i].board_id, posts[i].no] , function(error, results) {
+                if(error) throw error;
+                scrapNo = results[0].scrapno;
+                console.log(scrapNo);
+            })
             result += `
             <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
@@ -53,8 +60,13 @@ module.exports={
                 <div class="post_contents">
                     <P class="post_content">${contents.text}</P>
                 </div>
+                <div class="scraped">
+                    <img src="/asset/image/scrap_star.png" class="scrapstar">
+                    <p class="scrapedNo">${console.log(scrapNo)}</p>
+                </div>
             </div>
             `;
+            
             i++;
         }
         return result;
