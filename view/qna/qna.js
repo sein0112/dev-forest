@@ -48,7 +48,8 @@ exports.read = function(request, response){
                                 ...scrap[0],
                                 scrapMe,
                                 loginUserNickname,
-                                loginUserImage
+                                loginUserImage,
+                                userinfo:userinfo,
                             }
 
                             // console.log(data)
