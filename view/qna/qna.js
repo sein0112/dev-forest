@@ -30,6 +30,8 @@ exports.read = function(request, response){
                             if(error5){
                                 throw error5;
                             }
+                            let loginUserNickname = userinfo[0].nickname;
+                            let loginUserImage = userinfo[0].image;
                             let contents
                             try {
                                 contents = JSON.parse(question[0].content)
@@ -44,7 +46,9 @@ exports.read = function(request, response){
                                 ...question[0],
                                 ...scrap[0],
                                 scrapMe,
-                                userinfo: userinfo,
+                                loginUserNickname,
+                                loginUserImage,
+                                userinfo: userinfo,  
                             }
 
                             // console.log(data)

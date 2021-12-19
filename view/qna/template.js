@@ -120,8 +120,8 @@ module.exports = {
         </div>
                                         
         <div id="nav_userInfo">
-            <img id="usrProfImg" src="#" alt="userpng">
-            <p id="usrNname"><b>${nickname}</b></p>
+        <img id="usrProfImg" src="/uploads/${data.loginUserImage}" style="background-color:white; cursor:pointer;" onclick="window.location='/myPage'">
+        <p id="usrNname"><b>${data.loginUserNickname}</b></p>
             <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
         </div>
         
