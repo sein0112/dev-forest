@@ -171,7 +171,7 @@ module.exports = {
       <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
       <body>
       <div id="wrap"> 
-          ${this.nav(data.nickname)}
+          ${this.nav(data)}
         <div>
         <div id="read-question" class="answer-container">
           <div class="answer-info">
@@ -444,6 +444,36 @@ module.exports = {
         return list;
     },
     answer_create : function (ans, nickname){
+      var today = new Date();
+      return `
+      <div class="write-answer" style="display: none;">
+            <form action="/qna/anscreate_process" method="post">
+                <div class="answer-info">
+                    <div class="info-float info-img">
+                        <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                    </div>
+                    <div class="info-float info-content">
+                        <input id = "inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요">
+                        <span>${nickname}</span> | <span>${today}</span>
+                    </div>        
+                </div>
+                <div class="answer-content">
+                    <div class="content">
+                    <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
+                    </div>
+                </div>
+                <input type="hidden" name="boardId" value="${ans[0].board_id}">
+                <input type="hidden" name="questNo" value="${ans[0].quest_no}">
+                <input type="hidden" name="datetime" value="${ans[0].datetime}">
+                <input id="store_btn" type="submit" value="저장">
+            </form>
+        </div>
+        <div class="option_write" style="display: none;">
+            <button id="cancle_btn">취소</button>
+        </div>
+      </div>`;
+    },
+    answer_update : function (ans, nickname){
       var today = new Date();
       return `
       <div class="write-answer" style="display: none;">
