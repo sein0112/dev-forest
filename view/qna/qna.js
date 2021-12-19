@@ -31,38 +31,48 @@ exports.read = function(request, response){
                             if(error5){
                                 throw error5;
                             }
-                            let loginUserNickname = userinfo[0].nickname;
-                            let loginUserImage = userinfo[0].image;
-                            let contents
-                            try {
-                                contents = JSON.parse(question[0]?.content)
-                            } catch (e) {
-                                contents = { text : question[0]?.content}
-                            }
-                            scrapMe = scrapMe.length > 0
-                            let data = {
-                                contents,
-                                boardId : question[0]?.board_id,
-                                answer : answer,
-                                ...question[0],
-                                ...scrap[0],
-                                scrapMe,
-                                loginUserNickname,
-                                loginUserImage,
-                                userinfo:userinfo,
-                            }
+                            db.query(`SELECT answ_no, COUNT(*) as likeCnt FROM liketbl WHERE board_id=? AND quest_no=? GROUP BY answ_no ORDER BY answ_no`,[boardId, questionNo], function(error6, like){
+                                if(error6){
+                                    throw error6;
+                                }
+                                db.query(`SELECT * FROM liketbl WHERE board_id=? AND quest_no=?`,[boardId, questionNo], function(error7, likeMe){
+                                    if(error7){
+                                        throw error7;
+                                    }
+                                let loginUserNickname = userinfo[0].nickname;
+                                let loginUserImage = userinfo[0].image;
+                                let contents
+                                try {
+                                    contents = JSON.parse(question[0]?.content)
+                                } catch (e) {
+                                    contents = { text : question[0]?.content}
+                                }
+                                scrapMe = scrapMe.length > 0
+                                let data = {
+                                    contents,
+                                    boardId : question[0]?.board_id,
+                                    answer : answer,
+                                    ...question[0],
+                                    ...scrap[0],
+                                    scrapMe,
+                                    like,
+                                    likeMe,
+                                    loginUserNickname,
+                                    loginUserImage,
+                                    userinfo:userinfo,
+                                }
 
-                            // console.log(data)
-                            let writer = request.session.userid === data.user_id
-                            let html = qTemplate.question_read(data, writer);
-                            response.writeHead(200);
-                            response.end(html);
+                                // console.log(data)
+                                let writer = request.session.userid === data.user_id
+                                let html = qTemplate.question_read(data, writer);
+                                response.writeHead(200);
+                                response.end(html);
+                            })
                         })
-
                     })
                 })
             });
-
+        })
     })
 }
 

@@ -1,3 +1,5 @@
+const { like } = require("./qna")
+
 module.exports = {
     writeHtml : function (url, data, display){
         let html = `<div id="write-question" class="write-ask" style="display: ${display};">
@@ -207,7 +209,7 @@ module.exports = {
           </div>
         </div>
         ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
-        ${this.ansList(data.answer, data.user_id, data.userinfo[0], 0,data.userinfo)}
+        ${this.ansList(data.answer, data.user_id, data.userinfo[0], data.like, data.likeMe, data.userinfo)}
         </div>
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
@@ -431,9 +433,10 @@ module.exports = {
   },
 
   //답변글
-    ansList: function(ans, quest_userId, userInfo_s, likeCnt , loginUserInfo) {
+    ansList: function(ans, quest_userId, userInfo_s, like ,likeMe, loginUserInfo) {
         console.log("ansansansansansansansansansans", ans)
         var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
+        let src;
         var i = 0;
         while(i < ans.length) {
 
@@ -493,11 +496,11 @@ module.exports = {
                 <div class="info-float-right" style="margin: 18px 20px 0 0">
                     <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no})">
                         <div id="like_btn">
-                            <img id="answer_like ${ans[i].no}" src="./../../image/favorite_border_black_24dp.svg"/>
+                        <img id="answer_like ${ans[i].no}" src =${this.src(likeMe, ans[i].no, loginUserInfo)} />
                         </div>
                     </div>
                     <div class="like_num">
-                        <p id="like_numbers ${ans[i].no}">${likeCnt}</p>
+                        <p id="like_numbers ${ans[i].no}">${this.count(like, ans[i].no)}</p>
                     </div>
                 </div>
             </div>
@@ -563,4 +566,24 @@ module.exports = {
       `;}
       else return ``;
     },
+    count: function(like, ans_no){
+      let cnt = 0;
+      let i = 0;
+      while(i < like.length){
+        if(like[i].answ_no === ans_no)
+          if(!(like[i] === undefined)) cnt = like[i].likeCnt;
+          i+=1;
+      }
+      return cnt;
+    },
+    src: function(likeMe, ans_no, loginUserInfo){
+      let src = "./../../image/favorite_border_black_24dp.svg";
+      let i = 0;
+      while(i < likeMe.length){
+        if(ans_no === likeMe[i].answ_no)
+          if(!(likeMe[i] === undefined) && (likeMe[i].user_id=== loginUserInfo[0].id)) src = "./../../image/favorite_black_24dp.svg";
+          i+=1;
+      }
+      return src;
+    }
 }
