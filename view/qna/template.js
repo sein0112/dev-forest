@@ -464,8 +464,8 @@ module.exports = {
                     <h4>${ans[i].title}</h4>
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
-                ${ans[i].user_id ===quest_userId && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
-                ${ans[i].user_id ===quest_userId? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}
+                ${ans[i].user_id ===userInfo_s.id && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
+                ${ans[i].user_id ===userInfo_s.id? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}
           
                 <div class="adoption_container ${ans[i].no}">
                 ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, userInfo_s.id)}
