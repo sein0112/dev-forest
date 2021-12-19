@@ -65,6 +65,23 @@ module.exports={
         return result;
     },
     container: function(boardId, boardname, usertohtml, poststohtml) {
+        let newQButton;
+        if (boardId != 0)  newQButton = `
+            <div class="btn-wrapper">
+                <button id="answer_btn" class="withcode" 
+                onClick="location.href='/qna/${boardId}/first/create'"
+                style="
+                cursor: pointer;
+                margin: auto;
+                display: block;
+                width: 100px;
+                height: 30px;
+                color: #ffffff;
+                background-color: #3F3F3F;
+                border-radius: 12px;
+                border-style: none;">질문 작성하기</button>
+            </div>
+        `; else newQButton = '';
         return `
             <!DOCTYPE html>
             <head>
@@ -140,20 +157,7 @@ module.exports={
                         ${usertohtml}
                     </div>
                     <div id="boardInfo">
-                      <div class="btn-wrapper">
-                          <button id="answer_btn" class="withcode" 
-                          onClick="location.href='/qna/${boardId}/first/create'"
-                          style="
-                            cursor: pointer;
-                            margin: auto;
-                            display: block;
-                            width: 100px;
-                            height: 30px;
-                            color: #ffffff;
-                            background-color: #3F3F3F;
-                            border-radius: 12px;
-                            border-style: none;">질문 작성하기</button>
-                      </div>
+                      ${newQButton}
                         게시판 > ${boardname}
                     </div>            
                     <div id="contents">
