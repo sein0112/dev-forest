@@ -7,6 +7,7 @@ var rank = require('./view/rank/rank.js');
 var myLikeAndStar = require('./view/mypage/myLikeAndStar.js');
 var showBulletine = require('./view/bulletine/showBulletine.js');
 var loginRoutes = require('./view/login/loginRouter.js');
+var registerRoutes = require('./view/login/registerRouter.js')
 var boardRoutes = require('./view/board/boardRouter.js');
 var modRoutes = require('./view/login/usermodRouter.js');
 var qnaRoutes = require('./view/qna/qnaRouter.js');
