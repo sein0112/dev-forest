@@ -49,13 +49,13 @@ td {
     text-align: left;
 }
 .post_info{
-    width: 95%;
+    width: 100%;
 }
 .post_title {
     vertical-align: bottom;
     float: left;
     margin-left: 10px;
-    width: 90%;
+    width: 80%;
     white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -80,6 +80,21 @@ td {
     white-space: nowrap;
 }
 
+
+.post_time{
+    float: right;
+}
+
+.withcode{
+    float:right;
+    width: 10%;
+    height: fit-content;;
+    width:fit-content;
+    background-color:#A1A1A1;
+    padding:2px;
+    border-radius:12px;
+}
+
 .post_content{
     width: calc(100%-40px);
     margin-top: 80px;
@@ -95,11 +110,6 @@ td {
     border-radius:12px;
     padding: 20px;
 }
-
-.post_time{
-    float: right;
-}
-
 
 /*menu*/
 #menuList{

@@ -31,11 +31,15 @@ module.exports={
     posts: function(posts) {
         let i = 0;
         let result ='';
-        let contents;
+        let contents, ifCode;
         while (i < posts.length) {
-            try {
+            ifCode = '';
+            try { //with code
                 contents = JSON.parse(posts[i]?.content)
-            } catch (e) {
+                if(contents.code != '') ifCode = '<div class="withcode">코드 포함</div>';
+                if(contents.code == undefined) ifCode ='';
+                console.log(contents, ifCode);
+            } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
             result += `
@@ -43,6 +47,7 @@ module.exports={
                 <div class="post_info">
                     <img src="../../uploads/${posts[i].image}" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="post_title"><p class="userPost_title">${posts[i].title}</p></div>
+                    ${ifCode}
                     <div class="post_writer">${posts[i].nickname}</div>
                     <p class="post_time">${this.parseDate(posts[i].datetime)}</p>
                 </div>
