@@ -36,11 +36,11 @@ module.exports={
         while (i < posts.length) {
             ifCode = '';
             try { //with code
-                contents = JSON.parse(posts[i]?.content)
+                contents = JSON.parse(posts[i].content)
                 if(contents.code != '') ifCode = '<div class="withcode">코드 포함</div>';
                 if(contents.code == undefined) ifCode ='';
             } catch (e) { //without code
-                contents = { text : posts[i]?.content}
+                contents = { text : posts[i].content}
             }
             scrapNo = posts[i].scrapno ? `<img src="/image/scrap_star.png" style="width: 20px; height: 20px;" class="scrapstar"><p style="color: gold;" class="scrapedNo">${posts[i].scrapno}</p>` : '';
             result += `

@@ -47,14 +47,14 @@ exports.read = function(request, response){
                                 let loginUserImage = userinfo[0].image;
                                 let contents
                                 try {
-                                    contents = JSON.parse(question[0]?.content)
+                                    contents = JSON.parse(question[0].content)
                                 } catch (e) {
-                                    contents = { text : question[0]?.content}
+                                    contents = { text : question[0].content}
                                 }
                                 scrapMe = scrapMe.length > 0
                                 let data = {
                                     contents,
-                                    boardId : question[0]?.board_id,
+                                    boardId : question[0].board_id,
                                     answer : answer,
                                     ...question[0],
                                     ...scrap[0],
@@ -137,8 +137,8 @@ exports.update_process = function(request, response){
 
     var data = request.body;
     let content = {
-        text : data.content?.trim(),
-        code : data.codeContent?.trim(),
+        text : data.content.trim(),
+        code : data.codeContent.trim(),
     }
     const timeSource = new Date();
     let dateObj = new Date(timeSource);
@@ -213,8 +213,8 @@ exports.scrap = function(request, response){
 exports.anscreate_process = function(request, response){
     var data = request.body;
     let content = {
-        text : data.content?.trim(),
-        code : data.codeContent?.trim(),
+        text : data.content.trim(),
+        code : data.codeContent.trim(),
     }
     let userId = request.session.userid;
     db.query(`SELECT MAX(no) as maxNo FROM answerstbl WHERE board_id=? AND quest_no=?`,[data.boardId, data.questNo], function(error2, maxNo){
@@ -253,8 +253,8 @@ exports.ans_update_process = function(request, response){
 
     var data = request.body;
     let content = {
-        text : data.content?.trim(),
-        code : data.codeContent?.trim(),
+        text : data.content.trim(),
+        code : data.codeContent.trim(),
     }
     const timeSource = new Date();
     let dateObj = new Date(timeSource);

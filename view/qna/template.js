@@ -40,7 +40,7 @@ module.exports = {
                         style="overflow:hidden"
                         name="content"
                         onfocus="adjustHeight(this);"
-                        onkeyup="adjustHeight(this);">${data.contents?.text?.trim()?? ''}</textarea>
+                        onkeyup="adjustHeight(this);">${data.contents.text.trim()?? ''}</textarea>
               </div>
                 ${this.codeHtml.upsert(data, 'que')}
             </div>
@@ -154,7 +154,7 @@ module.exports = {
       upsert : function (data , tpye){
           let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
           let html = '';
-          if(data.contents?.code !==undefined && data.contents?.code !==null && data.contents.code !==''){
+          if(data.contents.code !==undefined && data.contents.code !==null && data.contents.code !==''){
               html = `<div id="write-code-${typeMode}" class="codepen">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
@@ -201,7 +201,7 @@ module.exports = {
             ${writer? '<div class="info-float-right"><button id="update_btn" class="small_btn" style="cursor:pointer">수정</button></div>' : ''}
           </div>
           <div class="answer-content">
-            <div class="content"><pre>${data.contents?.text?.trim()}</pre></div>
+            <div class="content"><pre>${data.contents.text.trim()}</pre></div>
             ${this.codeHtml.read(data)}
           </div>
       
@@ -457,9 +457,9 @@ module.exports = {
         while(i < ans.length) {
             let contents
             try {
-                contents = JSON.parse(ans[i]?.content)
+                contents = JSON.parse(ans[i].content)
             } catch (e) {
-                contents = { text : ans[i]?.content}
+                contents = { text : ans[i].content}
             }
             ans[i] = { ...ans[i], contents}
             list += `
@@ -554,8 +554,8 @@ module.exports = {
                     </div>
                     ${this.codeHtml.upsert(ans, 'new')}
                 </div>
-                <input type="hidden" name="boardId" value="${ans?.board_id}">
-                <input type="hidden" name="questNo" value="${ans?.no}">
+                <input type="hidden" name="boardId" value="${ans.board_id}">
+                <input type="hidden" name="questNo" value="${ans.no}">
                 <input id="store_btn" type="submit" value="저장">
             </form>
         </div>
