@@ -31,7 +31,13 @@ module.exports={
     posts: function(posts) {
         let i = 0;
         let result ='';
+        let contents;
         while (i < posts.length) {
+            try {
+                contents = JSON.parse(posts[i]?.content)
+            } catch (e) {
+                contents = { text : posts[i]?.content}
+            }
             result += `
             <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
@@ -41,7 +47,7 @@ module.exports={
                     <p class="post_time">${this.parseDate(posts[i].datetime)}</p>
                 </div>
                 <div class="post_contents">
-                    <P class="post_content">${posts[i].content}</P>
+                    <P class="post_content">${contents.text}</P>
                 </div>
             </div>
             `;

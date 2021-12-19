@@ -37,6 +37,8 @@ router.post('/logoutprocess', function(request, response){
     if (request.session.authenticate == false) {}
     else {
         delete request.session.userid;
+        delete request.session.image;
+        delete request.session.nickname;
         request.session.authenticate = false;
         response.redirect('/');
     }
