@@ -3,7 +3,7 @@ module.exports={
     parseDate:function(date) {
         let result='';
         let datelist = date.toString().split(' ');
-        result += datelist[3] + "/" + datelist[1] + "/" + datelist[2];
+        result += datelist[3] + "/" + datelist[1] + "/" + datelist[2] + " " + datelist[4];
         return result;
     },
     nav: function(userinfo) {

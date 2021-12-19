@@ -47,8 +47,8 @@ module.exports = {
     myQuests:function(questions) {
         let i = 0;
         let result = '';
-        let maxi = 3;
-        if (questions.length < 3) maxi = questions.length;
+        let maxi = 4;
+        if (questions.length < 4) maxi = questions.length;
         while (i < maxi) {
             let contents
             try {
@@ -77,8 +77,8 @@ module.exports = {
     myAnswerQuests:function(questions) {
         let i = 0;
         let result = '';
-        let maxi = 3;
-        if (questions.length < 3) maxi = questions.length;
+        let maxi = 4;
+        if (questions.length < 4) maxi = questions.length;
         while (i < maxi) {
 
             let contents
@@ -109,8 +109,8 @@ module.exports = {
     myScraps:function(questions){
         let i = 0;
         let result = '';
-        let maxi = 3;
-        if (questions.length < 3) maxi = questions.length;
+        let maxi = 4;
+        if (questions.length < 4) maxi = questions.length;
         while (i < maxi) {
             let contents
             try {
@@ -128,7 +128,7 @@ module.exports = {
                     <p class="myScrapPost_time">${this.parseDate(questions[i].datetime)}</p>
                 </div>
                 <div class="myScrapPost_contents">
-                    <P class="myScrapPost_content">${questions[i].content}</P>
+                    <P class="myScrapPost_content">${questions[i].contents.text}</P>
                 </div>
             </div>
             `;
@@ -139,8 +139,8 @@ module.exports = {
     myLikes:function(answers){
         let i = 0;
         let result = '';
-        let maxi = 3;
-        if (answers.length < 3) maxi = answers.length;
+        let maxi = 4;
+        if (answers.length < 4) maxi = answers.length;
         while (i < maxi) {
             result += `
             <div class="myLikePost" style="cursor: pointer;" onclick="onClickQna(${answers[i].board_id}, ${answers[i].quest_no})">

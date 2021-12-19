@@ -98,7 +98,7 @@ td {
     margin-bottom: 10px;
 }
 #myQuest, #myAnsw, #myScrap, #myLike{
-    min-width: 1080px;
+    min-width: 1250px;
     height: 300px;
     width: 100%;
     /*overflow-x: scroll;*/
@@ -132,7 +132,7 @@ td {
     text-overflow: ellipsis;
     height: 40px;
     white-space: normal;
-    line-height: 1.2;   /*줄간격*/
+    line-height: 1.3;   /*줄간격*/
     height: 2.5em;
     word-wrap: break-word; 
     display: -webkit-box; 
@@ -149,7 +149,7 @@ td {
     width: 233px;
     height: 140px;
     overflow: hidden;
-    line-height: 1.2;
+    line-height: 1.25;
     height:8.59em;
     word-wrap: break-word;
     display: -webkit-box;
