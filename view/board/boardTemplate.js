@@ -38,7 +38,6 @@ module.exports={
                 contents = JSON.parse(posts[i]?.content)
                 if(contents.code != '') ifCode = '<div class="withcode">코드 포함</div>';
                 if(contents.code == undefined) ifCode ='';
-                console.log(contents, ifCode);
             } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
