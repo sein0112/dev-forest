@@ -69,9 +69,10 @@ exports.read = function(request, response){
 exports.create = function (request, response){
     let data = request.params;
     data = {
-        nickname : request.session.nickname,
+        loginUserImage :request.session.image,
+        loginUserNickname : request.session.nickname,
         board_id : data.boardId,
-            ...data
+        ...data,
     }
     let html = qTemplate.question_create(data)
     response.writeHead(200)
