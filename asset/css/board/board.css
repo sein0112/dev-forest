@@ -140,7 +140,7 @@ td {
     margin-top: 100px;
     overflow: auto;
     border-radius: 13px;
-    box-shadow: 1px 0px 8px 1px rgba(68, 57, 57, 1);
+    box-shadow: 5px 5px 5px rgb(209, 209, 209);
     padding: 30px;
 }
 #hamburger_menu {
