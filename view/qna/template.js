@@ -142,7 +142,6 @@ module.exports = {
       },
       upsert : function (data , tpye){
           let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
-          console.log("333222222222222222222", typeMode)
           let html = '';
           if(data.contents?.code !==undefined && data.contents?.code !==null && data.contents.code !==''){
               html = `<div id="write-code-${typeMode}" class="codepen">
@@ -152,7 +151,7 @@ module.exports = {
                             style="overflow:hidden"
                             name="codeContent"
                             onfocus="adjustHeight(this);"
-                            onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
+                            onkeyup="adjustHeight(this);">${ tpye==="new" ? '' : data.contents.code.trim()}</textarea>
                 </div>`
           }else {
               html = `<div id="write-code-${typeMode}" class="codepen" style="display: none;">
@@ -524,11 +523,11 @@ module.exports = {
                   </div>
                 <div class="answer-info">
                     <div class="info-float info-img">
-                        <img id = "section_user_img" src="/uploads/${ans.image}">
+                        <img id = "section_user_img" src="/uploads/${ans.loginUserImage}">
                     </div>
                     <div class="info-float info-content">
                         <input id = "inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요">
-                        <span>${nickname}</span>
+                        <span>${ans.loginUserNickname}</span>
                     </div>        
                 </div>
                 <div class="answer-content">
