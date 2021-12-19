@@ -24,9 +24,8 @@ router.get('/board/:boardId', function(request, response) {
         WHERE board_id =? LIMIT 10';
     db.query(sql, [boardId], function(error, questions) {
         if(error) throw error;
-        console.log(questions);
         posttohtml = template.posts(questions);
-        response.send(template.container(boardName, usertohtml, posttohtml));
+        response.send(template.container(boardId, boardName, usertohtml, posttohtml));
     });
 });
 

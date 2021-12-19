@@ -1,3 +1,4 @@
+const db =  require('../../db.js');  
 module.exports={
     parseDate:function(date) {
         let result='';
@@ -31,14 +32,13 @@ module.exports={
     posts: function(posts) {
         let i = 0;
         let result ='';
-        let contents, ifCode;
+        let contents, ifCode, scrapNo;
         while (i < posts.length) {
             ifCode = '';
             try { //with code
                 contents = JSON.parse(posts[i]?.content)
                 if(contents.code != '') ifCode = '<div class="withcode">코드 포함</div>';
                 if(contents.code == undefined) ifCode ='';
-                console.log(contents, ifCode);
             } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
@@ -54,13 +54,18 @@ module.exports={
                 <div class="post_contents">
                     <P class="post_content">${contents.text}</P>
                 </div>
+                <div class="scraped">
+                    <img src="/asset/image/scrap_star.png" class="scrapstar">
+                    <p class="scrapedNo">0</p>
+                </div>
             </div>
             `;
+            
             i++;
         }
         return result;
     },
-    container: function(boardname, usertohtml, poststohtml) {
+    container: function(boardId, boardname, usertohtml, poststohtml) {
         return `
             <!DOCTYPE html>
             <head>
@@ -136,6 +141,20 @@ module.exports={
                         ${usertohtml}
                     </div>
                     <div id="boardInfo">
+                      <div class="btn-wrapper">
+                          <button id="answer_btn" class="withcode" 
+                          onClick="location.href='/qna/${boardId}/first/create'"
+                          style="
+                            cursor: pointer;
+                            margin: auto;
+                            display: block;
+                            width: 100px;
+                            height: 30px;
+                            color: #ffffff;
+                            background-color: #3F3F3F;
+                            border-radius: 12px;
+                            border-style: none;">질문 작성하기</button>
+                      </div>
                         게시판 > ${boardname}
                     </div>            
                     <div id="contents">
