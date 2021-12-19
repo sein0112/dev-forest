@@ -181,11 +181,15 @@ module.exports = {
                                 <li class="bigMenu"><a href="/">Home</a></li>
                             </div>
                             <div id="recentlyAsked">
-                                <img class="menu_icon" src="/image/chat.png">
+                                <img class="menu_icon" src="/image/mypage.png">
                                 <li class="bigMenu"><a href="/myPage">마이 페이지</a></li>
                             </div>
+                            <div id="postQuest">
+                                <img class="menu_icon" src="/image/ranking.png">
+                                <li class="bigMenu"><a href="/rank">랭킹</a></li>
+                            </div>
                             <div id="posts">
-                                <img class="menu_icon" src="/image/tag.png">
+                                <img class="menu_icon" src="/image/board.png">
                                 <li class="bigMenu"><a href="/board/1">게시판</a></li>
                                     <div id="tags">
                                         <a href="/board/1" class="left">javasript</a>

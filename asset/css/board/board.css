@@ -27,6 +27,7 @@ td {
 
 #contents, #boardInfo{
     margin-left: 400px;
+    min-width: 880px;
 }
 
 #boardInfo{
