@@ -2,23 +2,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Do+Hyeon&family=Jua&family=PT+Serif:wght@700&display=swap');
 
 
-body{
+.thisisrank > body{
     background-color: #E1E1E1;
     margin: 0;
     text-align: center;
     font-family: 'Jua', sans-serif;
 }
-a{
+.ranka{
     color: black;
     font-size: 24px;
     margin: 10px;
     text-decoration: none;
+    text-align: center;
+    font-family: 'Jua', sans-serif;
+
 }
 a:hover{
     color: gray;
 }
 .ranking-container{
-    margin: 20px;
     background-color: #ffffff;
     border-radius: 12px;
     height: 100%;
