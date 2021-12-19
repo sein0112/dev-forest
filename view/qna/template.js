@@ -19,7 +19,7 @@ module.exports = {
               </div>
               <div class="info-float-right">
                 <div class="add-codepen">
-                  <p id="codepen_btn">소스코드 추가하기</p>
+                  <p id="codepen_btn" class="codepen_btn">소스코드 추가하기</p>
                 </div>
               </div>
       
@@ -34,7 +34,7 @@ module.exports = {
                         onfocus="adjustHeight(this);"
                         onkeyup="adjustHeight(this);">${data.contents?.text?.trim()?? ''}</textarea>
               </div>
-                ${this.codeHtml.upsert(data)}
+                ${this.codeHtml.upsert(data, 'que')}
             </div>
             <div class="answer-info">
               <button class="small_btn info-float-right" style="cursor:pointer">완료</button>
@@ -140,10 +140,12 @@ module.exports = {
           }
           return html
       },
-      upsert : function (data){
+      upsert : function (data , tpye){
+          let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
+          console.log("333222222222222222222", typeMode)
           let html = '';
           if(data.contents?.code !==undefined && data.contents?.code !==null && data.contents.code !==''){
-              html = `<div id="write-code" class="codepen">
+              html = `<div id="write-code-${typeMode}" class="codepen">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
                             id = "textareaCodeContent"
@@ -153,7 +155,7 @@ module.exports = {
                             onkeyup="adjustHeight(this);">${data.contents.code.trim()}</textarea>
                 </div>`
           }else {
-              html = `<div id="write-code" class="codepen" style="display: none;">
+              html = `<div id="write-code-${typeMode}" class="codepen" style="display: none;">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
                             id = "textareaCodeContent"
@@ -305,6 +307,11 @@ module.exports = {
             document.getElementById('answer_btn').style.display = "none";
         };
         
+        function onClickAnsCodeBtn(data){
+            console.log(data)
+            document.getElementById('write-code-'+data).style.display="block";
+        }
+        
         $("#delete_btn").click(function() {
             let boardId = ${data.board_id}
             let questNo = ${data.no}
@@ -341,7 +348,11 @@ module.exports = {
         });
       
         $("#codepen_btn").click(function() {
-          $("#write-code").show();
+          $("#write-code-").show();
+        });
+        
+        $("#ans_c_codepen_btn").click(function() {
+            document.getElementById('write-code-new').style.display="block";
         });
       
         function adjustHeight(target) {
@@ -360,10 +371,6 @@ module.exports = {
               $("#write-answer-create").hide();
               $("#answer_btn").show();
               $(".option_write").hide();
-          });
-
-          $("#codepen_btn").click(function() {
-              $(".codepen").show();
           });
 
           $( 'button.hide1' ).click( function() {
@@ -414,7 +421,7 @@ module.exports = {
           });
         
           $("#codepen_btn").click(function() {
-            $("#write-code").show();
+              document.getElementById("write-code-").style.display = "block";
           });
         
           function adjustHeight(target) {
@@ -426,13 +433,28 @@ module.exports = {
 
   //답변글
     ansList: function(ans, quest_userId, userInfo_s, likeCnt , loginUserInfo) {
+        console.log("ansansansansansansansansansans", ans)
         var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
         var i = 0;
         while(i < ans.length) {
+
+            let contents
+            try {
+                contents = JSON.parse(ans[i]?.content)
+            } catch (e) {
+                contents = { text : ans[i]?.content}
+            }
+            ans[i] = { ...ans[i], contents}
+            console.log(ans[i])
             list += `
         <div class="answer-container mg20-left" id="ans_${ans[i].no}">
             <div class="write-answer" id="ans_w_${ans[i].no}" style="display: none; margin-bottom: 10px;">
                 <form action="/qna/ans_update_process" method="post">
+                      <div class="info-float-right">
+                        <div class="add-codepen">
+                          <p id="ans_codepen_btn" class="codepen_btn" onclick="onClickAnsCodeBtn(${ans[i].no})">소스코드 추가하기</p>
+                        </div>
+                      </div>
                     <div class="answer-info">
                         <div class="info-float info-img">
                             <img id="section_user_img" src="/uploads/제목을 입력해주세요_-002.png">
@@ -444,8 +466,9 @@ module.exports = {
                     </div>
                     <div class="answer-content">
                         <div class="content">
-                        <textarea id="inputContent" type="text" name="content" placeholder="내용을 입력하세요">${ans[i].content}</textarea>
+                        <textarea id="inputContent" type="text" name="content" placeholder="내용을 입력하세요">${ans[i].contents.text}</textarea>
                         </div>
+                        ${this.codeHtml.upsert(ans[i], 'ans')}
                     </div>
                     
                     <div class="answer-info">
@@ -483,8 +506,9 @@ module.exports = {
             </div>
             <div class="answer-content" id="ans_r_c_${ans[i].no}">
                 <div class="content">
-                    ${ans[i].content}
+                    ${ans[i].contents.text}
                 </div>
+                ${this.codeHtml.read(ans[i])}
             </div>
             </div>`;
           i = i+1;
@@ -495,6 +519,11 @@ module.exports = {
       return `
       <div class="write-answer" id="write-answer-create" style="display: none;">
             <form action="/qna/anscreate_process" method="post">
+                  <div class="info-float-right">
+                    <div class="add-codepen">
+                      <p id="ans_c_codepen_btn" class="codepen_btn">소스코드 추가하기</p>
+                    </div>
+                  </div>
                 <div class="answer-info">
                     <div class="info-float info-img">
                         <img id = "section_user_img" src="/uploads/${ans.image}">
@@ -508,6 +537,7 @@ module.exports = {
                     <div class="content">
                     <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
                     </div>
+                    ${this.codeHtml.upsert(ans, 'new')}
                 </div>
                 <input type="hidden" name="boardId" value="${ans?.board_id}">
                 <input type="hidden" name="questNo" value="${ans?.no}">

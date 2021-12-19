@@ -181,7 +181,10 @@ exports.scrap = function(request, response){
 //답변글
 exports.anscreate_process = function(request, response){
     var data = request.body;
-    console.log(data)
+    let content = {
+        text : data.content?.trim(),
+        code : data.codeContent?.trim(),
+    }
     let userId = request.session.userid;
     db.query(`SELECT MAX(no) as maxNo FROM answerstbl WHERE board_id=? AND quest_no=?`,[data.boardId, data.questNo], function(error2, maxNo){
         if(error2){
@@ -189,7 +192,7 @@ exports.anscreate_process = function(request, response){
         }
         db.query(`INSERT INTO answerstbl (board_id, quest_no, no, user_id, datetime, title, content)
                 VALUES(?, ?, ?, ?, NOW(), ?, ?)`,
-        [data.boardId, data.questNo, maxNo[0].maxNo+1, userId, data.title, data.content],
+        [data.boardId, data.questNo, maxNo[0].maxNo+1, userId, data.title, JSON.stringify(content)],
         function(error, result){
             if(error){
                 throw error;
@@ -221,7 +224,7 @@ exports.ans_update_process = function(request, response){
         code : data.codeContent?.trim(),
     }
     db.query('UPDATE answerstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND quest_no=?  AND no = ?',
-        [data.title.trim(), data.content, data.board_id, data.quest_no, data.no],
+        [data.title.trim(), JSON.stringify(content), data.board_id, data.quest_no, data.no],
         function(error, result){
             if(error){
                 throw error;
