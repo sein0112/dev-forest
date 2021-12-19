@@ -5,13 +5,21 @@ const db =  require('../../db.js');
 
 router.get('/board/:boardId', function(request, response) {
     // response.send(template.container());
+    let userinfo = request.session;
+    // console.log(userinfo);
+    // console.log(userinfo.nickname);
     let boardId = request.params.boardId;
-    let posttohtml;
-    console.log(request.params.boardId);
-    db.query('SELECT * FROM questionstbl WHERE board_id = ? LIMIT 10', [boardId], function(error, questions) {
+    let posttohtml, usertohtml;
+    usertohtml = template.nav(userinfo);
+    let sql = '\
+    SELECT board_id, no, datetime, nickname, title, content, image \
+    FROM questionstbl JOIN usertbl\
+    on usertbl.id = user_id\
+    WHERE board_id = ? LIMIT 5';
+    db.query(sql, [boardId], function(error, questions) {
         console.log(questions);
         posttohtml = template.posts(questions);
-        response.send(template.container(posttohtml));
+        response.send(template.container(usertohtml, posttohtml));
     });
 });
 

@@ -122,9 +122,12 @@ module.exports = {
         <div id="nav_userInfo">
             <img id="usrProfImg" src="/uploads/${data.loginUserImage}" style="background-color:white; cursor:pointer;" onclick="window.location='/myPage'">
             <p id="usrNname"><b>${data.loginUserNickname}</b></p>
-            <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
-        </div>
-        
+            <div id ="logoutform">
+                <form action='/login/logoutprocess' method='post'>
+                    <input type="submit" value="로그아웃" id="logout_btn" style="cursor: pointer;">
+                </form>
+            </div>
+        </div>        
   </div>`
   },
     codeHtml : {

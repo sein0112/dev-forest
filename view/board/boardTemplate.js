@@ -5,7 +5,29 @@ module.exports={
         result += datelist[3] + "/" + datelist[1] + "/" + datelist[2];
         return result;
     },
-
+    nav: function(userinfo) {
+        let result ='';
+        if (userinfo.authenticate == undefined || userinfo.authenticate == false) {//로그인
+            result = `
+            <div id="nav_userInfo">
+                <button id="logout_btn" style="cursor: pointer;" onclick="location.href='/login'">로그인</button>
+            </div>
+            `;
+        } else {
+            result = `
+            <div id="nav_userInfo">
+                <img id="usrProfImg" src="/uploads/${userinfo.image}" alt="userpng">
+                <p id="usrNname"><b>${userinfo.nickname}</b></p>
+                <div id ="logoutform">
+                    <form action='/login/logoutprocess' method='post'>
+                        <input type="submit" value="로그아웃" id="logout_btn" style="cursor: pointer;">
+                    </form>
+                </div>
+            </div>
+            `;
+        }
+        return result;
+    },
     posts: function(posts) {
         let i = 0;
         let result ='';
@@ -13,9 +35,9 @@ module.exports={
             result += `
             <div class="postss">
                 <div class="post_info">
-                    <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="../../uploads/${posts[i].image}" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="post_title"><p class="userPost_title">${posts[i].title}</p></div>
-                    <div class="post_writer">${posts[i].writer}</div>
+                    <div class="post_writer">${posts[i].nickname}</div>
                     <p class="post_time">${this.parseDate(posts[i].datetime)}</p>
                 </div>
                 <div class="post_contents">
@@ -27,7 +49,7 @@ module.exports={
         }
         return result;
     },
-    container: function(poststohtml) {
+    container: function(usertohtml, poststohtml) {
         return `
             <!DOCTYPE html>
             <head>
@@ -100,11 +122,7 @@ module.exports={
                                 <button id="search_btn" style="cursor:pointer;">search</button>
                             </form>
                         </div>
-                        <div id="nav_userInfo">
-                            <img id="usrProfImg" src="내사진.jpg" alt="userpng">
-                            <p id="usrNname"><b>정준서</b></p>
-                            <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
-                        </div>
+                        ${usertohtml}
                     </div>
                     <div id="boardInfo">
                         게시판 > Javascript
