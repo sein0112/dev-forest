@@ -11,7 +11,7 @@ exports.container = function(request, response) {
     let user;
     let userinfohtml, navhtml, questionshtml, myanswerquestshtml, myscraphtml, mylikehtml;
 
-    db.query('SELECT id, nickname, belong, image, name FROM usertbl JOIN gradetbl ON usertbl.level = gradetbl.level where usertbl.id=?', [userid], function(error, users) {
+    db.query('SELECT * FROM usertbl JOIN gradetbl ON usertbl.level = gradetbl.level where usertbl.id=?', [userid], function(error, users) {
         if(error) console.log(error);
         else{
             user = users[0];
