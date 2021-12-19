@@ -80,7 +80,7 @@ module.exports={
                                     </div>
                                     <div id="posts">
                                         <img class="menu_icon" src="/image/tag.png">
-                                        <li class="bigMenu"><a href="..">게시판</a></li>
+                                        <li class="bigMenu"><a href="/board/1">게시판</a></li>
                                         <div id="tags">
                                             <a href="/board/1" class="left">javasript</a>
                                             <a href="/board/2" class="right">ruby</a>
