@@ -12,6 +12,7 @@ module.exports={
         </head>
 
         <body class="login">
+        <center>
             <div class="container">
                 <div class="logo">
                     <img src="/image/forest.png" class="logo">
@@ -27,6 +28,7 @@ module.exports={
                     <input type="submit" value="로그인" class="submit_btn">
                 </form>
             </div>
+            </center>
         </body>
 
         </html>
