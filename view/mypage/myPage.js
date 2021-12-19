@@ -5,7 +5,8 @@ exports.container = function(request, response) {
     // let userid='abc@naver.com';
     let userid = request.session.userid;
     if (!request.session.userid) {
-        return response.redirect('/');
+        response.write('<script>alert("you need to sign in")</script>');
+        return response.write('<script>location.href="/";</script>');
     }
     let html;
     let user;

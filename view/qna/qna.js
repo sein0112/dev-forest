@@ -6,6 +6,10 @@ const sanitizeHtml = require('sanitize-html');
 const template = require("./ansTemplate.js");
 
 exports.read = function(request, response){
+    if (!request.session.userid) {
+        response.write('<script>alert("you need to sign in")</script>');
+        return response.write('<script>location.href="/";</script>');
+    }
     var _url = request.url;
     let boardId = request.params.boardId;
     let questionNo = request.params.questionNo;
@@ -75,6 +79,10 @@ exports.read = function(request, response){
 }
 
 exports.create = function (request, response){
+    if (!request.session.userid) {
+        response.write('<script>alert("you need to sign in")</script>');
+        return response.write('<script>location.href="/";</script>');
+    }
     let data = request.params;
 
     db.query(`SELECT name as board_name, id as board_id FROM boardtbl WHERE id=?`
