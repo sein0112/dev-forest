@@ -91,10 +91,11 @@ exports.create_process = function(request, response){
         if(error2){
             throw error2;
         }
-        db.query(`
-                    INSERT INTO questionstbl (board_id, no, datetime, updated_datetime, user_id, title, content)
-                    VALUES(?, ?, NOW(), NOW(), ?, ?, ?)`,
-            [data.boardId, maxNo[0].maxNo+1, userId, data.title, JSON.stringify(content)],
+        const timeSource = new Date();
+        let dateObj = new Date(timeSource);
+        db.query(`INSERT INTO questionstbl (board_id, no, datetime, updated_datetime, user_id, title, content)
+                    VALUES(?, ?, ?, ?, ?, ?, ?)`,
+            [data.boardId, maxNo[0].maxNo+1, dateObj, dateObj, userId, data.title, JSON.stringify(content)],
             function(error, result){
                 if(error){
                     throw error;
@@ -112,8 +113,10 @@ exports.update_process = function(request, response){
         text : data.content?.trim(),
         code : data.codeContent?.trim(),
     }
-    db.query('UPDATE questionstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND no = ?',
-        [data.title.trim(), JSON.stringify(content), data.boardId, data.questionNo],
+    const timeSource = new Date();
+    let dateObj = new Date(timeSource);
+    db.query('UPDATE questionstbl SET title=?, content=?, updated_datetime=? WHERE board_id = ? AND no = ?',
+        [data.title.trim(), JSON.stringify(content), dateObj, data.boardId, data.questionNo],
         function(error, result){
             if(error){
                 throw error;
@@ -151,11 +154,12 @@ exports.scrap = function(request, response){
         if (error) {
             throw error;
         }
-
+        const timeSource = new Date();
+        let dateObj = new Date(timeSource);
         if(scrap.length === 0){
             db.query(`INSERT INTO scraptbl (user_id, board_id, quest_no, datetime)
-                      VALUES(?, ?, ?, NOW())`,
-                [ userId, data.boardId, data.questNo],
+                      VALUES(?, ?, ?, ?)`,
+                [ userId, data.boardId, data.questNo, dateObj],
                 function(error2, result){
                     if(error2){
                         throw error2;
@@ -187,9 +191,11 @@ exports.anscreate_process = function(request, response){
         if(error2){
             throw error2;
         }
+        const timeSource = new Date();
+        let dateObj = new Date(timeSource);
         db.query(`INSERT INTO answerstbl (board_id, quest_no, no, user_id, datetime, title, content)
-                VALUES(?, ?, ?, ?, NOW(), ?, ?)`,
-        [data.boardId, data.questNo, maxNo[0].maxNo+1, userId, data.title, data.content],
+                VALUES(?, ?, ?, ?, ?, ?, ?)`,
+        [data.boardId, data.questNo, maxNo[0].maxNo+1, userId, dateObj, data.title, data.content],
         function(error, result){
             if(error){
                 throw error;
@@ -220,8 +226,10 @@ exports.ans_update_process = function(request, response){
         text : data.content?.trim(),
         code : data.codeContent?.trim(),
     }
-    db.query('UPDATE answerstbl SET title=?, content=?, updated_datetime=NOW() WHERE board_id = ? AND quest_no=?  AND no = ?',
-        [data.title.trim(), data.content, data.board_id, data.quest_no, data.no],
+    const timeSource = new Date();
+    let dateObj = new Date(timeSource);
+    db.query('UPDATE answerstbl SET title=?, content=?, updated_datetime=? WHERE board_id = ? AND quest_no=?  AND no = ?',
+        [data.title.trim(), data.content, dateObj, data.board_id, data.quest_no, data.no],
         function(error, result){
             if(error){
                 throw error;
@@ -256,11 +264,12 @@ exports.like = function(request, response){
         if (error) {
             throw error;
         }
-
+        const timeSource = new Date();
+        let dateObj = new Date(timeSource);
         if(like.length === 0){
             db.query(`INSERT INTO liketbl (user_id, board_id, quest_no, answ_no, datetime)
-                      VALUES(?, ?, ?, ?, NOW())`,
-                [userId, data.boardId, data.questNo, data.answNo],
+                      VALUES(?, ?, ?, ?, ?)`,
+                [userId, data.boardId, data.questNo, data.answNo, dateObj],
                 function(error2, result){
                     if(error2){
                         throw error2;
