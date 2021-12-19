@@ -55,7 +55,7 @@ module.exports = {
               <link rel="stylesheet" type="text/css" href="/css/qna/qna.css">
             </head>`
   },
-  nav : function (nickname){
+  nav : function (data){
     return `<div id="nav">
         <div id="menu">
             <img id="menuicon" src="/image/hamburgerbar2.png" alt="menu" onclick="menuClick()" style="cursor: pointer;">
