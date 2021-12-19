@@ -22,7 +22,7 @@ module.exports = {
                        style="width: 100%;"
                        type="text"
                        name="title"
-                       value="${data.title ?? ''}"
+                       value="${data.title ? data.title : ''}"
                        placeholder="질문 제목을 입력하세요">
               </div>
               <div class="info-float-right">
@@ -40,7 +40,7 @@ module.exports = {
                         style="overflow:hidden"
                         name="content"
                         onfocus="adjustHeight(this);"
-                        onkeyup="adjustHeight(this);">${data.contents.text.trim()?? ''}</textarea>
+                        onkeyup="adjustHeight(this);">${data.contents? data.contents.text : ''}</textarea>
               </div>
                 ${this.codeHtml.upsert(data, 'que')}
             </div>
@@ -154,7 +154,7 @@ module.exports = {
       upsert : function (data , tpye){
           let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
           let html = '';
-          if(data.contents.code !==undefined && data.contents.code !==null && data.contents.code !==''){
+          if(data.contents?.code !==undefined && data.contents?.code !==null && data.contents.code !==''){
               html = `<div id="write-code-${typeMode}" class="codepen">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
