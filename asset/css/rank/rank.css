@@ -22,6 +22,7 @@ a:hover{
     background-color: #ffffff;
     border-radius: 12px;
     height: 100%;
+    padding: 30px;
 }
 .top-rankers{
     margin-top: 80px;
@@ -122,4 +123,10 @@ a:hover{
 }
 #show_rank:hover{
     color: gray;
+}
+#hr{
+    margin-top:20px;
+}
+#belongRank{
+    padding-top: 30px;
 }

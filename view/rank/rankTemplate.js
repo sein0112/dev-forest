@@ -91,6 +91,8 @@ module.exports = {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>개발자의 숲</title>
             <link href="css/rank/rank.css" rel="stylesheet">
+            <link href="css/myPage/myPage.css" rel="stylesheet">
+            <link href="css/nav.css" rel="stylesheet">
             
         </head>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
@@ -105,9 +107,11 @@ module.exports = {
                 <div class="ranking-container">
                     <a>개인랭킹</a>
                     ${this.userRankList(userRnak)}
-                    <hr>
-                    <a>단체랭킹</a>
-                    ${this.groupRankList(groupRank)}
+                    <hr id="hr">
+                    <div id="belongRank">
+                        <a>단체랭킹</a>
+                        ${this.groupRankList(groupRank)}
+                    </div>
                 </div>
         </body>
         
