@@ -22,11 +22,19 @@ router.post('/loginprocess', function(request, response){
                 return response.write("<script>window.location='/login'</script>");
             }
             else{
+<<<<<<< HEAD
                 request.session.authenticate = true;
                 request.session.userid = id;
                 request.session.nickname = user[0].nickname;
-                console.log(request.session);
+                request.session.image = user[0].image;
                 response.redirect("/myPage");
+=======
+                response.write("<script>alert('login success')</script>");
+                request.session.authenticate = true;
+                request.session.userid = id;
+                console.log(request.session);
+                return response.write("<script>window.location='/myPage'</script>");
+>>>>>>> dev_jieun
             }
 
         }

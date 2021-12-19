@@ -23,6 +23,7 @@ router.post('/scrap_process', function(request, response){
     qna.scrap(request, response);
 });
 
+<<<<<<< HEAD
 router.post('/delete_process', function(request, response){
     qna.delete_process(request, response);
 });
@@ -43,4 +44,6 @@ router.post('/adoption_process', function(request, response){
     qna.adoption(request, response);
 });
 
+=======
+>>>>>>> dev_jieun
 module.exports = router;
