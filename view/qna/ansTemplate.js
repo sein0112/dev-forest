@@ -1,19 +1,11 @@
 module.exports = {
-<<<<<<< HEAD
     ansList: function(ans) {
         var list =[];
         var LikeCnt  = 0;
         var i = 0;
         while(i < ans.length) {           
             list += `
-=======
 
-    ansList: function(ans) {
-        var list;
-        var i = 0;
-        while(i < ans.length) {
-            list = `
->>>>>>> dev_jieun
         <div class="answer-container">
             <div class="answer-info">
                 <div class="info-float info-img">
@@ -21,7 +13,6 @@ module.exports = {
                 </div>
                 <div class="info-float info-content">
                     <h4>${ans[i].title}</h4>
-<<<<<<< HEAD
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
                 <div class="info-float-right">
@@ -32,18 +23,7 @@ module.exports = {
                     </div>
                     <div class="like_num">
                         <p id=like_numbers>${ LikeCnt }</p>
-=======
-                    <span>${ans[i].id}</span> | <span>${ans[i].datetime}</span>
-                </div>
-                <div class="info-float-right">
-                    <div class="like_img">
-                    <div id="like_btn">
-                        <img id="answer_like" src="image/favorite_border_black_24dp.svg"/>
-                    </div>
-                    </div>
-                    <div class="like_num">
-                        <p id=like_numbers>${ans[i].adoption}</p>
->>>>>>> dev_jieun
+
                     </div>
                 </div>
             </div>
@@ -76,51 +56,10 @@ module.exports = {
             <link href="css/qna/qna.css" rel="stylesheet">
         </head>
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-<<<<<<< HEAD
-=======
-        <script>
-            $(document).ready(function() {
-                $("#answer_btn").click(function() {
-                    $(".write-answer").show();
-                    $(".option_write").show();
-                    $("#answer_btn").hide();
-                });
-
-                $("#cancle_btn").click(function() {
-                    $(".write-answer").hide();
-                    $("#answer_btn").show();
-                    $(".option_write").hide();
-                });
-
-                $("#codepen_btn").click(function() {
-                    $(".codepen").show();
-                });
-
-                $( 'button.hide1' ).click( function() {
-                $( '.box1' ).hide();
-                } );
-
-                $("#answer_like").click(function() {
-                    const cnt = 0;
-                    if($('#answer_like').attr('src') ==="image/favorite_border_black_24dp.svg"){
-                        $('#answer_like').attr('src','image/favorite_black_24dp.svg'); 
-                        cnt++;
-                        $('#like_numbers').text(cnt);
-                    } else{
-                        $('#answer_like').attr('src','image/favorite_border_black_24dp.svg'); 
-                        cnt--;
-                        $('#like_numbers').text(cnt);
-                    }              
-                });
-            });
-        </script>
->>>>>>> dev_jieun
         <body>
             <h5 class="count-answer">${ans.length}개의 답변이 있습니다.</h5>
             ${this.ansList(ans)}
         </body>
-
-<<<<<<< HEAD
         </html>
         <script>
             function onClickLike(boardId, questNo, answNo, userId){
@@ -182,8 +121,5 @@ module.exports = {
                 });
             });
         </script>`
-=======
-        </html>`
->>>>>>> dev_jieun
     }
 }
