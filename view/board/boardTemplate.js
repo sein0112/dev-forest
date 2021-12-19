@@ -47,7 +47,7 @@ module.exports={
             <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
                     <img src="../../uploads/${posts[i].image}" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
-                    <div class="post_title"><p class="userPost_title">${posts[i].title}</p></div>
+                    <div class="post_title"><h4 style="padding-top: 10px">${posts[i].title}</h4></div>
                     ${ifCode}
                     <div class="post_writer">${posts[i].nickname}</div>
                     <p class="post_time">${this.parseDate(posts[i].datetime)}</p>

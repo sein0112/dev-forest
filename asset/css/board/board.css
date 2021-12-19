@@ -73,10 +73,8 @@ td {
     white-space:nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    height: 40px;
     white-space: normal;
     line-height: 1.2;   /*줄간격*/
-    height: 2.5em;
     word-wrap: break-word; 
     display: -webkit-box; 
     -webkit-line-clamp: 2;  /*보여줄 줄 개수*/
@@ -106,7 +104,7 @@ td {
     width:fit-content;
     background-color:#A1A1A1;
     padding:2px;
-    border-radius:12px;
+    border-radius:8px;
 }
 
 .post_content{
