@@ -25,7 +25,7 @@ router.get('/board/:boardId', function(request, response) {
     db.query(sql, [boardId], function(error, questions) {
         if(error) throw error;
         posttohtml = template.posts(questions);
-        response.send(template.container(boardName, usertohtml, posttohtml));
+        response.send(template.container(boardId, boardName, usertohtml, posttohtml));
     });
 });
 
