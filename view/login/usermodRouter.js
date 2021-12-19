@@ -1,7 +1,6 @@
 const express = require('express');
 const router  = express.Router();
 const template = require('./usermodTemplate.js');
-<<<<<<< HEAD
 const db =  require('../../db.js');
 
 var multer = require('multer'); // multer모듈 적용 (for 파일업로드)
@@ -16,9 +15,7 @@ var storage = multer.diskStorage({
     }
 })
 var upload = multer({ storage: storage })
-=======
-const db =  require('../../db.js');  
->>>>>>> dev_jieun
+
 
 router.get('/', function(request, response) {
     // console.log(request.session);
@@ -26,7 +23,6 @@ router.get('/', function(request, response) {
         return response.redirect('/login'); 
     };
     let userid = request.session.userid;
-<<<<<<< HEAD
     db.query(`SELECT * FROM usertbl WHERE id=?`, [userid], function(error, userinfo) {
         let user_nickname = userinfo[0].nickname;
         let user_belong = userinfo[0].belong;
@@ -36,26 +32,15 @@ router.get('/', function(request, response) {
 });
 
 router.post('/modprocess', upload.single('click_image'), function(request, response){
-=======
-    db.query(`SELECT nickname, belong FROM usertbl WHERE id=?`, [userid], function(error, userinfo) {
-        let user_nickname = userinfo[0].nickname;
-        let user_belong = userinfo[0].belong;
-        return response.send(template.container(userid, user_nickname, user_belong));
-    });
-});
 
-router.post('/modprocess', function(request, response){
->>>>>>> dev_jieun
     let userid = request.session.userid;
     let nickname = request.body.user_nickname; 
     let belong = request.body.user_belong;
     let currentpwd = request.body.user_current_pwd;
     let newpwd = request.body.user_new_pwd;
     let newpwdcheck = request.body.user_pwcheck;
-<<<<<<< HEAD
     let filename = request.file?.filename ?? ''
-=======
->>>>>>> dev_jieun
+
     if (newpwd !== newpwdcheck) {   
         response.write("<script>alert('passwords not same.')</script>");
         return response.write("<script>window.location='/modify'</script>");
@@ -66,11 +51,8 @@ router.post('/modprocess', function(request, response){
             response.write("<script>alert('not correct password')</script>");
             return response.write("<script>window.location='/modify'</script>");
         } else {
-<<<<<<< HEAD
             db.query(`UPDATE usertbl SET nickname=?, image=?, password=?, belong=? WHERE id = ? `, [nickname, filename, newpwd, belong, userid], function(error, result) {
-=======
-            db.query(`UPDATE usertbl SET nickname=?, password=?, belong=? WHERE id=?;`, [nickname, newpwd, belong, userid], function(error, result) {
->>>>>>> dev_jieun
+
                 if (error) {    //수정 실패
                     console.log(error); 
                     response.write("<script>alert('error')</script>"); 

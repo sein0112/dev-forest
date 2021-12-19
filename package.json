@@ -15,10 +15,8 @@
     "express-mysql-session": "^2.1.7",
     "express-session": "^1.17.2",
     "module": "^1.2.5",
-<<<<<<< HEAD
     "multer": "^1.4.4",
-=======
->>>>>>> dev_jieun
+
     "mysql": "^2.18.1",
     "sanitize-html": "^2.5.3"
   }
