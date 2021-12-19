@@ -1,6 +1,5 @@
 var http = require('http');
 var url = require('url');
-var answer = require('./view/qna/answer.js');
 var qna = require('./view/qna/qna.js');
 var myPage = require('./view/mypage/myPage.js');
 var rank = require('./view/rank/rank.js');
