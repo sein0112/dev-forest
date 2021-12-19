@@ -153,8 +153,10 @@ module.exports = {
       },
       upsert : function (data , tpye){
           let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
+          let temp = {code : ''}
+          data.contents = { ...temp}
           let html = '';
-          if(data.contents?.code !==undefined && data.contents?.code !==null && data.contents.code !==''){
+          if(data.contents.code !==undefined && data.contents.code !==null && data.contents.code !==''){
               html = `<div id="write-code-${typeMode}" class="codepen">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
