@@ -333,8 +333,7 @@ module.exports = {
                     dataType: "json" 
                 })
                 .done(function(data) {
-                    // 나중에 목록으로 돌아가게경로 변경
-                    window.location = '/myPage';
+                    window.location = '/board/'+boardId;
                 })
                 .fail(function(xhr, status, errorThrown) {
                     console.log("error >>>>>>>>>> ",errorThrown)
