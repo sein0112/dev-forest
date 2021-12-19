@@ -136,7 +136,10 @@ module.exports = {
                 </form>
             </div>
         </div>        
-  </div>`
+  </div>
+  <div style="margin-bottom: 10px;">
+        <span style="cursor: pointer" onclick="window.location='/board/${data.board_id}'">게시판 -> ${data.board_name}<span>
+  </div>   `
   },
     codeHtml : {
       read : function (data){

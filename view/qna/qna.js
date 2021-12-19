@@ -9,7 +9,7 @@ exports.read = function(request, response){
     var _url = request.url;
     let boardId = request.params.boardId;
     let questionNo = request.params.questionNo;
-    db.query(`SELECT board_id, no, datetime, updated_datetime, user_id, title, content, u.nickname, u.image FROM questionstbl left JOIN usertbl u on questionstbl.user_id = u.id where board_id = ? AND no = ?`,[boardId, questionNo], function(error, question){
+    db.query(`SELECT board_id, no, datetime, updated_datetime, user_id, title, content, u.nickname, u.image, b.name as board_name FROM questionstbl left JOIN usertbl u on questionstbl.user_id = u.id left join boardtbl b on questionstbl.board_id = b.id where board_id = ? AND no = ?`,[boardId, questionNo], function(error, question){
         if(error){
             throw error;
         }
@@ -61,8 +61,6 @@ exports.read = function(request, response){
                                     loginUserImage,
                                     userinfo:userinfo,
                                 }
-
-                                // console.log(data)
                                 let writer = request.session.userid === data.user_id
                                 let html = qTemplate.question_read(data, writer);
                                 response.writeHead(200);
@@ -78,15 +76,25 @@ exports.read = function(request, response){
 
 exports.create = function (request, response){
     let data = request.params;
-    data = {
-        loginUserImage :request.session.image,
-        loginUserNickname : request.session.nickname,
-        board_id : data.boardId,
-        ...data,
-    }
-    let html = qTemplate.question_create(data)
-    response.writeHead(200)
-    response.end(html);
+
+    db.query(`SELECT name as board_name, id as board_id FROM boardtbl WHERE id=?`
+        ,[data.boardId],
+        function(error, board){
+            if(error){
+                throw error;
+            }
+            data = {
+                loginUserImage :request.session.image,
+                loginUserNickname : request.session.nickname,
+                board_id : data.boardId,
+                ...data,
+                ...board[0]
+            }
+            let html = qTemplate.question_create(data)
+            response.writeHead(200)
+            response.end(html);
+        })
+
 }
 
 exports.create_process = function(request, response){
