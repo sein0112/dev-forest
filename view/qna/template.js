@@ -204,7 +204,7 @@ module.exports = {
         </div>
         ${writer? this.writeHtml(`/qna/${data.board_id}/${data.no}/update_process`, data, 'none'): ''}
         </div>
-          ${this.ansList(data.answer, data.user_id, data.userinfo[0], 0)}
+          ${this.ansList(data.answer, data.user_id, data.userinfo[0], 0, writer)}
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
           </div>
@@ -274,6 +274,32 @@ module.exports = {
           })
       };
         
+        function onClickDeleteAns(board_id ,quest_no ,no) {
+            if(confirm('정말 삭제하시겠습니까?')){
+                $.ajax({
+                    url: "/qna/ans_delete_process",
+                    data: { board_id, quest_no, no},
+                    method: "post", 
+                    dataType: "json" 
+                })
+                .done(function(data) {
+                    window.location = '/qna/'+board_id+'/'+quest_no;
+                })
+                .fail(function(xhr, status, errorThrown) {
+                    console.log("error >>>>>>>>>> ",errorThrown)
+                })
+            }
+        };
+        
+        function onClickUpdateAns(board_id ,quest_no ,no) {
+           
+            document.getElementById('ans_w_'+no).style.display = "block";
+            document.getElementById('ans_w_'+no).style.border = "2px solid #141414";
+            document.getElementById('ans_r_'+no).style.display = "none";
+            document.getElementById('ans_r_c_'+no).style.display = "none";
+            document.getElementById('answer_btn').style.display = "none";
+        };
+        
         $("#delete_btn").click(function() {
             let boardId = ${data.board_id}
             let questNo = ${data.no}
@@ -320,13 +346,13 @@ module.exports = {
       
       $(document).ready(function() {
           $("#answer_btn").click(function() {
-              $(".write-answer").show();
+              $("#write-answer-create").show();
               $(".option_write").show();
               $("#answer_btn").hide();
           });
 
           $("#cancle_btn").click(function() {
-              $(".write-answer").hide();
+              $("#write-answer-create").hide();
               $("#answer_btn").show();
               $(".option_write").hide();
           });
@@ -412,8 +438,33 @@ module.exports = {
         var i = 0;
         while(i < ans.length) {
             list += `
-        <div class="answer-container mg20-left">
-            <div class="answer-info">
+        <div class="answer-container mg20-left" id="ans_${ans[i].no}">
+            <div class="write-answer" id="ans_w_${ans[i].no}" style="display: none; margin-bottom: 10px;">
+                <form action="/qna/ans_update_process" method="post">
+                    <div class="answer-info">
+                        <div class="info-float info-img">
+                            <img id="section_user_img" src="/uploads/제목을 입력해주세요_-002.png">
+                        </div>
+                        <div class="info-float info-content">
+                            <input id="inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요" value="${ans[i].title}">
+                            <span>수룡이</span>
+                        </div>        
+                    </div>
+                    <div class="answer-content">
+                        <div class="content">
+                        <textarea id="inputContent" type="text" name="content" placeholder="내용을 입력하세요">${ans[i].content}</textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="answer-info">
+                    <input id="store_btn" type="submit" value="저장">
+                    </div>
+                    <input type="hidden" name="board_id" value="${ans[i].board_id}">
+                    <input type="hidden" name="quest_no" value="${ans[i].quest_no}">
+                    <input type="hidden" name="no" value="${ans[i].no}"">
+                </form>
+            </div>
+            <div class="answer-info" id="ans_r_${ans[i].no}">
                 <div class="info-float info-img">
                     <img id = "section_user_img" src="/uploads/${ans[i].image}">
                 </div>
@@ -421,6 +472,9 @@ module.exports = {
                     <h4>${ans[i].title}</h4>
                     <span>${ans[i].nickname}</span> | <span>${ans[i].datetime}</span>
                 </div>
+                ${ans[i].user_id ===quest_userId && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
+                ${ans[i].user_id ===quest_userId? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}
+          
                 <div class="adoption_container ${ans[i].no}">
                 ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, userInfo.id)}
                 </div>
@@ -435,7 +489,7 @@ module.exports = {
                     </div>
                 </div>
             </div>
-            <div class="answer-content">
+            <div class="answer-content" id="ans_r_c_${ans[i].no}">
                 <div class="content">
                     ${ans[i].content}
                 </div>
@@ -447,7 +501,7 @@ module.exports = {
     },
     answer_create : function (ans, nickname){
       return `
-      <div class="write-answer" style="display: none;">
+      <div class="write-answer" id="write-answer-create" style="display: none;">
             <form action="/qna/anscreate_process" method="post">
                 <div class="answer-info">
                     <div class="info-float info-img">
