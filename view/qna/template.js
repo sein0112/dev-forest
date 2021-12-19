@@ -64,7 +64,7 @@ module.exports = {
                 <ul id="hamburger_menu">
                     <div id="toHome" style="cursor:pointer;" onclick="location.href='../mainPage.html'">
                         <img class="menu_icon" src="/image/home.png">
-                        <li class="bigMenu"><a href="../..">Home</a></li>
+                        <li class="bigMenu"><a href="/">Home</a></li>
                     </div>
                     <div id="recentlyAsked">
                         <img class="menu_icon" src="/image/chat.png">
@@ -76,36 +76,36 @@ module.exports = {
                     </div>
                     <div id="posts">
                         <img class="menu_icon" src="/image/tag.png">
-                        <li class="bigMenu"><a href="../..">게시판</a></li>
+                        <li class="bigMenu"><a href="/board/1">게시판</a></li>
                         <div id="tags">
-                            <a href="../.." class="left">javasript</a>
-                            <a href="../.." class="right">ruby</a>
-                            <a href="../.." class="left">python</a>
-                            <a href="../.." class="right">swift</a>
-                            <a href="../.." class="left">java</a>
-                            <a href="../.." class="right">arrays</a>
-                            <a href="../.." class="left">php</a>
-                            <a href="../.." class="right">c</a>
-                            <a href="../.." class="left">android</a>
-                            <a href="../.." class="right">asp.net</a>
-                            <a href="../.." class="left">html</a>
-                            <a href="../.." class="right">.net</a>
-                            <a href="../.." class="left">jquery</a>
-                            <a href="../.." class="right">sql</a>
-                            <a href="../.." class="left">css</a>
-                            <a href="../.." class="right">r</a>
-                            <a href="../.." class="left">mysql</a>
-                            <a href="../.." class="right">sql-server</a>
-                            <a href="../.." class="left">c++</a>
-                            <a href="../.." class="right">swift</a>
-                            <a href="../.." class="left">reactjs</a>
-                            <a href="../.." class="right">ajax</a>
-                            <a href="../.." class="left">ios</a>
-                            <a href="../.." class="right">pandas</a>
-                            <a href="../.." class="left">node.js</a>
-                            <a href="../.." class="right">linux</a>
-                            <a href="../.." class="left">django</a>
-                            <a href="../.." class="right">angularjs</a>
+                          <a href="/board/1" class="left">javasript</a>
+                          <a href="/board/2" class="right">ruby</a>
+                          <a href="/board/3" class="left">python</a>
+                          <a href="/board/4" class="right">swift</a>
+                          <a href="/board/5" class="left">java</a>
+                          <a href="/board/6" class="right">arrays</a>
+                          <a href="/board/7" class="left">php</a>
+                          <a href="/board/8" class="right">c</a>
+                          <a href="/board/9" class="left">android</a>
+                          <a href="/board/10" class="right">asp.net</a>
+                          <a href="/board/11" class="left">html</a>
+                          <a href="/board/12" class="right">.net</a>
+                          <a href="/board/13" class="left">jquery</a>
+                          <a href="/board/14" class="right">sql</a>
+                          <a href="/board/15" class="left">css</a>
+                          <a href="/board/16" class="right">r</a>
+                          <a href="/board/17" class="left">mysql</a>
+                          <a href="/board/18" class="right">sql-server</a>
+                          <a href="/board/19" class="left">c++</a>
+                          <a href="/board/20" class="right">swift</a>
+                          <a href="/board/21" class="left">reactjs</a>
+                          <a href="/board/22" class="right">ajax</a>
+                          <a href="/board/23" class="left">ios</a>
+                          <a href="/board/24" class="right">pandas</a>
+                          <a href="/board/25" class="left">node.js</a>
+                          <a href="/board/26" class="right">linux</a>
+                          <a href="/board/27" class="left">django</a>
+                          <a href="/board/28" class="right">angularjs</a>
                         </div>
                     </div>
                 </ul>                        
@@ -122,9 +122,12 @@ module.exports = {
         <div id="nav_userInfo">
             <img id="usrProfImg" src="/uploads/${data.loginUserImage}" style="background-color:white; cursor:pointer;" onclick="window.location='/myPage'">
             <p id="usrNname"><b>${data.loginUserNickname}</b></p>
-            <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
-        </div>
-        
+            <div id ="logoutform">
+                <form action='/login/logoutprocess' method='post'>
+                    <input type="submit" value="로그아웃" id="logout_btn" style="cursor: pointer;">
+                </form>
+            </div>
+        </div>        
   </div>`
   },
     codeHtml : {
@@ -208,7 +211,7 @@ module.exports = {
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
           </div>
-          ${this.answer_create(data.answer, data.userinfo[0].nickname)}
+          ${this.answer_create(data, data.userinfo[0].nickname)}
       </body>
       
       </html>
@@ -404,7 +407,7 @@ module.exports = {
             <div class="answer-container mg20-left">
             <div class="answer-info">
                 <div class="info-float info-img">
-                    <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                    <img id = "section_user_img" src="/uploads/${ans[i].image}">
                 </div>
                 <div class="info-float info-content">
                     <h4>${ans[i].title}</h4>
@@ -435,17 +438,16 @@ module.exports = {
         return list;
     },
     answer_create : function (ans, nickname){
-      var today = new Date();
       return `
       <div class="write-answer" style="display: none;">
             <form action="/qna/anscreate_process" method="post">
                 <div class="answer-info">
                     <div class="info-float info-img">
-                        <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                        <img id = "section_user_img" src="/uploads/${ans.image}">
                     </div>
                     <div class="info-float info-content">
                         <input id = "inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요">
-                        <span>${nickname}</span> | <span>${today}</span>
+                        <span>${nickname}</span>
                     </div>        
                 </div>
                 <div class="answer-content">
@@ -453,9 +455,8 @@ module.exports = {
                     <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
                     </div>
                 </div>
-                <input type="hidden" name="boardId" value="${ans[0]?.board_id}">
-                <input type="hidden" name="questNo" value="${ans[0]?.quest_no}">
-                <input type="hidden" name="datetime" value="${ans[0]?.datetime}">
+                <input type="hidden" name="boardId" value="${ans?.board_id}">
+                <input type="hidden" name="questNo" value="${ans?.no}">
                 <input id="store_btn" type="submit" value="저장">
             </form>
         </div>
