@@ -34,11 +34,12 @@
             </div>
             <div id="search">
                 <p id="search_text"><b>질문을 검색해보세요</b></p>
-                <form action="/">
-                    <input id="search_query" type="text">
-                    <button id="search_btn" style="cursor: pointer">search</button>
+                <form action="/search">
+                    <input id="search_query" name="search_query" type="text">
+                    <input type="submit" id="search_btn" value="search" class="submit_btn" style="cursor:pointer;">
                 </form>
             </div>
+
             <div id="latelyAsked">
                 <button id="latelyQ_btn" style="cursor: pointer;"><u>최근 질문 둘러보기</u></button>
             </div>

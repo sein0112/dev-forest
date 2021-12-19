@@ -91,7 +91,7 @@ module.exports = {
             result += `
             <div class="myAnswPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
                 <div id="myAnswPost_info">
-                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;" >
+                    <img src="/uploads/${questions[i].image}" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;" >
                     <div class="myAnswPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myAnswPost_writer">${questions[i].nickname}</div>
                     <p class="myAnswPost_time">${this.parseDate(questions[i].datetime)}</p>
@@ -122,7 +122,7 @@ module.exports = {
             result += `
                 <div class="myScrapPost" style="cursor: pointer;" onclick="onClickQna(${questions[i].board_id}, ${questions[i].quest_no})">
                 <div id="myScrapPost_info">
-                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="/uploads/${questions[i].image}" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myScrapPost_title"><p class="userPost_title">${questions[i].title}</p></div>
                     <div class="myScrapPost_writer">${questions[i].nickname}</div>
                     <p class="myScrapPost_time">${this.parseDate(questions[i].datetime)}</p>
@@ -145,7 +145,7 @@ module.exports = {
             result += `
             <div class="myLikePost" style="cursor: pointer;" onclick="onClickQna(${answers[i].board_id}, ${answers[i].quest_no})">
                 <div id="myLikePost_info">
-                    <img src="내사진.jpg" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
+                    <img src="/uploads/${answers[i].image}" alter="image" style="background-color:white; float: left; border-radius:30%; width:60px; height:60px;">
                     <div class="myLikePost_title"><p class="userPost_title">${answers[i].title}</p></div>
                     <div class="myLikePost_writer">${answers[i].nickname}</div>
                     <p class="myLikePost_time">${this.parseDate(answers[i].datetime)}</p>
