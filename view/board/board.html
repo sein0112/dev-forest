@@ -1,8 +1,8 @@
 <!DOCTYPE html>
     <head>
         <meta charset="utf-8">
-        <title>마이페이지</title>
-        <link rel="stylesheet" href="../../asset/css/mypage/myPage.css">
+        <title>게시판</title>
+        <link rel="stylesheet" href="../../asset/css/board/board.css">
         <link rel="stylesheet" href="../../asset/css/nav.css">
     </head>
     <body>
@@ -74,9 +74,36 @@
                     <button id="logout_btn" style="cursor: pointer;" onclick="location.href='mainPage.html'">로그아웃</button>
                 </div>
             </div>
+            <div id="boardInfo">
+                게시판 > Javascript
+            </div>            
             <div id="contents">
+                <div class="postss">
+                    <div class="post_info">
+                        <img src="내사진.jpg" alter="image" style="float: left; border-radius:30%; width:60px; height:60px;">
+                        <div class="post_title"><p class="userPost_title">내가 즐겨찾기한 글입니다</p></div>
+                        <div class="post_writer">작성자작성자wkd</div>
+                        <p class="post_time">2021/11/11</p>
+                    </div>
+                    <div class="post_contents">
+                        <P class="post_content">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Corporis voluptas nulla, libero, tempora debitis nihil laboriosam beatae placeat nostrum illum eveniet quis reiciendis quaerat necessitatibus, expedita harum odio minima et?</P>
+                    </div>
+                </div>
 
             </div>
         </div>
     </body>
+    <script>
+        function menuClick(){
+            var toggle = document.getElementById('menuList').style.visibility;
+            if (toggle === 'hidden'){
+                document.getElementById('menuList').style.visibility = 'visible';
+                document.getElementById('menuiconX').style.visibility = 'visible';
+            }
+            else{
+                document.getElementById('menuList').style.visibility = 'hidden';
+                document.getElementById('menuiconX').style.visibility = 'hidden';
+            }
+        }
+    </script>
 </html>

@@ -6,6 +6,7 @@ var myPage = require('./view/mypage/myPage.js')
 var rank = require('./view/rank/rank.js');
 var loginRoutes = require('./view/login/loginRouter.js');
 var boardRoutes = require('./view/board/boardRouter.js');
+var searchRoutes = require('./view/board/searchRouter.js');
 var modRoutes = require('./view/login/usermodRouter.js');
 var registerRoutes = require('./view/login/registerRouter.js');
 var qnaRoutes = require('./view/qna/qnaRouter.js');
@@ -55,6 +56,7 @@ app.use('/rank', function(request, response){
 });
 
 app.get('/board/:boardId', boardRoutes);
+app.get('/search', searchRoutes);
 
 app.use('/uploads', express.static('uploads'));
 
