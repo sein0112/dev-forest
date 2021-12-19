@@ -208,7 +208,7 @@ module.exports = {
           <div class="btn-wrapper">
               <button id="answer_btn">답변 작성하기</button>
           </div>
-          ${this.answer_create(data.answer, data.nickname)}
+          ${this.answer_create(data, data.nickname)}
       </body>
       
       </html>
@@ -415,7 +415,7 @@ module.exports = {
         <div class="answer-container mg20-left">
             <div class="answer-info">
                 <div class="info-float info-img">
-                    <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                    <img id = "section_user_img" src="/uploads/${ans[i].image}">
                 </div>
                 <div class="info-float info-content">
                     <h4>${ans[i].title}</h4>
@@ -446,17 +446,16 @@ module.exports = {
         return list;
     },
     answer_create : function (ans, nickname){
-      var today = new Date();
       return `
       <div class="write-answer" style="display: none;">
             <form action="/qna/anscreate_process" method="post">
                 <div class="answer-info">
                     <div class="info-float info-img">
-                        <img id = "section_user_img" src="image/water-839590_1920.jpg">
+                        <img id = "section_user_img" src="/uploads/${ans.image}">
                     </div>
                     <div class="info-float info-content">
                         <input id = "inputTitle" type="text" name="title" placeholder="답변 제목을 입력하세요">
-                        <span>${nickname}</span> | <span>${today}</span>
+                        <span>${nickname}</span>
                     </div>        
                 </div>
                 <div class="answer-content">
@@ -464,9 +463,8 @@ module.exports = {
                     <textarea id = "inputContent" type="text" name="content" placeholder="내용을 입력하세요"></textarea>
                     </div>
                 </div>
-                <input type="hidden" name="boardId" value="${ans[0]?.board_id}">
-                <input type="hidden" name="questNo" value="${ans[0]?.quest_no}">
-                <input type="hidden" name="datetime" value="${ans[0]?.datetime}">
+                <input type="hidden" name="boardId" value="${ans?.board_id}">
+                <input type="hidden" name="questNo" value="${ans?.no}">
                 <input id="store_btn" type="submit" value="저장">
             </form>
         </div>
