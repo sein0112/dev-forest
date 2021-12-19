@@ -17,7 +17,7 @@ module.exports={
         } else {
             result = `
             <div id="nav_userInfo">
-                <img id="usrProfImg" src="/uploads/${userinfo.image}" alt="userpng">
+                <img id="usrProfImg" src="/uploads/${userinfo.image}" alt="userpng" style="cursor:pointer; " onclick="window.location='/myPage'">
                 <p id="usrNname"><b>${userinfo.nickname}</b></p>
                 <div id ="logoutform">
                     <form action='/login/logoutprocess' method='post'>
@@ -42,7 +42,7 @@ module.exports={
             } catch (e) { //without code
                 contents = { text : posts[i]?.content}
             }
-            scrapNo = posts[i].scrapno ? `<img src="/image/scrap_star.png" class="scrapstar"><p class="scrapedNo">${posts[i].scrapno}</p>` : '';
+            scrapNo = posts[i].scrapno ? `<img src="/image/scrap_star.png" style="width: 20px; height: 20px;" class="scrapstar"><p style="color: gold;" class="scrapedNo">${posts[i].scrapno}</p>` : '';
             result += `
             <div class="postss" onclick="location.href='/qna/${posts[i].board_id}/${posts[i].no}'" style="cursor: pointer;">
                 <div class="post_info">
@@ -53,10 +53,14 @@ module.exports={
                     <p class="post_time">${this.parseDate(posts[i].datetime)}</p>
                 </div>
                 <div class="post_contents">
-                    <P class="post_content">${contents.text}</P>
-                </div>
-                <div class="scraped">
-                    ${scrapNo}
+                    <div class="post_content">
+                    <pre>${contents.text}</pre>
+                    ${contents.code !== ''? `<code><pre style="background-color: #f3f3f3; overflow: hidden; height: 4.59em; padding-top: 5px; margin-top: 5px">${contents.code}</pre></code>` : ''}
+                    
+                    </div>
+                    <div class="scraped">
+                        ${scrapNo}
+                    </div>
                 </div>
             </div>
             `;

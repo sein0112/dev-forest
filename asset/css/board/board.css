@@ -6,6 +6,18 @@ body {
     padding: 0;
     margin: 0;
 }
+
+code, pre, .code-font {
+    font-family: Consolas, Courier New, monospace;
+    font-size: 13px;
+}
+
+
+.answer-content{
+    margin: 40px 10px 10px 10px;
+    padding: 20px;
+}
+
 a {
     text-decoration: none;
     color: black;
@@ -37,10 +49,10 @@ td {
 
 .postss{
     padding: 20px;
+    padding-bottom: 40px;
     margin-bottom: 15px;
     background-color: white;
     border-radius: 12px;
-    height: 280px;
 }
 
 #contents{
@@ -100,13 +112,10 @@ td {
 .post_content{
     width: calc(100%-40px);
     margin-top: 80px;
-    height: 100px;
     overflow: hidden;
     line-height: 1.2;
-    height:8.59em;
     word-wrap: break-word;
     display: -webkit-box;
-    -webkit-line-clamp: 7;
     -webkit-box-orient: vertical;
     background-color: #e5e5e5;
     border-radius:12px;
@@ -122,7 +131,7 @@ td {
 
 .scrapedNo{
     float: left;
-    margin-top: 10px;
+    margin-top: 5px;
     margin-left: 5px;
 }
 /*menu*/
