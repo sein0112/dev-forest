@@ -3,7 +3,6 @@ const qTemplate = require('./template.js');
 const qs = require("querystring");
 const url = require("url");
 const sanitizeHtml = require('sanitize-html');
-const template = require("./ansTemplate.js");
 
 exports.read = function(request, response){
     if (!request.session.userid) {

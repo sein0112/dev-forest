@@ -1,7 +1,5 @@
 var http = require('http');
 var url = require('url');
-var answer = require('./view/qna/answer.js');
-var qna = require('./view/qna/qna.js');
 var myPage = require('./view/mypage/myPage.js')
 var rank = require('./view/rank/rank.js');
 var loginRoutes = require('./view/login/loginRouter.js');
@@ -43,9 +41,6 @@ app.use('/register', registerRoutes);
 app.use('/modify', modRoutes);
 app.use('/qna', qnaRoutes);
 
-app.use('/answer', function(request, response){
-    answer.container(request, response);
-});
 
 app.get('/myPage', function(request, response) {
     myPage.container(request, response);
