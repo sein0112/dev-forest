@@ -35,7 +35,7 @@ module.exports={
                         <p class="list_name">닉네임</p>
                         <input type="text" name="user_nickname" class="list_blank" value="${usernickname}">
                         <p class="list_name">소속</p>
-                        <input type="password" name="user_belong" class="list_blank" value="${userbelong}">
+                        <input type="text" name="user_belong" class="list_blank" value="${userbelong}">
                         <p class="list_name">현재 비밀번호</p>
                         <input type="password" name="user_current_pwd" class="list_blank" placeholder="현재 비밀번호">
                         <p class="list_name">새로운 비밀번호</p>

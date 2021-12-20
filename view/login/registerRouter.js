@@ -24,10 +24,10 @@ router.post('/emailcheck', function(request, response) {
 });
 
 router.post('/registerprocess', function(request, response){
-    let id = request.body.user_id;
-    let nickname = request.body.user_nickname;
-    let pwd = request.body.user_pwd; 
-    let belong = request.body.user_belong;
+    let id = request.body.user_id.trim();
+    let nickname = request.body.user_nickname.trim();
+    let pwd = request.body.user_pwd.trim(); 
+    let belong = request.body.user_belong.trim();
 
     // console.log(id, nickname, pwd, belong);
     db.query('INSERT INTO usertbl (id, password, nickname, belong, level, grade_date) VALUES(?, ?, ?, ?, 1, now())', [id, pwd, nickname, belong], function(error, result) {
