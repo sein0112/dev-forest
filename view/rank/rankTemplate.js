@@ -104,7 +104,7 @@ module.exports = {
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
                 <title>개발자의 숲</title>
                 <link href="css/rank/rank.css" rel="stylesheet">
-                <link href="css/myPage/myPage.css" rel="stylesheet">
+                <link href="css/mypage/myPage.css" rel="stylesheet">
                 <link href="css/nav.css" rel="stylesheet">
                 
             </head>
