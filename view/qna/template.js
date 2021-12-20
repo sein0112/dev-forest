@@ -152,34 +152,38 @@ module.exports = {
           return html
       },
       upsert : function (data , tpye){
-          let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
-          if(data.contents === undefined && data.contents === null){
+        let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
+        if(data.contents === undefined || data.contents === null){
+          data.contents = {}
+          if(data.contents.data === undefined || data.contents.data === null){
             data.contents.code = ''
           }
-          let html = '';
-          if(data.contents.code !==''){
-              html = `<div id="write-code-${typeMode}" class="codepen">
-                  <label for="textareaCodeContent"></label>
-                  <textarea class="textarea-code"
-                            id = "textareaCodeContent"
-                            style="overflow:hidden"
-                            name="codeContent"
-                            onfocus="adjustHeight(this);"
-                            onkeyup="adjustHeight(this);">${ tpye==="new" ? '' : data.contents.code.trim()}</textarea>
-                </div>`
-          }else {
-              html = `<div id="write-code-${typeMode}" class="codepen" style="display: none;">
-                  <label for="textareaCodeContent"></label>
-                  <textarea class="textarea-code"
-                            id = "textareaCodeContent"
-                            style="overflow:hidden"
-                            name="codeContent"
-                            onfocus="adjustHeight(this);"
-                            onkeyup="adjustHeight(this);"></textarea>
-                </div>`
-          }
-          return html
-      }
+        }
+        let html = '';
+        if(data.contents.code !==''){
+            html = `<div id="write-code-${typeMode}" class="codepen">
+                <label for="textareaCodeContent"></label>
+                <textarea class="textarea-code"
+                          id = "textareaCodeContent"
+                          style="overflow:hidden"
+                          name="codeContent"
+                          onfocus="adjustHeight(this);"
+                          onkeyup="adjustHeight(this);">${ tpye==="new" ? '' : data.contents.code.trim()}</textarea>
+              </div>`
+        }else {
+            html = `<div id="write-code-${typeMode}" class="codepen" style="display: none;">
+                <label for="textareaCodeContent"></label>
+                <textarea class="textarea-code"
+                          id = "textareaCodeContent"
+                          style="overflow:hidden"
+                          name="codeContent"
+                          onfocus="adjustHeight(this);"
+                          onkeyup="adjustHeight(this);"></textarea>
+              </div>`
+        }
+        return html
+    }
+   
     },
   question_read : function (data, writer){
     return `
