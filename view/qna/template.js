@@ -153,10 +153,11 @@ module.exports = {
       },
       upsert : function (data , tpye){
           let typeMode = tpye==='ans'? data.no : (tpye === 'new' ? 'new' :'')
-          let temp = {code : ''}
-          data.contents = { ...temp}
+          if(data.contents === undefined && data.contents === null){
+            data.contents.code = ''
+          }
           let html = '';
-          if(data.contents.code !==undefined && data.contents.code !==null && data.contents.code !==''){
+          if(data.contents.code !==''){
               html = `<div id="write-code-${typeMode}" class="codepen">
                   <label for="textareaCodeContent"></label>
                   <textarea class="textarea-code"
@@ -444,7 +445,6 @@ module.exports = {
 
   //답변글
     ansList: function(ans, quest_userId, userInfo_s, like ,likeMe, loginUserInfo) {
-        console.log("ansansansansansansansansansans", ans)
         var list = `<h5 class="mg15-top-bottom" className="count-answer">${ans.length}개의 답변이 있습니다.</h5>`;
         let src;
         var i = 0;
