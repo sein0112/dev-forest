@@ -1,5 +1,6 @@
 var http = require('http');
 var url = require('url');
+var mainRoutes = require('./view/mainRouter.js');
 var myPage = require('./view/mypage/myPage.js')
 var rank = require('./view/rank/rank.js');
 var loginRoutes = require('./view/login/loginRouter.js');
@@ -32,9 +33,7 @@ app.use(
     })
 }));
 
-app.get('/', function(request, response){
-    response.sendFile(__dirname + '/view/mainPage.html');
-})
+app.get('/', mainRoutes);
 
 app.use('/login', loginRoutes);
 app.use('/register', registerRoutes);
