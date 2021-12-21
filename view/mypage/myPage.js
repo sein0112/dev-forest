@@ -23,7 +23,7 @@ exports.container = function(request, response) {
         if(error) console.log(error);
         else{
             user = users[0];
-            //console.log(user);
+            console.log(user);
             userinfohtml = template.userinfotohtml(user);
             navhtml = template.nav(user);
         }
