@@ -13,41 +13,45 @@ module.exports = {
         `;
     },
     userRankList:function(rank){
-        var top = `
+        let maxno, i=0;
+        console.log(rank.length);
+        if (rank.length < 3) maxno = rank.length;
+        else {maxno = 3;}
+        var top=`            
             <div class="indivisual-rankings">
-                <div class="top-rankers">
-                    <div class="ranker">
-                        <span id="rank_1" class="top_rank_num">1</span>
-                        <img id = "ranking_user_img" src="/uploads/${rank[0].image}">
-                        <p>${rank[0].nickname}</p>
-                    </div>
-                    <div class="ranker">
-                        <span id="rank_2" class="top_rank_num">2</span>
-                        <img id = "ranking_user_img" src="/uploads/${rank[1].image}">
-                        <p>${rank[1].nickname}</p>
-                    </div>
-                    <div class="ranker">
-                        <span id="rank_3" class="top_rank_num">3</span>
-                        <img id = "ranking_user_img" src="/uploads/${rank[2].image}">
-                        <p>${rank[2].nickname}</p>
-                    </div>
+                <div class="top-rankers">`;
+        while (i < maxno) {
+            top += `
+            <div class="ranker">
+                <span id="rank_${i+1}" class="top_rank_num">${i+1}</span>
+                <img id = "ranking_user_img" src="/uploads/${rank[i].image}">
+                <p>${rank[i].nickname}</p>
+            </div>
+            `;
+            i++;
+        }
+        top += `
                 </div>
             </div>
         `;
-        var list = `<div><ul>`;
-        var i = 3;
-        while(i < rank.length) {
-            list = list + `
-            <li id="others">
-                <div id="rank_num">${i+1}</div>
-                <div class="others_user_info">
-                    <img id = "others_ranking_user_img" src="uploads/${rank[i].image}">
-                    <span id="others_username">${rank[i].nickname}</span>
-                </div>
-            </li>`;
-            i = i+1;
+        if (maxno < 3){console.log(top); return top;} 
+        if (maxno >= 3) {
+            var list = `<div><ul>`;
+            var j = 3;
+            while(j < rank.length) {
+                list = list + `
+                <li id="others">
+                    <div id="rank_num">${j+1}</div>
+                    <div class="others_user_info">
+                        <img id = "others_ranking_user_img" src="uploads/${rank[j].image}">
+                        <span id="others_username">${rank[j].nickname}</span>
+                    </div>
+                </li>`;
+                j++;
+            }
+            list = top+list+`</ul></div>`;
+            console.log(list);
         }
-        list = top+list+`</ul></div>`;
         return list;
     },
     groupRankList:function(rank){
