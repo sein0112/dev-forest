@@ -15,7 +15,7 @@ exports.container = function(request, response) {
         SELECT id, nickname, belong, image, usertbl.level, grade_date, gradetbl.name, sum(point) as point FROM usertbl \
         JOIN gradetbl \
         ON usertbl.level = gradetbl.level \
-        join answerstbl\
+        left join answerstbl\
         on user_id = id\
         where usertbl.id=?\
     ';
@@ -23,6 +23,7 @@ exports.container = function(request, response) {
         if(error) console.log(error);
         else{
             user = users[0];
+            if (user.point == null) user.point = 0;
             console.log(user);
             userinfohtml = template.userinfotohtml(user);
             navhtml = template.nav(user);
