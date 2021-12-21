@@ -10,7 +10,6 @@ router.get('/search', function(request, response) {
 
     let search_query = request.query.search_query.trim();
     search_query = '%' + search_query + '%';
-    console.log(search_query);
     let sql ='SELECT board_id, no, datetime, nickname, title, content, image, name\
     FROM questionstbl\
     JOIN usertbl\

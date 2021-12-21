@@ -24,7 +24,6 @@ exports.container = function(request, response) {
         else{
             user = users[0];
             if (user.point == null) user.point = 0;
-            console.log(user);
             userinfohtml = template.userinfotohtml(user);
             navhtml = template.nav(user);
         }
@@ -39,7 +38,6 @@ exports.container = function(request, response) {
             db.query('call getlatelyAnswered(?)', [userid], function(error, questions) {
                 if(error) console.log(error);
                 else{
-                    //console.log(questions[0]);
                     myanswerquestshtml = template.myAnswerQuests(questions[0]);
                 }
 

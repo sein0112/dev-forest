@@ -89,7 +89,6 @@ module.exports ={
                                 dataType: "json" 
                             })
                             .done(function(res) {
-                                console.log(res)
                                 if(res.data){
                                     document.getElementById('secondFormUserId').value = user_email;
                                     document.getElementById("checking").innerHTML = res.message;

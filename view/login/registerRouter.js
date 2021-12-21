@@ -33,7 +33,6 @@ router.post('/registerprocess', function(request, response){
     db.query('INSERT INTO usertbl (id, password, nickname, belong, level, grade_date) VALUES(?, ?, ?, ?, 1, now())', [id, pwd, nickname, belong], function(error, result) {
         if (error) throw error;
         else {
-            console.log("성공");
             response.write('<script>alert("signUp success");</script>');
             response.write('<script>location.href="/";</script>');
         }

@@ -54,7 +54,6 @@ module.exports={
             function loadFile(event) {
                 let reader = new FileReader();
 
-                console.log(event)
                 reader.onload = function(event) { 
                     document.querySelector("#userImgId").setAttribute("src", event.target.result); 
                 }; 

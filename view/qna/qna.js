@@ -106,7 +106,6 @@ exports.create = function (request, response){
 
 exports.create_process = function(request, response){
     var data = request.body;
-    console.log(data)
     let content = {
         text : data.content.trim(),
         code : data.codeContent.trim(),
@@ -156,7 +155,6 @@ exports.delete_process = function(request, response){
     var data = request.body;
     let userId = request.session.userid
 
-    console.log(data, userId)
     db.query('DELETE FROM questionstbl WHERE board_id = ? AND user_id=? AND no = ?',
         [data.boardId, userId, data.questNo],
         function(error, result){
@@ -269,7 +267,6 @@ exports.ans_update_process = function(request, response){
 }
 exports.adoption = function(request, response){
     var data = request.body;
-    console.log(data)
     let userId = request.session.userid;
     db.query(`UPDATE answerstbl SET point=?, adoption=? WHERE  board_id=? AND quest_no=? AND no=?`,
     [data.adoptPoint, 1, data.boardId, data.questNo, data.no],
@@ -286,7 +283,6 @@ exports.like = function(request, response){
     var data = request.body;
     let userId = request.session.userid
 
-    // console.log(data)
     db.query(`SELECT * FROM liketbl WHERE board_id=? AND quest_no=? AND answ_no=? AND user_id=?`,
         [data.boardId, data.questNo, data.answNo, userId],
         function(error, like) {

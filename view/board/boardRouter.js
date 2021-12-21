@@ -13,7 +13,6 @@ router.get('/board/:boardId', function(request, response) {
         if (error) throw error;
         boardName = boardname[0].name;
     });
-    console.log(boardId);
     db.query('call getPosts(?)', [boardId], function(error, questions) {
         if(error) throw error;
         posttohtml = template.posts(questions[0]);
