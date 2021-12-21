@@ -268,14 +268,41 @@ exports.ans_update_process = function(request, response){
 exports.adoption = function(request, response){
     var data = request.body;
     let userId = request.session.userid;
+
     db.query(`UPDATE answerstbl SET point=?, adoption=? WHERE  board_id=? AND quest_no=? AND no=?`,
     [data.adoptPoint, 1, data.boardId, data.questNo, data.no],
     function(error, result){
         if(error){
             throw error;
         }
-        response.writeHead(302, {Location: `/qna/${data.boardId}/${data.questNo}}`});
-        response.end();
+        db.query(`select user_id, SUM(point) as point
+              from answerstbl where user_id =?`, [data.ansUserId],
+            function(error, user) {
+                if (error) {
+                    throw error;
+                }
+                console.log(user[0].point)
+                let level = 1;
+                if(user[0].point >= 20000){
+                    level = 5;
+                } else if(user[0].point >= 10000) {
+                    level = 4;
+                } else if(user[0].point >= 3000) {
+                    level = 3;
+                } else if(user[0].point >= 1000) {
+                    level = 2;
+                }
+
+                db.query('UPDATE usertbl SET level=? WHERE id=?',
+                    [level, data.ansUserId],
+                    function(error, result){
+                        if(error){
+                            throw error;
+                        }
+                        response.writeHead(302, {Location: `/qna/${data.boardId}/${data.questNo}}`});
+                        response.end();
+                    })
+            })
     })
 }
 

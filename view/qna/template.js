@@ -512,7 +512,7 @@ module.exports = {
                 ${ans[i].user_id === loginUserInfo[0].id && !ans[i].adoption ?'<div class=\"info-float-right\"><button onclick=\"onClickDeleteAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_delete_btn\" class=\"small_btn\" style="cursor:pointer;">삭제</button></div>' : ''}
                 ${ans[i].user_id === loginUserInfo[0].id? '<div class=\"info-float-right\"><button onclick=\"onClickUpdateAns(\''+ ans[i].board_id+ '\',\'' +ans[i].quest_no+ '\',\'' + ans[i].no + '\')\" id=\"ans_update_btn\" class=\"small_btn\" style="cursor:pointer;">수정</button></div>' : ''}          
                 <div class="adoption_container ${ans[i].no}">
-                ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, loginUserInfo[0].id , existAdoption)}
+                ${this.adoption(`${ans[i].point}`,`${ans[i].adoption}`,`${ans[i].board_id}`,`${ans[i].quest_no}`, `${ans[i].no}`, `${ans[i].user_id}`, quest_userId, loginUserInfo[0].id , existAdoption, ans[i].user_id)}
                 </div>
                 <div class="info-float-right" style="margin: 18px 20px 0 0">
                     <div class="like_img" onclick="onClickLike(${ans[i].board_id},${ans[i].quest_no}, ${ans[i].no})">
@@ -570,7 +570,7 @@ module.exports = {
         </div>
       </div>`;
     },
-    adoption: function(point, adoption, board_id, quest_no, no, ans_userId, quest_userId, user_id, existAdoption){
+    adoption: function(point, adoption, board_id, quest_no, no, ans_userId, quest_userId, user_id, existAdoption, ans_user_id){
       // console.log(ans_userId, quest_userId, user_id);
       if(adoption > 0)
           return `<img style="width: 24px; height: 24px; margin: 18px 20px 0 0" src="/image/adoption.png">`;
@@ -579,6 +579,7 @@ module.exports = {
           return `
           <form class="adoption" action="/qna/adoption_process" method="post">
             <input id = "adopt_point" type="text" name="adoptPoint" placeholder="채택 포인트를 입력하세요">
+            <input type="hidden" name="ansUserId" value="${ans_user_id}">
             <input type="hidden" name="boardId" value="${board_id}">
             <input type="hidden" name="questNo" value="${quest_no}">
             <input type="hidden" name="no" value="${no}">
