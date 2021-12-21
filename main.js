@@ -14,7 +14,42 @@ const session = require('express-session');
 var MySQLStore = require('express-mysql-session')(session);
 var app = express();
 var bodyParser = require('body-parser');
+const db = require("./db.js");
+const schedule = require("node-schedule");
 
+
+schedule.scheduleJob('* * 4 * * *', function (){
+    db.query(`select user_id, SUM(point) as point
+              from answerstbl
+              group by user_id`, [],
+        function(error, userList) {
+            if (error) {
+                throw error;
+            }
+            console.log("프로시저 실행 >>>>>> ", Date())
+            console.log("프로시저 실행 >>>>>> ", userList)
+            let level = 1;
+            for(let data of userList){
+                if(data.point >= 20000){
+                    level = 5;
+                } else if(data.point >= 10000) {
+                    level = 4;
+                } else if(data.point >= 3000) {
+                    level = 3;
+                } else if(data.point >= 1000) {
+                    level = 2;
+                }
+
+                db.query('UPDATE usertbl SET level=? WHERE id=?',
+                    [level, data.user_id],
+                    function(error, result){
+                        if(error){
+                            throw error;
+                        }
+                    })
+            }
+        })
+})
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(__dirname + '/asset'));
