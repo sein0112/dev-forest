@@ -34,7 +34,7 @@ module.exports ={
                     <div >
                         <input type="text" name="user_email" id="firstFormUserId" class="text_email" placeholder="이메일" value="${idBeforeCheck}">
                         <input id="checkEmail" type="button" name="email_check" value="중복조회" class="doublecheck_btn">
-                        <p id="checking">${loginChecked}</p>
+                        <p id="checking" style="color: red">${loginChecked}</p>
                     </div>
 
                     <form action="/register/registerprocess" method="post">
@@ -57,7 +57,8 @@ module.exports ={
                 function checkSameDPw(target) {
                   let user_pw = document.getElementById('user_pw').value;
                   console.log(user_pw, target.value)
-                  if(user_pw !== target.value){
+                  let chcking = document.getElementById("checking").innerHTML
+                  if(user_pw !== target.value || chcking !== "Success"){
                     document.getElementById("pwRedInfo").style.display = "block"
                     document.getElementById("submitRegister").disabled = true;
                   } else {
@@ -68,7 +69,8 @@ module.exports ={
                 function checkSamePw(target) {
                   let user_pw = document.getElementById('user_dbpw').value;
                   console.log(user_pw, target.value)
-                  if(user_pw !== target.value){
+                  let chcking = document.getElementById("checking").innerHTML
+                  if(user_pw !== target.value || chcking !== "Success"){
                     document.getElementById("pwRedInfo").style.display = "block"
                     document.getElementById("submitRegister").disabled = true;
                   } else {
@@ -90,11 +92,15 @@ module.exports ={
                             })
                             .done(function(res) {
                                 if(res.data){
+                                    document.getElementById("firstFormUserId").disabled = true;
                                     document.getElementById('secondFormUserId').value = user_email;
                                     document.getElementById("checking").innerHTML = res.message;
+                                    document.getElementById("checking").style.color = "green";
                                     document.getElementById("submitRegister").disabled = false;
                                 }else {
+                                    document.getElementById("firstFormUserId").disabled = false;
                                     document.getElementById("checking").innerHTML = res.message;
+                                    document.getElementById("checking").style.color = "red";
                                     document.getElementById("submitRegister").disabled = true;
                                 }
                             })
