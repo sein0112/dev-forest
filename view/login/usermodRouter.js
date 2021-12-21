@@ -37,7 +37,9 @@ router.post('/modprocess', upload.single('click_image'), function(request, respo
     let currentpwd = request.body.user_current_pwd;
     let newpwd = request.body.user_new_pwd;
     let newpwdcheck = request.body.user_pwcheck;
-    let filename = request.file.filename ? request.file.filename : ''
+    let filename;
+    if(request.file == undefined) filename = request.session.image;
+    else {filename = request.file.filename ? request.file.filename : ''}
     if (newpwd !== newpwdcheck) {   
         response.write("<script>alert('passwords not same.')</script>");
         return response.write("<script>window.location='/modify'</script>");
@@ -54,9 +56,12 @@ router.post('/modprocess', upload.single('click_image'), function(request, respo
                     response.write("<script>alert('error')</script>"); 
                     return response.write("<script>window.location='/modify'</script>");
                 }
+                request.session.nickname = nickname;
+                request.session.image = filename;
                 //수정 성공
-                response.write("<script>alert('success')</script>");                
-                return response.write("<script>window.location='/myPage'</script>");
+                // response.write("<script>alert('success')</script>");                
+                // return response.write("<script>window.location='/myPage'</script>");
+                return response.redirect('/myPage');
             });
         }
     });
