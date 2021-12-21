@@ -14,7 +14,6 @@ module.exports = {
     },
     userRankList:function(rank){
         let maxno, i=0;
-        console.log(rank.length);
         if (rank.length < 3) maxno = rank.length;
         else {maxno = 3;}
         var top=`            
@@ -34,7 +33,7 @@ module.exports = {
                 </div>
             </div>
         `;
-        if (maxno < 3){console.log(top); return top;} 
+        if (maxno < 3){return top;} 
         if (maxno >= 3) {
             var list = `<div><ul>`;
             var j = 3;
